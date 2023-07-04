@@ -6,6 +6,8 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'guest', loadChildren:() => import('./public/public.module').then(m => m.PublicModule) },
   { path: 'user', loadChildren:() => import('./private/private.module').then(m => m.PrivateModule)},
+  { path: '**', component: LandingPageComponent},
+
 ];
 
 @NgModule({
