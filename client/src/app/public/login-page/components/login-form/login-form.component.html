@@ -1,0 +1,31 @@
+<form [formGroup]="loginForm" class="my-8 grid grid-rows-3 gap-6 justify-items-center" (ngSubmit)="onLogin($event)" autocomplete="off">          
+    <!----Ingrese su email---->
+    <div class="">
+      <input type="email" id="email"  formControlName="email" class=" w-80 p-1 border-solid border-2 form-control" aria-describedby="emailHelp" placeholder="Correo Electrónico" [ngClass]="{'is-valid':!Email?.errors&& Email?.touched}"/>
+      <div *ngIf="Email?.errors && Email?.touched">
+        <p *ngIf="Email?.hasError('required')" class="text-red-600">
+          Ingrese su email
+        </p>
+        <p *ngIf="Email?.hasError('email')" class="text-red-600">
+          El formato del email es inválido
+        </p>
+      </div>
+    </div>
+    <!----Ingrese la contraseña--->
+    <div class="field">
+      <label class="label" for="password"></label>
+      <input  id="password" name="password" formControlName="password" placeholder="Contraseña" class=" w-80 p-1 border-solid border-2  input-password form-control" [ngClass]="{'is-valid':!Password?.errors&&Password?.touched}"/>
+     
+      <div *ngIf="Password?.errors && Password?.touched">
+        <p *ngIf="Password?.hasError('required')" class="text-red-600">
+          Ingrese su contraseña
+        </p>
+    
+      </div>
+    </div>
+
+      <div class="boton">
+          <button class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+      </div>
+
+</form> 
