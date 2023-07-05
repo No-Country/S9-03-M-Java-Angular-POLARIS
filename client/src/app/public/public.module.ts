@@ -12,6 +12,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../shared/shared.module';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { LoginFormComponent } from './login-page/components/login-form/login-form.component';
+
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import { MatInputModule } from '@angular/material/input';
     PublicComponent,
     HomeComponent,
     LandingPageComponent,
-    FormVolunteerComponent
+    FormVolunteerComponent,
+    LoginPageComponent,
+    LoginFormComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    SharedModule
   ]
 })
 export class PublicModule { }
