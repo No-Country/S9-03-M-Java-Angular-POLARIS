@@ -1,12 +1,12 @@
 <div class="justify-center mt-10">
-    <h2 class="text-center">Crea tu cuenta</h2>
+    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900 text-center">Crea tu cuenta</h1>
     <div class="text-center mt-8">
-        <p>Para crear tu cuenta tienes que ser mayor de 18 años e </p>
-        <p>ingresar todos los datos requeridos.</p>
+        <p class="text-lg">Para crear tu cuenta tienes que ser mayor de 18 años e</p>
+        <p class="text-md mt-2">ingresar todos los datos requeridos.</p>
     </div>
 
     <div class="flex justify-center">
-        <mat-stepper labelPosition="bottom"  linear #stepper class="w-1/2 mt-4">
+        <mat-stepper labelPosition="bottom"  linear #stepper class="w-full mt-4">
             <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
                 <form [formGroup]="firstFormGroup" class="flex flex-col gap-4">
                   <div>
@@ -38,7 +38,7 @@
                   </div>
                   <div>
                     <div class="border border-gray-300 rounded-md p-2">
-                        <input matInput formControlName="writeYourEmail" placeholder="Escribe tu correo electrónico" required class="w-full focus:border-transparent outline-none custom-input" email autocomplete="off">
+                        <input matInput formControlName="writeYourEmail" placeholder="Escribe tu correo electrónico" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off" email>
                     </div>
                     <div>
                         <mat-error *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('required') && firstFormGroup.controls['writeYourEmail'].touched">El correo electrónico es requerido.</mat-error>
@@ -70,7 +70,7 @@
               <form [formGroup]="secondFormGroup" class="flex flex-col gap-4">
                 <div>
                     <div class="border border-gray-300 rounded-md p-2">
-                        <mat-select formControlName="secondCtrl" placeholder="Sexo" required class="w-full focus:border-transparent outline-none custom-input">
+                        <mat-select formControlName="Sex" placeholder="Sexo" required class="w-full focus:border-transparent outline-none custom-input">
                           <mat-option value="opcion1">Femenino</mat-option>
                           <mat-option value="opcion2">Masculino</mat-option>
                         </mat-select>
@@ -92,9 +92,14 @@
 
                 <div>
                     <div class="border border-gray-300 rounded-md p-2 mt-2">
-                        <input matInput formControlName="documentNumber" placeholder="Número de documento" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                      <input matInput formControlName="documentNumber" [placeholder]="getDocumentPlaceholder()"
+                        [attr.pattern]="getDocumentPattern()" required
+                        class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
                     </div>
                     <div>
+                      <mat-error *ngIf="secondFormGroup.get('documentNumber')?.hasError('pattern')">
+                        Formato de documento incorrecto.
+                      </mat-error>
                     </div>
                 </div>
 
@@ -122,10 +127,10 @@
                     </div>
                 </div>
                 <div>
-                    <div class="border border-gray-300 rounded-md p-2 mt-2">
-                        <input matInput formControlName="country" placeholder="Pais" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-                    </div>
-                    <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <mat-select formControlName="country" placeholder="Pais" required class="w-full focus:border-transparent outline-none custom-input">
+                            <mat-option *ngFor="let country of countriesData" [value]="country">{{ country }}</mat-option>
+                        </mat-select>
                     </div>
                 </div>
 
@@ -137,17 +142,55 @@
                     </div>
                 </div>
                 <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext class="bg-blue-500 text-white">Siguiente</button>
+                  <button matStepperNext class="bg-blue-700 text-white px-4 py-2 rounded-md">Siguiente</button>
                 </div>
               </form>
             </mat-step>
-            <mat-step>
-              <p>You are now done.</p>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-              </div>
+            <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+                <form [formGroup]="thirdFormGroup" class="flex flex-col gap-4">
+                    <div>
+                        <div class="border border-gray-300 rounded-md p-2">
+                            <mat-select formControlName="timeAvailability" placeholder="Disponibilidad Horaria" required class="w-full focus:border-transparent outline-none custom-input">
+                              <mat-option value="opcion1">Mañana</mat-option>
+                              <mat-option value="opcion2">Tarde</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="border border-gray-300 rounded-md p-2 mt-2">
+                            <input matInput formControlName="profession" placeholder="Profesión" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="border border-gray-300 rounded-md p-2">
+                            <mat-select formControlName="skillsHobbies" placeholder="Habilidades o pasatiempos" required class="w-full focus:border-transparent outline-none custom-input">
+                              <mat-option value="opcion1">Braile</mat-option>
+                              <mat-option value="opcion2">Tocar un instrumento musical</mat-option>
+                              <mat-option value="opcion2">Escultura</mat-option>
+                              <mat-option value="opcion2">Cerámica</mat-option>
+                              <mat-option value="opcion2">Tejido</mat-option>
+                              <mat-option value="opcion2">Deportes</mat-option>
+                              <mat-option value="opcion2">Escritura o narrativa</mat-option>
+                              <mat-option value="opcion2">Cocina</mat-option>
+                              <mat-option value="opcion2">Juegos de mesa</mat-option>
+                              <mat-option value="opcion2">Idiomas</mat-option>
+                              <mat-option value="opcion2">Yoya y meditación</mat-option>
+                              <mat-option value="opcion2">Computación con lectores de pantalla</mat-option>
+                              <mat-option value="opcion2">Arreglo de computadoras</mat-option>
+                              <mat-option value="opcion2">Artesano de maderas</mat-option>
+                              <mat-option value="opcion2">Arreglo de computadoras</mat-option>
+                              <mat-option value="opcion2">Canto</mat-option>
+                              <mat-option value="opcion2">Otros (especificar)</mat-option>
+                            </mat-select>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="bg-blue-700 text-white px-4 py-2 rounded-md" (click)="resetFormAndSaveData()">Enviar</button>
+                    </div>
+                </form>
             </mat-step>
           </mat-stepper>
     </div>
