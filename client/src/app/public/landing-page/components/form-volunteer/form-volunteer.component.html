@@ -1,36 +1,154 @@
-<div class="flex justify-center">
-    <mat-stepper labelPosition="bottom" #stepper class="w-1/2">
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field class="w-full">
-                <input matInput placeholder="Nombre de usuario" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field class="w-full">
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="saveFormData(); stepper.reset()">Save and Reset</button>
-          </div>
-        </mat-step>
-    </mat-stepper>
+<div class="justify-center mt-10">
+    <h2 class="text-center">Crea tu cuenta</h2>
+    <div class="text-center mt-8">
+        <p>Para crear tu cuenta tienes que ser mayor de 18 años e </p>
+        <p>ingresar todos los datos requeridos.</p>
+    </div>
+
+    <div class="flex justify-center">
+        <mat-stepper labelPosition="bottom"  linear #stepper class="w-1/2 mt-4">
+            <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+                <form [formGroup]="firstFormGroup" class="flex flex-col gap-4">
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="nameUser" placeholder="Nombre de usuario" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                        <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">El nombre de usuario es requerido.</mat-error>
+                        <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de usuario debe tener al menos 3 caracteres.</mat-error>
+                        <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe tener como máximo 20 caracteres.</mat-error>
+                    </div>
+                  </div> 
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                      <input matInput formControlName="password" placeholder="Contraseña" required class="w-full focus:border-transparent outline-none custom-input" [type]="showPassword ? 'text' : 'password'" autocomplete="off">
+                    </div>
+                    <div>
+                      <mat-error *ngIf="firstFormGroup.controls['password'].hasError('required') && firstFormGroup.controls['password'].touched">La contraseña es requerida.</mat-error>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                      <input matInput formControlName="confirmPassword" placeholder="Confirma contraseña" required class="w-full focus:border-transparent outline-none custom-input" [type]="showPassword ? 'text' : 'password'" autocomplete="off">
+                    </div>
+                    <div>
+                      <mat-error *ngIf="firstFormGroup.controls['confirmPassword'].hasError('required') && firstFormGroup.controls['confirmPassword'].touched">Debes confirmar la contraseña.</mat-error>
+                      <mat-error *ngIf="firstFormGroup.hasError('passwordMismatch') && firstFormGroup.controls['confirmPassword'].touched && firstFormGroup.controls['confirmPassword'].value !== ''">Las contraseñas no coinciden.</mat-error>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <input matInput formControlName="writeYourEmail" placeholder="Escribe tu correo electrónico" required class="w-full focus:border-transparent outline-none custom-input" email autocomplete="off">
+                    </div>
+                    <div>
+                        <mat-error *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('required') && firstFormGroup.controls['writeYourEmail'].touched">El correo electrónico es requerido.</mat-error>
+                        <mat-error *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('email') && firstFormGroup.controls['writeYourEmail'].touched">El formato del correo electrónico es incorrecto.</mat-error>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <mat-select formControlName="typeUser" placeholder="Voluntario o institución" required class="w-full focus:border-transparent outline-none custom-input">
+                          <mat-option value="opcion1">Voluntario</mat-option>
+                          <mat-option value="opcion2">Institución</mat-option>
+                        </mat-select>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <input matInput formControlName="nameUsernameUser" placeholder="Nombre y apellido" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                        <mat-error *ngIf="firstFormGroup.controls['nameUsernameUser'].hasError('required') && firstFormGroup.controls['nameUsernameUser'].touched">El nombre y apellido son requeridos.</mat-error>
+                    </div>
+                  </div>
+                  <div>
+                    <button matStepperNext class="bg-blue-700 text-white px-4 py-2 rounded-md" (click)="markAllAsTouched()">Siguiente</button>
+                  </div>
+                </form>
+              </mat-step>
+            <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+              <form [formGroup]="secondFormGroup" class="flex flex-col gap-4">
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <mat-select formControlName="secondCtrl" placeholder="Sexo" required class="w-full focus:border-transparent outline-none custom-input">
+                          <mat-option value="opcion1">Femenino</mat-option>
+                          <mat-option value="opcion2">Masculino</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <div class="flex items-center"> <!-- Utilizamos flexbox para alinear horizontalmente -->
+                          <input matInput [matDatepicker]="datePicker" formControlName="birthdate" placeholder="Fecha de nacimiento" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                        </div>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                    </div>
+                    <div>
+                        <mat-error *ngIf="secondFormGroup.controls['birthdate'].hasError('required') && secondFormGroup.controls['birthdate'].touched">La fecha de nacimiento es requerida.</mat-error>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="documentNumber" placeholder="Número de documento" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="address" placeholder="Direccion" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="location" placeholder="Localidad" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2">
+                        <mat-select formControlName="province" placeholder="Provincia" required class="w-full focus:border-transparent outline-none custom-input">
+                          <mat-option value="opcion1">Buenos Aires</mat-option>
+                          <mat-option value="opcion2">Catamarca</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="country" placeholder="Pais" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="border border-gray-300 rounded-md p-2 mt-2">
+                        <input matInput formControlName="cellphoneNumber" placeholder="numero de celular" required class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext class="bg-blue-500 text-white">Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <p>You are now done.</p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+    </div>
 </div>

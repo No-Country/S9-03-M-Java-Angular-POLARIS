@@ -6,7 +6,7 @@ import { FormVolunteerComponent } from './public/landing-page/components/form-vo
 
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent},
+  { path: '', component: FormVolunteerComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'user', loadChildren:() => import('./private/private.module').then(m => m.PrivateModule)},
   { path: '**', component: FormVolunteerComponent},

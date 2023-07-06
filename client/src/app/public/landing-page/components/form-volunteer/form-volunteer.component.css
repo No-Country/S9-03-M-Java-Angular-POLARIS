@@ -1,0 +1,8 @@
+::ng-deep .mat-step-header .mat-step-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+}
+.custom-input {
+    height: 32px; /* Ajusta el valor según tu preferencia */
+}

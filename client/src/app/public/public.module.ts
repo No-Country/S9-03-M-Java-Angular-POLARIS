@@ -12,6 +12,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 import { SharedModule } from '../shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-page/components/login-form/login-form.component';
@@ -36,6 +41,10 @@ import { LoginFormComponent } from './login-page/components/login-form/login-for
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     SharedModule
   ]
 })
