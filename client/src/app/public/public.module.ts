@@ -8,6 +8,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-page/components/login-form/login-form.component';
+import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 
 
 
@@ -18,6 +19,7 @@ import { LoginFormComponent } from './login-page/components/login-form/login-for
     LandingPageComponent,
     LoginPageComponent,
     LoginFormComponent,
+    RecoverPasswordComponent,
   ],
   imports: [
     CommonModule,
