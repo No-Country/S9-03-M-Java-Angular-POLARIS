@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "volunteer")
 public class Volunteer extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
