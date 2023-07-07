@@ -1,6 +1,5 @@
 package com.polaris.appWebPolaris.model;
 
-import com.polaris.appWebPolaris.enums.Role;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,17 +12,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Admin extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String email;
-    private String password;
-    private String profileImg;
-    private Role role;
-    private String contactNumber;
-    private String address;
-    private String country;
-    private String province;
-    private String locality;
+    private Long adminId;
+    private String name;
 }
