@@ -1,5 +1,6 @@
 package com.polaris.appWebPolaris.model;
 
+import com.polaris.appWebPolaris.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,9 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "admin")
-public class Admin extends User{
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminId;
-    private String name;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String profileImg;
 }

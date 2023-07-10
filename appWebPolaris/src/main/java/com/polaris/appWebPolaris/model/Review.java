@@ -15,12 +15,12 @@ import lombok.Setter;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewId;
+    private Long id;
     @ManyToOne
     @JoinColumn(
-            name = "volunteer_id",
-            nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
+            name = "volunteer_id"
+            //nullable = false,
+            //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
     )
     private Volunteer volunteer;
     private String comment;

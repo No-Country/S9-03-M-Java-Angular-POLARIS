@@ -15,30 +15,29 @@ import lombok.Setter;
 public class WorkRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long workRequestId;
+    private Long id;
     @ManyToOne
     @JoinColumn(
-            name = "volunteer_id",
-            nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
+            name = "volunteer_id"
+            //nullable = false,
+            //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
     )
     private Volunteer volunteer;
     @ManyToOne
     @JoinColumn(
-            name = "institution_id",
-            nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (institution_id) references institution (institutionId)")
+            name = "institution_id"
+            //nullable = false,
+            //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (institution_id) references institution (institutionId)")
     )
     private Institution institution;
 
     @OneToOne
     @JoinColumn(
-            name = "work_id",
-            nullable = false,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (work_id) references work (workId)"),
-            insertable = false, updatable = false
+            name = "work_id"
+            //nullable = false,
+            //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (work_id) references work (workId)"),
+            //insertable = false, updatable = false
     )
-
     private Work work;
     private String details;
     private String string;
