@@ -1,0 +1,11 @@
+input,
+select {
+  border-radius: 0.4rem;
+  padding: 0.8rem;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+.padding {
+  padding: 0 24px 24px 24px;
+}

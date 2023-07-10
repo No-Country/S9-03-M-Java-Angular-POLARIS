@@ -1,0 +1,72 @@
+<div class="justify-center mt-10">
+  <div class="flex justify-center">
+    <div class="w-full mt-4">
+      <!-- <mat-step [stepControl]="form" [editable]="true"> -->
+
+      <form [formGroup]="form" class="flex flex-col padding gap-4">
+        <input type="text" name="name" placeholder="Nombre de usuario">
+        <input type="text" name="password" placeholder="Contraseña">
+        <div>
+          <input type="text" name="confirm-password" placeholder="Confirma la contraseña">
+        </div>
+        <div>
+          <input type="text" name="email" placeholder="email">
+        </div>
+        <div>
+          <input type="text" name="confirm-email" placeholder="Confirma emial">
+        </div>
+        <div>
+          <select>
+            <option hidden value="" disabled selected>Tipo de institucion</option>
+            <option value="'privada'">{{privada | titlecase}}</option>
+            <option value="'publica'">{{publica | titlecase}}</option>
+          </select>
+        </div>
+        <div>
+          <input type="text" name="name-institution" placeholder="Nombre de la institucion">
+        </div>
+
+
+        <div>
+          <select>
+            <option hidden value="" disabled selected>Provincia</option>
+          </select>
+        </div>
+
+        <div>
+          <input type="text" name="locality" placeholder="Localidad">
+        </div>
+
+        <div>
+          <input type="text" name="addres" placeholder="Dirección">
+        </div>
+
+        <div>
+          <input type="text" name="numberPhone" placeholder="Teléfono">
+        </div>
+
+
+        <div>
+          <select>
+            <option hidden value="" disabled selected>Disponibilidad horaria</option>
+            <option value="'morning'">{{morning | titlecase }}</option>
+            <option value="'afternoon'">{{afternoon | titlecase }}</option>
+          </select>
+        </div>
+
+        <div>
+          <select>
+            <option hidden value="" disabled selected>Servicios demandados</option>
+            <option value="'voluntary'">{{volunteer}}</option>
+            <option value="'tallerista'">{{workshops}}</option>
+            <option value="'service'">{{service}}</option>
+            <option value="'other'">{{other}}</option>
+          </select>
+        </div>
+      </form>
+
+      <!-- </mat-step> -->
+    </div>
+  </div>
+
+</div>
