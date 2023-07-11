@@ -6,6 +6,10 @@ select {
   width: 100%;
 }
 
+input:focus {
+  outline: none;
+}
+
 .padding {
   padding: 0 24px 24px 24px;
 }

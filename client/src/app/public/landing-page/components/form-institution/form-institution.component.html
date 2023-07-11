@@ -3,65 +3,168 @@
     <div class="w-full mt-4">
       <!-- <mat-step [stepControl]="form" [editable]="true"> -->
 
-      <form [formGroup]="form" class="flex flex-col padding gap-4">
-        <input type="text" name="name" placeholder="Nombre de usuario">
-        <input type="text" name="password" placeholder="Contraseña">
+      <form [formGroup]="form" class="flex flex-col padding gap-4" (ngSubmit)="saveInstitution()">
+
         <div>
-          <input type="text" name="confirm-password" placeholder="Confirma la contraseña">
+          <input class="border border-gray-300 rounded-md p-2 mt-2" type="text" name="name"
+            placeholder="Nombre de usuario" formControlName="userName">
+          <div>
+            <mat-error *ngIf="hasError('userName','required')">
+              {{inputRequired}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','minlength')">
+              {{inputMinLength}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','maxlength')">
+              {{inputMaxLength}}
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','pattern')">
+              {{notNumberSpecial}}
+            </mat-error>
+          </div>
         </div>
+
+
         <div>
-          <input type="text" name="email" placeholder="email">
+          <input type="text" name="password" placeholder="Contraseña" formControlName="password">
+          <div>
+            <mat-error *ngIf="hasError('password','required')">
+              {{inputRequired}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('password','pattern')">
+              La contraseña debe contener más de 8 caracteres de longitud,
+              debe mezclar letras y numeros.
+            </mat-error>
+          </div>
+
+
         </div>
+
         <div>
-          <input type="text" name="confirm-email" placeholder="Confirma emial">
+          <input type="text" name="confirm-password" placeholder="Confirma la contraseña"
+            formControlName="confirmPassword">
+          <div>
+            <mat-error *ngIf="hasError('confirmPassword','required')">
+              {{inputRequired}}.
+            </mat-error>
+            <mat-error *ngIf="passwordConfirm()">
+              La contraseña no coincide.
+            </mat-error>
+          </div>
         </div>
+
         <div>
-          <select>
+          <input type="text" name="email" placeholder="email" formControlName="email">
+          <div>
+            <mat-error *ngIf="hasError('email','required')">{{inputRequired}}.</mat-error>
+            <mat-error *ngIf="hasError('confirmEmail','email')">
+              Ingrese un email valido.
+            </mat-error>
+          </div>
+        </div>
+
+        <div>
+          <input type="text" name="confirm-email" placeholder="Confirma emial" formControlName="confirmEmail">
+          <div>
+            <mat-error *ngIf="hasError('confirmEmail','required')">
+              {{inputRequired}}.</mat-error>
+            <mat-error *ngIf="emailConfirm()">
+              El email no coincide.
+            </mat-error>
+          </div>
+        </div>
+
+        <div>
+          <select formControlName="tipeInstitution">
             <option hidden value="" disabled selected>Tipo de institucion</option>
             <option value="'privada'">{{privada | titlecase}}</option>
             <option value="'publica'">{{publica | titlecase}}</option>
           </select>
+          <div>
+            <mat-error *ngIf="hasError('tipeInstitution','required')">{{inputRequired}}.</mat-error>
+          </div>
         </div>
         <div>
-          <input type="text" name="name-institution" placeholder="Nombre de la institucion">
+          <input type="text" name="name-institution" placeholder="Nombre de la institucion"
+            formControlName="nameInstitution">
+          <div>
+            <mat-error *ngIf="hasError('nameInstitution','required')">{{inputRequired}}.</mat-error>
+            <mat-error *ngIf="hasError('nameInstitution','minlength')">{{inputMinLength}}.</mat-error>
+            <mat-error *ngIf="hasError('nameInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
+          </div>
         </div>
 
-
         <div>
+
           <select>
             <option hidden value="" disabled selected>Provincia</option>
           </select>
+          <div>
+            <mat-error *ngIf="hasError('province','required')">
+              {{inputRequired}}.
+            </mat-error>
+          </div>
         </div>
 
         <div>
-          <input type="text" name="locality" placeholder="Localidad">
+          <input type="text" name="locality" placeholder="Localidad" formControlName="locality">
+          <div>
+            <mat-error *ngIf="hasError('locality','required')">
+              {{inputRequired}}.
+            </mat-error>
+          </div>
         </div>
 
         <div>
-          <input type="text" name="addres" placeholder="Dirección">
+          <input type="text" name="addres" placeholder="Dirección" formControlName="addressInstitution">
+          <div>
+            <mat-error *ngIf="hasError('addressInstitution','required')">
+              {{inputRequired}}.</mat-error>
+            <mat-error *ngIf="hasError('addressInstitution','minlength')">
+              {{inputMinLength}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('addressInstitution','maxlength')">
+              {{inputMaxLength}}.</mat-error>
+          </div>
         </div>
 
         <div>
-          <input type="text" name="numberPhone" placeholder="Teléfono">
+          <input type="text" name="numberPhone" placeholder="Teléfono" formControlName="numberPhone">
+          <div>
+            <mat-error *ngIf="hasError('numberPhone','required')">
+              {{inputRequired}}.</mat-error>
+            <mat-error *ngIf="hasError('numberPhone','pattern')">
+              Solo se aceptan numeros.
+            </mat-error>
+          </div>
         </div>
 
 
         <div>
-          <select>
+          <select formControlName="timeAvailability">
             <option hidden value="" disabled selected>Disponibilidad horaria</option>
             <option value="'morning'">{{morning | titlecase }}</option>
             <option value="'afternoon'">{{afternoon | titlecase }}</option>
           </select>
+          <div>
+            <mat-error *ngIf="hasError('timeAvailability','required')">{{inputRequired}}.</mat-error>
+          </div>
         </div>
 
         <div>
-          <select>
+          <select formControlName="services">
             <option hidden value="" disabled selected>Servicios demandados</option>
             <option value="'voluntary'">{{volunteer}}</option>
             <option value="'tallerista'">{{workshops}}</option>
             <option value="'service'">{{service}}</option>
             <option value="'other'">{{other}}</option>
           </select>
+          <div>
+            <mat-error *ngIf="hasError('services','required')">{{inputRequired}}.</mat-error>
+          </div>
+        </div>
+        <div>
+          <button class="bg-blue-700 text-white px-4 py-2 rounded-md">Guardar</button>
         </div>
       </form>
 
