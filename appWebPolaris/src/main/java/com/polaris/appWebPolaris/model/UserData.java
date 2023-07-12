@@ -1,6 +1,5 @@
 package com.polaris.appWebPolaris.model;
 
-import com.polaris.appWebPolaris.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,32 +14,27 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "volunteer")
-public class Volunteer {
+public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
+    private String firstNameVolunteer;
     private String lastName;
-    private String gender;
+    private Integer dni;
+    private String gender;//mirar esto
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    private String email;
-    private String password;
-    private String profileImg;
-    //private Role role;
+
     private String contactNumber;
-    private String address;
-    private String country;
-    private String province;
-    private String locality;
+    private String address;//me parece que no
+    private String country;//mirar esto, podria ser nacionalidad y pais donde vives
+    private boolean residential;
     private String availability;
     private String profession;
     private boolean isValidated;
     private boolean experience;
-    //@OneToMany
-    //private List<Review> reviews;
-    private String presentation;
-    //private List<String> skills;
-    //@OneToMany
-    //private List<WorkRequest> workRequests;
+    private String presentation;//suprimimos manejar los skill para que pueda ponerlo aca
+    private Integer postalCode;
+
 
 }

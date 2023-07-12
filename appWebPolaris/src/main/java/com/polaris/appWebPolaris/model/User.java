@@ -7,19 +7,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
+@Table(name = "userLogin")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
     private String email;
     private String password;
-    private String profileImg;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    @OneToOne
+    private UserData userData;
+    @ManyToOne
+    private Work works;
+
 }

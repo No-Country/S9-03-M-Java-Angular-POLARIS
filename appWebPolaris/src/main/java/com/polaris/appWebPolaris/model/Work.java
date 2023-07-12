@@ -20,5 +20,7 @@ public class Work {
     private Long id;
     private String name;
     private String description;
+    @Temporal(TemporalType.DATE)
     private Date date;
+    private String status;
 }

@@ -22,7 +22,7 @@ public class Review {
             //nullable = false,
             //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
     )
-    private Volunteer volunteer;
+    private UserData userData;//la conexion va a estar con usuario
     private String comment;
     private Integer rating;
 }
