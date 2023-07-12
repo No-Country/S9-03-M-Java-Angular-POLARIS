@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,10 +15,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "volunteer")
-public class UserData {
+public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstNameVolunteer;
     private String lastName;
     private Integer dni;
@@ -36,5 +38,6 @@ public class UserData {
     private String presentation;//suprimimos manejar los skill para que pueda ponerlo aca
     private Integer postalCode;
 
-
+//    @OneToMany(mappedBy = "profile")
+//    private List<Review> reviews;
 }

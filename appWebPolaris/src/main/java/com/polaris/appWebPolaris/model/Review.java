@@ -16,13 +16,11 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(
-            name = "volunteer_id"
-            //nullable = false,
-            //foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (volunteer_id) references volunteer (volunteerId)")
-    )
-    private UserData userData;//la conexion va a estar con usuario
+    @JoinColumn(name = "profile_id")
+    private Profile profile;//la conexion va a estar con usuario
+
     private String comment;
     private Integer rating;
 }

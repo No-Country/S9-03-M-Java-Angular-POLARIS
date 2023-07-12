@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "userLogin")
-public class User {
+@Table(name = "user_login")
+public class UserLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +23,13 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @OneToOne
-    private UserData userData;
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
+
     @ManyToOne
+    @JoinColumn(name = "work_id")
     private Work works;
 
 }
