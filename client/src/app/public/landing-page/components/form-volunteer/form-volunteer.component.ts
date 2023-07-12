@@ -40,6 +40,7 @@ export class FormVolunteerComponent implements OnInit {
       country: ['', Validators.required],
       cellphoneNumber: ['', Validators.required],
     });
+    
     this.thirdFormGroup = this._formBuilder.group({
       timeAvailability: ['', Validators.required],
       profession: ['', Validators.required],
@@ -120,7 +121,7 @@ export class FormVolunteerComponent implements OnInit {
   resetFormAndSaveData() {
     // Guardar los datos del formulario
     const formData = {...this.firstFormGroup.value,...this.secondFormGroup.value};
-    
+
     console.log('Datos del formulario:', formData);
 
     // Restablecer los valores del formulario

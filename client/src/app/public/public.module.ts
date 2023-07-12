@@ -21,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-page/components/login-form/login-form.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { FormInstitutionComponent } from './landing-page/components/form-institution/form-institution.component';
 
 
 
@@ -33,6 +34,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
     LoginPageComponent,
     LoginFormComponent,
     RecoverPasswordComponent,
+    FormInstitutionComponent,
   ],
   imports: [
     CommonModule,
