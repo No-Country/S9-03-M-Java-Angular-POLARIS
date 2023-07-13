@@ -1,0 +1,4 @@
+
+“
+java:S1598"ðThis file "UserMapper.java" should be located in "com\polaris\appWebPolaris\mapper" directory, not in "C:\Users\USER\OneDrive\Escritorio\ultima\S9-03-M-Java-Angular-POLARIS\appWebPolaris\src\main\java\com\polaris\appWebPolaris\mapper\impl".(õâµ©øÿÿÿÿ8öøºÿ”1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(õâµ©øÿÿÿÿ8³ý³ÿ”1

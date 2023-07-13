@@ -1,0 +1,4 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(æƒ½ª
+„
+java:S4165"hRemove this useless assignment; "userMapper" already holds the assigned value along all execution paths.(·áò8¿“§ÿ”1

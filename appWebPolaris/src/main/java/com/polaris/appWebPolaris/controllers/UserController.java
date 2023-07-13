@@ -1,5 +1,6 @@
 package com.polaris.appWebPolaris.controllers;
 
+import com.polaris.appWebPolaris.dto.UserLoginDto;
 import com.polaris.appWebPolaris.model.UserLogin;
 import com.polaris.appWebPolaris.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserLogin> save(@RequestBody UserLogin userLogin){
-        return ResponseEntity.ok(userLoginService.save(userLogin));
+    public ResponseEntity<UserLogin> save(@RequestBody UserLoginDto userLoginDto){
+        return ResponseEntity.ok(userLoginService.save(userLoginDto));
     }
 
     @PutMapping
-    public ResponseEntity<UserLogin> update(@RequestBody UserLogin userLogin){
-        return ResponseEntity.ok(userLoginService.save(userLogin));
+    public ResponseEntity<UserLogin> update(@RequestBody UserLoginDto userLoginDto){
+        return ResponseEntity.ok(userLoginService.save(userLoginDto));
     }
 
     @DeleteMapping("/{id}")
