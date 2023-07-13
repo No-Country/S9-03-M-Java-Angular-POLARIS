@@ -44,10 +44,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                //.requestMatchers(HttpMethod.GET, "/customers").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
                                 .requestMatchers(HttpMethod.GET, "/volunteers/**").hasAnyRole(Roles.VOLUNTEER, Roles.INSTITUTION)
                                 .requestMatchers(HttpMethod.DELETE, "/volunteers/**").hasRole(Roles.VOLUNTEER)
-                                //.requestMatchers(HttpMethod.DELETE, "/customers/**").hasAuthority("ELIMINAR_PRIVILEGE")
 
                                 .anyRequest().authenticated()
 
