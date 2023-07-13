@@ -1,7 +1,5 @@
 package com.polaris.appWebPolaris.service.impl;
 
-import com.polaris.appWebPolaris.dto.UserLoginDto;
-import com.polaris.appWebPolaris.mapper.UserMapper;
 import com.polaris.appWebPolaris.model.UserLogin;
 import com.polaris.appWebPolaris.repository.UserLoginRepository;
 import com.polaris.appWebPolaris.service.UserLoginService;
@@ -15,31 +13,34 @@ import java.util.Optional;
 public class UserServiceImpl implements UserLoginService {
 
     private final UserLoginRepository userLoginRepository;
-    private final UserMapper userMapper;
+//    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserLoginRepository userLoginRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserLoginRepository userLoginRepository) {
         this.userLoginRepository = userLoginRepository;
-        this.userMapper = userMapper;
+//        this.userMapper = userMapper;
     }
 
     @Override
-    public List<UserLoginDto> findAll() {
-        return null;
+    public List<UserLogin> findAll() {
+        return userLoginRepository.findAll();
     }
 
     @Override
-    public Optional<UserLoginDto> findById(Long id) {
-        return Optional.empty();
+    public Optional<UserLogin> findById(Long id) {
+        return userLoginRepository.findById(id);
     }
 
     @Override
-    public UserLogin save(UserLoginDto userLoginDto) {
-        return userLoginRepository.save(userMapper.toUserLogin(userLoginDto));
+    public UserLogin save(UserLogin userLogin) {
+        return userLoginRepository.save(userLogin);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return findById(id).map(userLoginDto -> {
+            userLoginRepository.deleteById(id);
+            return true;
+        }).orElse(false);
     }
 }
