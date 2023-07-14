@@ -3,6 +3,7 @@ import { FormBuilder,FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/shared/models/user/LoginUser';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -10,11 +11,13 @@ import { LoginUser } from 'src/app/shared/models/user/LoginUser';
 })
 export class LoginFormComponent {
 
+
   loginForm:FormGroup;
   isLogged:boolean=false;
   loginUser: LoginUser={email:"",password:""};
   emailUsuario: string="";
   password: string="";
+
 
   constructor(private formBuilder:FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group(

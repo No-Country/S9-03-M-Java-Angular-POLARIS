@@ -6,24 +6,25 @@
         </div>
 
         <div class="absolute top-[47%] left-[15%] flex flex-col">
-            <p class="max-w-[80%] lg:text-4xl sm:text-xl text-center pt-4 text-white animate__animated animate__fadeIn">¡Bienvenido de nuevo!, inicia sesión para acceder a tu cuenta y continuar haciendo la diferencia juntos</p>
+            <p class="max-w-[80%] lg:text-4xl sm:text-xl text-center pt-4 text-white animate__animated animate__fadeIn">"¡Bienvenido de nuevo!, inicia sesión para acceder a tu cuenta y continuar haciendo la diferencia juntos."</p>
         </div>
 
         <img src="../../../assets/img/gradientPolaris.png" alt="" class="w-full h-full object-cover">
     </div>
 
 
-    <div class="relative w-1/2 h-full justify-normal flex flex-col bg-white">
+    <div class="relative min-[320px]:w-full md:w-1/2 h-full justify-normal flex flex-col bg-white">
 
         
-        <div class="pl-[10%] pt-20 w-full">
-            <button href=""><h1 class="pt-20 text-xl text-gray-700 font-extralight cursor-pointer hover:underline ">&lt; Regresar</h1></button>
+        <div class="pl-[10%] pt-5 w-full">
+            <button (click)="inicio()"><h1 class="pt-20 text-xl text-gray-700 font-extralight cursor-pointer hover:underline pb-5">&lt; Regresar</h1></button>
         
             <h1 class="sm:pt-[30%] md:pt-[10%] md:text-2xl sm:text-xl font-semibold mb-4">¡Bienvenido de nuevo!</h1>
             
-            <div class="row-span-2">
+            <div class="w-full flex flex-col">
                 <app-login-form></app-login-form>
             </div>
+            
             <div class="hidden">
                 <a routerLink="/recover-password">Olvidaste tu usuario y/o contraseña?</a>
             </div>
