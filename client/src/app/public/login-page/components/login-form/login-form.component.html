@@ -1,7 +1,8 @@
-<form [formGroup]="loginForm" class="my-8 grid grid-rows-3 gap-6 justify-items-center" (ngSubmit)="onLogin($event)" autocomplete="off">          
+<form [formGroup]="loginForm" class="w-[90%] flex flex-col" (ngSubmit)="onLogin($event)" autocomplete="off">          
     <!----Ingrese su email---->
-    <div class="">
-      <input type="email" id="email"  formControlName="email" class=" w-80 p-1 border-solid border-2 form-control" aria-describedby="emailHelp" placeholder="Correo Electrónico" [ngClass]="{'is-valid':!Email?.errors&& Email?.touched}"/>
+    <div class="flex flex-col pt-[4%] w-full">
+      <label class="text-xs text-gray-500 mb-[.01%]" for="email">Correo electrónico (*)</label>
+      <input type="email" id="email"  formControlName="email" class="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none mt-0 rounded-sm" aria-describedby="emailHelp" [ngClass]="{'is-valid':!Email?.errors&& Email?.touched}"/>
       <div *ngIf="Email?.errors && Email?.touched">
         <p *ngIf="Email?.hasError('required')" class="text-red-600">
           Ingrese su email
@@ -12,9 +13,9 @@
       </div>
     </div>
     <!----Ingrese la contraseña--->
-    <div class="field">
-      <label class="label" for="password"></label>
-      <input  id="password" name="password" formControlName="password" placeholder="Contraseña" class=" w-80 p-1 border-solid border-2  input-password form-control" [ngClass]="{'is-valid':!Password?.errors&&Password?.touched}"/>
+    <div class="lex flex-col pt-[5%] w-full">
+      <label class="text-xs text-gray-500 mb-[.01%]" for="password">Contraseña (*)</label>
+      <input  id="password" name="password" formControlName="password" class="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none mt-0 rounded-sm" [ngClass]="{'is-valid':!Password?.errors&&Password?.touched}"/>
      
       <div *ngIf="Password?.errors && Password?.touched">
         <p *ngIf="Password?.hasError('required')" class="text-red-600">
@@ -24,8 +25,28 @@
       </div>
     </div>
 
-      <div class="boton">
-          <button class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+    <div class="pt-[4%] w-full flex flex-col my-4">
+      <button class="w-full text-white bg-[#008eefff] rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-[#008eefff]/90" type="submit" [disabled]="!loginForm.valid">Iniciar sesión</button>
+    </div>
+
+    <div class="w-full flex items-center justify-center relative py-2 pt-[7%]">
+      <div class="w-full h-[1px] bg-black/80"></div>
+      <p class="text-lg absolute text-black/80 bg-white pl-[7%] pr-[7%]">O continúa con</p>
+    </div>
+
+    <div class="w-full flex lg:flex-row min-[320px]:flex-col pt-[4%] items-center justify-center">
+
+      <div class="text-black my-2 lg:mr-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+        <img class="h-6 mr-2" src="../../../../../assets/img/icons/google.png" alt="">
+        <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Google</p>
       </div>
+
+      <div class="text-black my-2 lg:ml-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+        <img class="h-6 mr-2" src="../../../../../assets/img/icons/facebook.png" alt="">
+        <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Facebook</p>
+      </div>
+
+    </div>
+    
 
 </form> 
