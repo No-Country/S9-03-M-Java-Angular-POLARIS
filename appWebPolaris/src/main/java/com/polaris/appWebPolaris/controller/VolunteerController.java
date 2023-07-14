@@ -18,7 +18,7 @@ public class VolunteerController {
     private final IVolunteerUseCase iVolunteerUseCase;
 
 
-    @GetMapping(path = "/getAll/{id}")
+    @GetMapping(path = "/getAll")
     public ResponseEntity<List<VolunteerDto>> getAll() {
         return ResponseEntity.ok(iVolunteerUseCase.getAll());
     }
