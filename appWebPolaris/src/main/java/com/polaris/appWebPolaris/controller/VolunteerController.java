@@ -18,14 +18,14 @@ public class VolunteerController {
     private final IVolunteerUseCase iVolunteerUseCase;
 
 
-    @GetMapping()
+    @GetMapping(path = "/getAll")
     public ResponseEntity<List<VolunteerDto>> getAll() {
         return ResponseEntity.ok(iVolunteerUseCase.getAll());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<VolunteerDto> getVolunteerById(@PathVariable Long id) {
-        return ResponseEntity.of(iVolunteerUseCase.getVolunteerById(id));
+    @GetMapping(path = "/getById/{id}")
+    public ResponseEntity<?> getVolunteerById(@PathVariable Long id) {
+        return iVolunteerUseCase.getVolunteerById(id);
     }
 
     @GetMapping(path = "/email/{email}")
@@ -33,14 +33,14 @@ public class VolunteerController {
         return ResponseEntity.of(iVolunteerUseCase.getVolunteerByEmail(email));
     }
 
-    @PatchMapping
+    @PatchMapping(path = "/update")
     public ResponseEntity<VolunteerDto> update(@RequestBody VolunteerDto volunteerDtoUpdate) {
         return ResponseEntity.of(iVolunteerUseCase.update(volunteerDtoUpdate));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(this.iVolunteerUseCase.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    @DeleteMapping(path = "/deleteId/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return iVolunteerUseCase.delete(id);
     }
 
 

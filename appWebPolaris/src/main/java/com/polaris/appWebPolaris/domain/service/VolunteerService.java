@@ -8,9 +8,12 @@ import com.polaris.appWebPolaris.exception.CustomerExistsException;
 import com.polaris.appWebPolaris.exception.EmailValidationException;
 import com.polaris.appWebPolaris.security.Roles;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +29,12 @@ public class VolunteerService implements IVolunteerUseCase {
     }
 
     @Override
-    public Optional<VolunteerDto> getVolunteerById(Long id) {
-        return iVolunteerRepository.getVolunteerById(id);
+    public ResponseEntity<?> getVolunteerById(Long id) {
+        Optional<VolunteerDto> result = iVolunteerRepository.getVolunteerById(id);
+        if(result.isEmpty()){
+            return ResponseEntity.badRequest().body("No existe un voluntario con ese id");
+        }
+        return ResponseEntity.ok(result);
     }
 
     @Override
@@ -47,9 +54,7 @@ public class VolunteerService implements IVolunteerUseCase {
             throw new CustomerExistsException();
         }
 
-//        String passwordGenerated = generateRandomPassword(10);
         newVolunteer.setPassword(passwordEncoder.encode(newVolunteer.getPassword()));
-//        newCustomer.setRol(newCustomer.getRol());
         newVolunteer.setRol(Roles.VOLUNTEER);
         iVolunteerRepository.save(newVolunteer);
 
@@ -68,11 +73,16 @@ public class VolunteerService implements IVolunteerUseCase {
     }
 
     @Override
-    public boolean delete(Long id) {
-        if (iVolunteerRepository.getVolunteerById(id).isEmpty()){
-            return false;
+    public ResponseEntity<?> delete(Long id) {
+        Optional<VolunteerDto> companyDB = iVolunteerRepository.getVolunteerById(id);
+        HashMap<String, Object> json = new HashMap<>();
+
+        if (companyDB.isPresent()) {
+            iVolunteerRepository.delete(id);
+            json.put("mensaje", "Volunteer successfully eliminated");
+            return new ResponseEntity<>(json, HttpStatus.OK);
         }
-        iVolunteerRepository.delete(id);
-        return true;
+        json.put("mensaje", "Volunteer does not exist");
+        return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
     }
 }

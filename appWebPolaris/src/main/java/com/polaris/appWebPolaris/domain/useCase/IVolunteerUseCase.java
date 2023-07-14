@@ -2,6 +2,7 @@ package com.polaris.appWebPolaris.domain.useCase;
 
 import com.polaris.appWebPolaris.domain.dto.ResponseVolunteerDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,7 @@ public interface IVolunteerUseCase {
 
     List<VolunteerDto> getAll();
 
-    Optional<VolunteerDto> getVolunteerById(Long id);
+    ResponseEntity<?> getVolunteerById(Long id);
 
     Optional<VolunteerDto> getVolunteerByEmail(String email);
 
@@ -18,6 +19,6 @@ public interface IVolunteerUseCase {
 
     Optional<VolunteerDto> update(VolunteerDto modifyVolunteer);
 
-    boolean delete(Long id);
+    ResponseEntity<?> delete(Long id);
 
 }
