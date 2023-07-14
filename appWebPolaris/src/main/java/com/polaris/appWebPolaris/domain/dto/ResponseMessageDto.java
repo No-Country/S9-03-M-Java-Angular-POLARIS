@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ResponseVolunteerDto {
+public class ResponseMessageDto {
 
     private String message;
 }

@@ -3,7 +3,7 @@ package com.polaris.appWebPolaris.controller;
 
 import com.polaris.appWebPolaris.domain.dto.AuthCustomerDto;
 import com.polaris.appWebPolaris.domain.dto.JwtResponseDto;
-import com.polaris.appWebPolaris.domain.dto.ResponseVolunteerDto;
+import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.repository.IAuthUseCase;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
@@ -23,7 +23,7 @@ public class AuthController {
 
 
     @PostMapping(path = "/registerVolunteer")
-    public ResponseEntity<ResponseVolunteerDto> saveVolunteer(@RequestBody VolunteerDto volunteerDtoNew) {
+    public ResponseEntity<ResponseMessageDto> saveVolunteer(@RequestBody VolunteerDto volunteerDtoNew) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(iVolunteerUseCase.saveVolunteer(volunteerDtoNew));
     }

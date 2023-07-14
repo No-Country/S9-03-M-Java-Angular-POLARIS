@@ -1,6 +1,6 @@
 package com.polaris.appWebPolaris.domain.useCase;
 
-import com.polaris.appWebPolaris.domain.dto.ResponseVolunteerDto;
+import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public interface IVolunteerUseCase {
 
     Optional<VolunteerDto> getVolunteerByEmail(String email);
 
-    ResponseVolunteerDto saveVolunteer(VolunteerDto newVolunteer);
+    ResponseMessageDto saveVolunteer(VolunteerDto newVolunteer);
 
     Optional<VolunteerDto> update(VolunteerDto modifyVolunteer);
 

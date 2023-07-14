@@ -1,6 +1,6 @@
 package com.polaris.appWebPolaris.domain.service;
 
-import com.polaris.appWebPolaris.domain.dto.ResponseVolunteerDto;
+import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.repository.IVolunteerRepository;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
@@ -36,7 +36,7 @@ public class VolunteerService implements IVolunteerUseCase {
     }
 
     @Override
-    public ResponseVolunteerDto saveVolunteer(VolunteerDto newVolunteer) {
+    public ResponseMessageDto saveVolunteer(VolunteerDto newVolunteer) {
 
         if (!newVolunteer.getEmail().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
@@ -53,7 +53,7 @@ public class VolunteerService implements IVolunteerUseCase {
         newVolunteer.setRol(Roles.VOLUNTEER);
         iVolunteerRepository.save(newVolunteer);
 
-        return new ResponseVolunteerDto("Voluntario registrado Correctamente");
+        return new ResponseMessageDto("Voluntario registrado Correctamente");
 
     }
 
