@@ -3,6 +3,9 @@ package com.polaris.appWebPolaris.persistance.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,7 +22,8 @@ public class VolunteerEntity {
     private String email;
     private String password;
     private String dni;
-    private Integer age;
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateOfBirth;
     private String gender;
     private String province;
     private String locality;
@@ -27,6 +31,5 @@ public class VolunteerEntity {
     private String numberCellphone;
 
     private String rol;
-
 
 }

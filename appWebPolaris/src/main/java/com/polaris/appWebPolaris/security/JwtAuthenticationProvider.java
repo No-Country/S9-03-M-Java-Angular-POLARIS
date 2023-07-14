@@ -47,9 +47,7 @@ public class JwtAuthenticationProvider {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
         String tokenCreated = JWT.create()
-                .withClaim("id", volunteerJwt.getId())
-                .withClaim("firstName", volunteerJwt.getFirstName())
-                .withClaim("numberCellPhone", String.valueOf(volunteerJwt.getNumberCellphone()))
+                .withClaim("ID", volunteerJwt.getId())
                 .withClaim("email", volunteerJwt.getEmail())
                 .withClaim("rol", volunteerJwt.getRol())
                 .withIssuedAt(now)
@@ -82,21 +80,8 @@ public class JwtAuthenticationProvider {
             throw new BadCredentialsException("Usuario no registrado.");
         }
 
-        //Creo un UserDetails pero cuando voy a roles() lo que esta es una nueva autoridad con prefijo ROLES_
-        /*
-        UserDetails userTest = User.withUsername(exists.getFullName()).password(exists.getPassword()).roles(exists.getRol()).build();
-        userTest.getAuthorities().forEach(System.out::println);
-        System.out.println("imprimiendo userDetails");
-        System.out.println(userTest);*/
-
-        //return new UsernamePasswordAuthenticationToken(userTest, token, userTest.getAuthorities());
-
-        //return new UsernamePasswordAuthenticationToken(userTest, token, Collections.singletonList(new SimpleGrantedAuthority("WRITE_PRIVILEGE")));
-
         HashSet<SimpleGrantedAuthority> rolesAndAuthorities = new HashSet<>();
         rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_" + exists.getRol())); //rol
-        // rolesAndAuthorities.add(new SimpleGrantedAuthority("ELIMINAR_PRIVILEGE")); // permisos del rol
-
 
         return new UsernamePasswordAuthenticationToken(exists, token, rolesAndAuthorities);
     }

@@ -2,10 +2,14 @@ package com.polaris.appWebPolaris.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class VolunteerDto {
+
 
     private Long id;
     private String firstName;
@@ -13,7 +17,7 @@ public class VolunteerDto {
     private String email;
     private String password;
     private String dni;
-    private Integer age;
+    private LocalDate dateOfBirth;
     private String gender;
     private String province;
     private String locality;
@@ -24,18 +28,18 @@ public class VolunteerDto {
     @Override
     public String toString() {
         return "VolunteerDto{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", dni='" + dni + '\'' +
-                ", age=" + age +
+                ", dateOfBirth=" + dateOfBirth +
                 ", gender='" + gender + '\'' +
                 ", province='" + province + '\'' +
                 ", locality='" + locality + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", numberCellphone='" + numberCellphone + '\'' +
-                ", rol='" + rol + '\'' +
                 '}';
     }
 }
