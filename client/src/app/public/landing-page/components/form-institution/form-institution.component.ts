@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DemandedService } from 'src/app/shared/enums/demanded-services-enum';
-import { TimeAvailability } from 'src/app/shared/enums/time-availability-enum';
-import { TypeInstitution } from 'src/app/shared/enums/type-institution-enum';
 
 @Component({
   selector: 'app-form-institution',
@@ -12,14 +9,6 @@ import { TypeInstitution } from 'src/app/shared/enums/type-institution-enum';
 export class FormInstitutionComponent {
 
   form: FormGroup;
-  privada: string = TypeInstitution.PRIVADA;
-  publica: string = TypeInstitution.PUBLICA;
-  volunteer: string = DemandedService.VOLUNTEER;
-  workshops: string = DemandedService.WORKSHOPS;
-  service: string = DemandedService.SERVICE;
-  other: string = DemandedService.OTHERS;
-  morning = TimeAvailability.MORNING;
-  afternoon = TimeAvailability.AFTERNOON;
   showPassword: boolean = false
 
   inputRequired = "Este campo es requerido";
@@ -28,19 +17,17 @@ export class FormInstitutionComponent {
   notNumberSpecial = "No se aceptan números ni caracteres especiales";
 
   confirmPassword = "";
-  confirmEmail = "";
-
 
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
   //    userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18), Validators.pattern('^[A-Za-z ]+$')]],
+      nameInstitution: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18)]],
+      cuitInstitution: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
       email: ['', [Validators.required, Validators.email]],
-      cuitInstitution: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
-      nameInstitution: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18)]],
       province: ['', Validators.required],
       locality: ['', Validators.required],
     });
@@ -61,7 +48,4 @@ export class FormInstitutionComponent {
 
   }
 
-  emailConfirm() {
-    return this.form.get('confirmEmail')!.touched && ((this.form.get('email')!.value !== this.form.get('confirmEmail')!.value));
-  }
 }

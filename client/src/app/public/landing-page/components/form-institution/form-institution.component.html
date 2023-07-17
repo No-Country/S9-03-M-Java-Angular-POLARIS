@@ -15,13 +15,13 @@
               <mat-error *ngIf="hasError('nameInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
             </div>
           </div>
+  
+          
           <div>
             <input type="text" name="cuit-institution" placeholder="Cuit"
             formControlName="cuitInstitution">
             <div>
               <mat-error *ngIf="hasError('cuitInstitution','required')">{{inputRequired}}.</mat-error>
-              <mat-error *ngIf="hasError('cuitnstitution','minlength')">{{inputMinLength}}.</mat-error>
-              <mat-error *ngIf="hasError('cuitInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
             </div>
           </div>
         </div>
@@ -31,9 +31,7 @@
           <input type="text" name="email" placeholder="email" formControlName="email">
           <div>
             <mat-error *ngIf="hasError('email','required')">{{inputRequired}}.</mat-error>
-            <mat-error *ngIf="hasError('confirmEmail','email')">
-              Ingrese un email valido.
-            </mat-error>
+      
           </div>
         </div>
 
