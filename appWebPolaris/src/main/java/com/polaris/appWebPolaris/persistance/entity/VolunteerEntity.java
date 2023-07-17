@@ -27,8 +27,11 @@ public class VolunteerEntity {
     private String gender;
     private String province;
     private String locality;
-    private String occupation;
+    private String education;
     private String numberCellphone;
+    private String description;
+    private String availability;
+    private String imageProfile;
 
     private String rol;
 

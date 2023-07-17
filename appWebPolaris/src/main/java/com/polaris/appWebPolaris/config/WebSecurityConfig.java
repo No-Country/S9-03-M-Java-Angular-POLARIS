@@ -47,11 +47,12 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/volunteers/**").hasAnyRole(Roles.VOLUNTEER, Roles.INSTITUTION)
                                 .requestMatchers(HttpMethod.DELETE, "/volunteers/**").hasRole(Roles.VOLUNTEER)
 
+                                .requestMatchers(HttpMethod.GET, "/institutions/**").hasAnyRole(Roles.VOLUNTEER, Roles.INSTITUTION)
+                                .requestMatchers(HttpMethod.DELETE, "/institutions/**").hasRole(Roles.INSTITUTION)
+
                                 .anyRequest().authenticated()
 
                 );
-
-
         return http.build();
     }
     @Bean

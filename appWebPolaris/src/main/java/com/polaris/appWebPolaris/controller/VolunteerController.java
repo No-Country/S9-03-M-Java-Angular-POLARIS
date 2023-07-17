@@ -2,9 +2,11 @@ package com.polaris.appWebPolaris.controller;
 
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +15,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/volunteers")
+@SecurityRequirement(name = "jwt")
 public class VolunteerController {
 
     private final IVolunteerUseCase iVolunteerUseCase;
 
 
     @GetMapping(path = "/getAll")
+    @PreAuthorize("hasRole('VOLUNTEER')")
     public ResponseEntity<List<VolunteerDto>> getAll() {
         return ResponseEntity.ok(iVolunteerUseCase.getAll());
     }

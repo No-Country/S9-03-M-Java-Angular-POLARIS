@@ -2,6 +2,7 @@ package com.polaris.appWebPolaris.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,6 +33,7 @@ public class JwtAuthenticationProvider {
      * Lista blanca con los jwt creados
      */
     private HashMap<String, VolunteerDto> listToken = new HashMap<>();
+    private HashMap<String, InstitutionDto> listTokenInstitution = new HashMap<>();
 
     /**
      * Crea un nuevo jwt en base al cliente recibido por parametro y lo agrega a la lista blanca
@@ -58,6 +60,25 @@ public class JwtAuthenticationProvider {
         return tokenCreated;
     }
 
+    public String createTokenInstitution(InstitutionDto institutionJwt) {
+
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + 3600000); // 1 hora en milisegundos
+
+        Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
+        String tokenCreated = JWT.create()
+                .withClaim("ID", institutionJwt.getId())
+                .withClaim("email", institutionJwt.getEmail())
+                .withClaim("rol", institutionJwt.getRol())
+                .withIssuedAt(now)
+                .withExpiresAt(validity)
+                .sign(algorithm);
+
+        listTokenInstitution.put(tokenCreated, institutionJwt);
+        return tokenCreated;
+    }
+
     /**
      * Valida si el token es valido y retorna una sesión del usuario
      *
@@ -74,18 +95,44 @@ public class JwtAuthenticationProvider {
         //verifica el token como su firma y expiración, lanza una excepcion si algo falla
         JWT.require(Algorithm.HMAC256(secretKey)).build().verify(token);
 
-
         VolunteerDto exists = listToken.get(token);
-        if (exists == null) {
+        InstitutionDto existsInstitute = null;
+
+        if (listTokenInstitution.containsKey(token)) {
+            existsInstitute = listTokenInstitution.get(token);
+        }
+
+        if (exists == null && existsInstitute == null) {
+            throw new BadCredentialsException("Usuario no registrado.");
+        }
+
+        HashSet<SimpleGrantedAuthority> rolesAndAuthorities = new HashSet<>();
+
+        if (exists != null) {
+            rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_" + exists.getRol()));
+            return new UsernamePasswordAuthenticationToken(exists, token, rolesAndAuthorities);
+        } else if (existsInstitute != null) {
+            rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_" + existsInstitute.getRol()));
+            return new UsernamePasswordAuthenticationToken(existsInstitute, token, rolesAndAuthorities);
+        }
+
+        throw new BadCredentialsException("Usuario no registrado.");
+
+        /*        if (exists == null && existsInstitute == null) {
             throw new BadCredentialsException("Usuario no registrado.");
         }
 
         HashSet<SimpleGrantedAuthority> rolesAndAuthorities = new HashSet<>();
         rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_" + exists.getRol())); //rol
+        rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_" + existsInstitute.getRol())); //rol
 
-        return new UsernamePasswordAuthenticationToken(exists, token, rolesAndAuthorities);
+        if (exists != null){
+            return new UsernamePasswordAuthenticationToken(exists, token, rolesAndAuthorities);
+        } else if(existsInstitute != null){
+            return new UsernamePasswordAuthenticationToken(existsInstitute, token, rolesAndAuthorities);
+        }
+        return null;*/
     }
-
     public String deleteToken(String jwt) {
 
         if (!listToken.containsKey(jwt)) {

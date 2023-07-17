@@ -8,5 +8,7 @@ public interface IAuthUseCase {
 
     JwtResponseDto signIn(AuthCustomerDto authCustomerDto);
 
+    JwtResponseDto signInInstitution(AuthCustomerDto authCustomerDto);
+
     JwtResponseDto signOut(String jwt);
 }

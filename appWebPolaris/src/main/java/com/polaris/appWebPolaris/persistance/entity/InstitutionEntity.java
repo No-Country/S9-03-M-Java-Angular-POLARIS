@@ -22,6 +22,7 @@ public class InstitutionEntity {
     private String type;
     private String availability;
     private String numberphone;
+    private String imageProfile;
 
     private String rol;
 

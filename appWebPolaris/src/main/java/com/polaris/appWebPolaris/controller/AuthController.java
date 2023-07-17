@@ -1,11 +1,9 @@
 package com.polaris.appWebPolaris.controller;
 
 
-import com.polaris.appWebPolaris.domain.dto.AuthCustomerDto;
-import com.polaris.appWebPolaris.domain.dto.JwtResponseDto;
-import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
-import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
+import com.polaris.appWebPolaris.domain.dto.*;
 import com.polaris.appWebPolaris.domain.repository.IAuthUseCase;
+import com.polaris.appWebPolaris.domain.useCase.IInstitutionUseCase;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +18,7 @@ public class AuthController {
 
     private final IAuthUseCase iAuthUseCase;
     private final IVolunteerUseCase iVolunteerUseCase;
+    private final IInstitutionUseCase iInstitutionUseCase;
 
 
     @PostMapping(path = "/registerVolunteer")
@@ -28,13 +27,24 @@ public class AuthController {
                 .body(iVolunteerUseCase.saveVolunteer(volunteerDtoNew));
     }
 
-    @PostMapping(path = "/sign-in")
-    public ResponseEntity<JwtResponseDto> signIn(@RequestBody AuthCustomerDto authCustomerDto) {
+    @PostMapping(path = "/registerInstitution")
+    public ResponseEntity<ResponseMessageDto> saveInstitute(@RequestBody InstitutionDto institutionDtoDtoNew) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(iInstitutionUseCase.saveInstitution(institutionDtoDtoNew));
+    }
+
+    @PostMapping(path = "/sign-in-volunteer")
+    public ResponseEntity<JwtResponseDto> signInVolunteer(@RequestBody AuthCustomerDto authCustomerDto) {
         return ResponseEntity.ok(iAuthUseCase.signIn(authCustomerDto));
     }
 
-    @PostMapping(path = "/sign-out")
+    @PostMapping(path = "/sign-in-institute")
+    public ResponseEntity<JwtResponseDto> signInInstitute(@RequestBody AuthCustomerDto authCustomerDto) {
+        return ResponseEntity.ok(iAuthUseCase.signInInstitution(authCustomerDto));
+    }
+
+/*    @PostMapping(path = "/sign-out")
     public ResponseEntity<JwtResponseDto> signOut(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String jwt) {
         return ResponseEntity.ok(iAuthUseCase.signOut(jwt));
-    }
+    }*/
 }
