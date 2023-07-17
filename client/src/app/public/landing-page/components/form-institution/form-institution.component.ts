@@ -20,6 +20,7 @@ export class FormInstitutionComponent {
   other: string = DemandedService.OTHERS;
   morning = TimeAvailability.MORNING;
   afternoon = TimeAvailability.AFTERNOON;
+  showPassword: boolean = false
 
   inputRequired = "Este campo es requerido";
   inputMinLength = "Este campo debe contener al menos 3 caracteres";
@@ -34,23 +35,14 @@ export class FormInstitutionComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18), Validators.pattern('^[A-Za-z ]+$')]],
-      password: ['', Validators.required,
-        Validators.pattern(this.patternPassword)
-      ],
-      confirmPassword: ['', Validators.required,
-        Validators.pattern(this.patternPassword)],
-
-      email: ['', Validators.required, Validators.email],
-      confirmEmail: ['', Validators.required, Validators.email],
-      tipeInstitution: ['', Validators.required],
-      nameInstitution: ['', Validators.required, Validators.minLength(2), Validators.maxLength(18)],
-      addressInstitution: ['', Validators.required],
+  //    userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18), Validators.pattern('^[A-Za-z ]+$')]],
+      password: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
+      email: ['', [Validators.required, Validators.email]],
+      cuitInstitution: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
+      nameInstitution: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(18)]],
       province: ['', Validators.required],
       locality: ['', Validators.required],
-      numberPhone: ['', [Validators.required, Validators.pattern('^[+0-9]+$')]],
-      timeAvailability: ['', Validators.required],
-      services: ['', Validators.required]
     });
   }
 

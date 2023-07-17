@@ -4,13 +4,15 @@ import { LandingPageComponent } from './public/landing-page/landing-page.compone
 import { LoginPageComponent } from './public/login-page/login-page.component';
 import { RecoverPasswordComponent } from './public/recover-password/recover-password.component';
 import { InstitutionDashboardComponent } from './private/institution/institution-dashboard/institution-dashboard.component';
+import { InstitutionRegFormComponent } from './public/login-page/components/institution-reg-form/institution-reg-form.component';
 
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'recover-password', component: RecoverPasswordComponent},
-  { path: 'institution', component: InstitutionDashboardComponent},
+  { path: 'register-institution', component: InstitutionRegFormComponent},
+  { path: 'dashboard-institution', component: InstitutionDashboardComponent},
   { path: '**', component: LandingPageComponent},
 
 ];

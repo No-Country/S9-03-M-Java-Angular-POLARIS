@@ -3,30 +3,42 @@
     <div class="w-full mt-4">
       <!-- <mat-step [stepControl]="form" [editable]="true"> -->
 
-      <form [formGroup]="form" class="flex flex-col padding gap-4" (ngSubmit)="saveInstitution()">
+      <form [formGroup]="form" class="flex flex-col padding gap-8" (ngSubmit)="saveInstitution()">
 
-        <div>
-          <input class="border border-gray-300 rounded-md p-2 mt-2" type="text" name="name"
-            placeholder="Nombre de usuario" formControlName="userName">
+        <div class="grid gap-4 grid-cols-2">
           <div>
-            <mat-error *ngIf="hasError('userName','required')">
-              {{inputRequired}}.
-            </mat-error>
-            <mat-error *ngIf="hasError('userName','minlength')">
-              {{inputMinLength}}.
-            </mat-error>
-            <mat-error *ngIf="hasError('userName','maxlength')">
-              {{inputMaxLength}}
-            </mat-error>
-            <mat-error *ngIf="hasError('userName','pattern')">
-              {{notNumberSpecial}}
-            </mat-error>
+            <input type="text" name="name-institution" placeholder="Nombre de la institucion"
+              formControlName="nameInstitution">
+            <div>
+              <mat-error *ngIf="hasError('nameInstitution','required')">{{inputRequired}}.</mat-error>
+              <mat-error *ngIf="hasError('nameInstitution','minlength')">{{inputMinLength}}.</mat-error>
+              <mat-error *ngIf="hasError('nameInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
+            </div>
+          </div>
+          <div>
+            <input type="text" name="cuit-institution" placeholder="Cuit"
+            formControlName="cuitInstitution">
+            <div>
+              <mat-error *ngIf="hasError('cuitInstitution','required')">{{inputRequired}}.</mat-error>
+              <mat-error *ngIf="hasError('cuitnstitution','minlength')">{{inputMinLength}}.</mat-error>
+              <mat-error *ngIf="hasError('cuitInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
+            </div>
           </div>
         </div>
 
 
         <div>
-          <input type="text" name="password" placeholder="Contraseña" formControlName="password">
+          <input type="text" name="email" placeholder="email" formControlName="email">
+          <div>
+            <mat-error *ngIf="hasError('email','required')">{{inputRequired}}.</mat-error>
+            <mat-error *ngIf="hasError('confirmEmail','email')">
+              Ingrese un email valido.
+            </mat-error>
+          </div>
+        </div>
+
+        <div>
+          <input [type]="showPassword ? 'text' : 'password'"  name="password" placeholder="Contraseña" formControlName="password">
           <div>
             <mat-error *ngIf="hasError('password','required')">
               {{inputRequired}}.
@@ -41,7 +53,7 @@
         </div>
 
         <div>
-          <input type="text" name="confirm-password" placeholder="Confirma la contraseña"
+          <input [type]="showPassword ? 'text' : 'password'"  name="confirm-password" placeholder="Confirma la contraseña"
             formControlName="confirmPassword">
           <div>
             <mat-error *ngIf="hasError('confirmPassword','required')">
@@ -52,53 +64,9 @@
             </mat-error>
           </div>
         </div>
-
+        
         <div>
-          <input type="text" name="email" placeholder="email" formControlName="email">
-          <div>
-            <mat-error *ngIf="hasError('email','required')">{{inputRequired}}.</mat-error>
-            <mat-error *ngIf="hasError('confirmEmail','email')">
-              Ingrese un email valido.
-            </mat-error>
-          </div>
-        </div>
-
-        <div>
-          <input type="text" name="confirm-email" placeholder="Confirma emial" formControlName="confirmEmail">
-          <div>
-            <mat-error *ngIf="hasError('confirmEmail','required')">
-              {{inputRequired}}.</mat-error>
-            <mat-error *ngIf="emailConfirm()">
-              El email no coincide.
-            </mat-error>
-          </div>
-        </div>
-
-        <div>
-          <select formControlName="tipeInstitution">
-            <option hidden value="" disabled selected>Tipo de institucion</option>
-            <option value="'privada'">{{privada | titlecase}}</option>
-            <option value="'publica'">{{publica | titlecase}}</option>
-          </select>
-          <div>
-            <mat-error *ngIf="hasError('tipeInstitution','required')">{{inputRequired}}.</mat-error>
-          </div>
-        </div>
-        <div>
-          <input type="text" name="name-institution" placeholder="Nombre de la institucion"
-            formControlName="nameInstitution">
-          <div>
-            <mat-error *ngIf="hasError('nameInstitution','required')">{{inputRequired}}.</mat-error>
-            <mat-error *ngIf="hasError('nameInstitution','minlength')">{{inputMinLength}}.</mat-error>
-            <mat-error *ngIf="hasError('nameInstitution','maxlength')">{{inputMaxLength}}.</mat-error>
-          </div>
-        </div>
-
-        <div>
-
-          <select>
-            <option hidden value="" disabled selected>Provincia</option>
-          </select>
+          <input type="text" name="province" placeholder="Provincia" formControlName="province">
           <div>
             <mat-error *ngIf="hasError('province','required')">
               {{inputRequired}}.
@@ -114,8 +82,11 @@
             </mat-error>
           </div>
         </div>
-
-        <div>
+        
+        <div class=" mx-auto ">
+          <button class="bg-[#3498DB] text-white w-96 h-10 px-4 py-2 rounded-md">Crear cuenta</button>
+        </div>
+   <!-- <div>
           <input type="text" name="addres" placeholder="Dirección" formControlName="addressInstitution">
           <div>
             <mat-error *ngIf="hasError('addressInstitution','required')">
@@ -162,14 +133,31 @@
           <div>
             <mat-error *ngIf="hasError('services','required')">{{inputRequired}}.</mat-error>
           </div>
-        </div>
+        </div>     
         <div>
-          <button class="bg-blue-700 text-white px-4 py-2 rounded-md">Guardar</button>
-        </div>
+          <input class="border border-gray-300 rounded-md p-2 mt-2" type="text" name="name"
+            placeholder="Nombre de usuario" formControlName="userName">
+          <div>
+            <mat-error *ngIf="hasError('userName','required')">
+              {{inputRequired}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','minlength')">
+              {{inputMinLength}}.
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','maxlength')">
+              {{inputMaxLength}}
+            </mat-error>
+            <mat-error *ngIf="hasError('userName','pattern')">
+              {{notNumberSpecial}}
+            </mat-error>
+          </div>
+        </div>--> 
+
+       
       </form>
 
-      <!-- </mat-step> -->
-    </div>
-  </div>
+    
+    </div>  
+  </div>  
 
 </div>
