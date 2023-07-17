@@ -1,18 +1,20 @@
-<div class="justify-center mt-10">
-  <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900 text-center">Crea tu cuenta</h1>
-  <div class="text-center mt-8">
-    <p class="text-lg">Para crear tu cuenta tienes que ser mayor de 18 años e</p>
-    <p class="text-md mt-2">ingresar todos los datos requeridos.</p>
-  </div>
+<div class="w-full h-screen flex items-start">
 
-  <div class="flex justify-center">
-    <mat-stepper labelPosition="bottom" linear #stepper class="w-full mt-4">
-      <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-        <form [formGroup]="firstFormGroup" class="flex flex-col gap-4">
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="nameUser" placeholder="Nombre de usuario" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+  <div class="w-[90%]">
+    
+    <div class="pt-[10%] pl-[10%]">
+      <div class="container bg-white bg-opacity-10 z-2 rounded-[48px] shadow-3xl border border-r-0 border-b-0 border-opacity-30 backdrop-filter backdrop-blur-sm w-full">
+
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro Voluntario</h1>
+        
+        <form class="w-full flex flex-col">
+
+          <div class="w-full flex px-[5%] lg:py-8 min-[320px]:flex-col lg:flex-row items-center justify-center">
+
+            <!-- Nombre y Apellido -->
+            <div class="min-[320px]:w-full lg:w-[50%] mx-4 min-[320px]:pb-6 lg:py-0">
+              <input matInput formControlName="nameUser" placeholder="Nombre Apellido (*)" required
+              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
             </div>
             <div>
               <mat-error
@@ -23,11 +25,47 @@
               <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe
                 tener como máximo 20 caracteres.</mat-error>
             </div>
+
+
+            <!-- DNI -->
+            <div class="min-[320px]:w-full lg:w-[50%] mx-4">
+              <input matInput formControlName="dniUser" placeholder="DNI (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+            </div>
+            <div>
+              <mat-error
+                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">El
+                  nombre de usuario es requerido.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de usuario debe
+                  tener al menos 3 caracteres.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe
+                  tener como máximo 20 caracteres.</mat-error>
+            </div>
+
           </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <input matInput formControlName="password" placeholder="Contraseña" required
-                class="w-full focus:border-transparent outline-none custom-input"
+          
+
+          <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
+
+            <!-- Correo Electrónico -->
+            <div class="w-full flex flex-col lg:px-[2%] pb-6">
+              <input matInput formControlName="writeYourEmail" placeholder="Correo Electrónico (*)" required
+              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off" email>
+            </div>
+            <div>
+              <mat-error
+                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('required') && firstFormGroup.controls['writeYourEmail'].touched">El
+                correo electrónico es requerido.</mat-error>
+              <mat-error
+                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('email') && firstFormGroup.controls['writeYourEmail'].touched">El
+                formato del correo electrónico es incorrecto.</mat-error>
+            </div>
+
+
+            <!-- Password -->
+            <div class="w-full flex flex-col lg:px-[2%] pb-6">
+              <input matInput formControlName="password" placeholder="Contraseña (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none"
                 [type]="showPassword ? 'text' : 'password'" autocomplete="off">
             </div>
             <div>
@@ -35,11 +73,12 @@
                 *ngIf="firstFormGroup.controls['password'].hasError('required') && firstFormGroup.controls['password'].touched">La
                 contraseña es requerida.</mat-error>
             </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <input matInput formControlName="confirmPassword" placeholder="Confirma contraseña" required
-                class="w-full focus:border-transparent outline-none custom-input"
+         
+
+            <!-- Password Again -->
+            <div class="w-full flex flex-col lg:px-[2%] pb-6">
+              <input matInput formControlName="confirmPassword" placeholder="Verifica tu contraseña (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none"
                 [type]="showPassword ? 'text' : 'password'" autocomplete="off">
             </div>
             <div>
@@ -50,186 +89,71 @@
                 *ngIf="firstFormGroup.hasError('passwordMismatch') && firstFormGroup.controls['confirmPassword'].touched && firstFormGroup.controls['confirmPassword'].value !== ''">Las
                 contraseñas no coinciden.</mat-error>
             </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <input matInput formControlName="writeYourEmail" placeholder="Escribe tu correo electrónico" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off" email>
+
+
+            <!-- Provincia -->
+            <div class="w-full flex flex-col lg:px-[2%] pb-6">
+              <input matInput formControlName="province" placeholder="Provincia" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('required') && firstFormGroup.controls['writeYourEmail'].touched">El
-                correo electrónico es requerido.</mat-error>
-              <mat-error
-                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('email') && firstFormGroup.controls['writeYourEmail'].touched">El
-                formato del correo electrónico es incorrecto.</mat-error>
+                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">La
+                  Provincia de usuario es requerido.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de Provincia debe tener al menos 3 caracteres.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de Provincia debe tener como máximo 20 caracteres.</mat-error>
             </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <mat-select formControlName="typeUser" placeholder="Voluntario o institución" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option value="opcion1">Voluntario</mat-option>
-                <mat-option value="opcion2">Institución</mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <input matInput formControlName="nameUsernameUser" placeholder="Nombre y apellido" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
+
+            
+            <!-- Localidad -->
+            <div class="w-full flex flex-col lg:px-[2%] pb-6">
+              <input matInput formControlName="localidad" placeholder="Localidad (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['nameUsernameUser'].hasError('required') && firstFormGroup.controls['nameUsernameUser'].touched">El
-                nombre y apellido son requeridos.</mat-error>
+                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">La
+                  Provincia de usuario es requerido.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de la Localidad debe tener al menos 3 caracteres.</mat-error>
+              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 20 caracteres.</mat-error>
             </div>
+
+            <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
+              <button class="bg-[#3498db] text-white px-4 py-2 rounded-md" (click)="resetFormAndSaveData()">Crear Cuenta</button>
+            </div>
+
           </div>
-          <div>
-            <button matStepperNext class="bg-blue-700 text-white px-4 py-2 rounded-md"
-              (click)="markAllAsTouched()">Siguiente</button>
-          </div>
+
         </form>
-      </mat-step>
-      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-        <form [formGroup]="secondFormGroup" class="flex flex-col gap-4">
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <mat-select formControlName="Sex" placeholder="Sexo" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option value="opcion1">Femenino</mat-option>
-                <mat-option value="opcion2">Masculino</mat-option>
-              </mat-select>
-            </div>
-          </div>
 
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <div class="flex items-center"> <!-- Utilizamos flexbox para alinear horizontalmente -->
-                <input matInput [matDatepicker]="datePicker" formControlName="birthdate"
-                  placeholder="Fecha de nacimiento" required
-                  class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-              </div>
-              <mat-datepicker #datePicker></mat-datepicker>
-            </div>
-            <div>
-              <mat-error
-                *ngIf="secondFormGroup.controls['birthdate'].hasError('required') && secondFormGroup.controls['birthdate'].touched">La
-                fecha de nacimiento es requerida.</mat-error>
-            </div>
+        <div class="w-[93%] flex items-center relative py-2 justify-between">
+          <div class="w-[20%] h-[1px] bg-white ml-[7%] pl-[10%]"></div>
+          <p class="flex-row text-lg absolute text-white bg-transparent justify-center pl-[3%] min-[320px]:ml-[28%] lg:ml-[40%]">O registrate con</p>
+          <div class="w-[20%] h-[1px] bg-white ml-[30%] pr-[1%]"></div>
+        </div>
+    
+        <div class="w-[90%] flex lg:flex-row min-[320px]:flex-col py-[4%] items-center justify-center ml-[5%]">
+    
+          <div class="text-black my-2 lg:mr-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+            <img class="h-6 mr-2" src="../../../../../assets/img/icons/google.png" alt="">
+            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Google</p>
           </div>
+    
+          <div class="text-black my-2 lg:ml-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+            <img class="h-6 mr-2" src="../../../../../assets/img/icons/facebook.png" alt="">
+            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Facebook</p>
+          </div>
+    
+        </div>
+        
+      </div>
 
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="documentNumber" [placeholder]="getDocumentPlaceholder()"
-                [attr.pattern]="getDocumentPattern()" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-            </div>
-            <div>
-              <mat-error *ngIf="secondFormGroup.get('documentNumber')?.hasError('pattern')">
-                Formato de documento incorrecto.
-              </mat-error>
-            </div>
-          </div>
+      <div class="text-white text-center text-[32px] font-normal">
+        Juntos, construyendo un futuro inclusivo
+      </div>
 
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="address" placeholder="Direccion" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-            </div>
-            <div>
-            </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="location" placeholder="Localidad" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-            </div>
-            <div>
-            </div>
-          </div>
-
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <mat-select formControlName="province" placeholder="Provincia" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option value="opcion1">Buenos Aires</mat-option>
-                <mat-option value="opcion2">Catamarca</mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <mat-select formControlName="country" placeholder="Pais" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option *ngFor="let country of countriesData" [value]="country">{{ country }}</mat-option>
-              </mat-select>
-            </div>
-          </div>
-
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="cellphoneNumber" placeholder="numero de celular" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-            </div>
-            <div>
-            </div>
-          </div>
-          <div>
-            <button matStepperNext class="bg-blue-700 text-white px-4 py-2 rounded-md">Siguiente</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
-        <form [formGroup]="thirdFormGroup" class="flex flex-col gap-4">
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <mat-select formControlName="timeAvailability" placeholder="Disponibilidad Horaria" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option value="opcion1">Mañana</mat-option>
-                <mat-option value="opcion2">Tarde</mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div>
-            <div class="border border-gray-300 rounded-md p-2 mt-2">
-              <input matInput formControlName="profession" placeholder="Profesión" required
-                class="w-full focus:border-transparent outline-none custom-input" autocomplete="off">
-            </div>
-            <div>
-            </div>
-          </div>
-
-          <div>
-            <div class="border border-gray-300 rounded-md p-2">
-              <mat-select formControlName="skillsHobbies" placeholder="Habilidades o pasatiempos" required
-                class="w-full focus:border-transparent outline-none custom-input">
-                <mat-option value="opcion1">Braile</mat-option>
-                <mat-option value="opcion2">Tocar un instrumento musical</mat-option>
-                <mat-option value="opcion2">Escultura</mat-option>
-                <mat-option value="opcion2">Cerámica</mat-option>
-                <mat-option value="opcion2">Tejido</mat-option>
-                <mat-option value="opcion2">Deportes</mat-option>
-                <mat-option value="opcion2">Escritura o narrativa</mat-option>
-                <mat-option value="opcion2">Cocina</mat-option>
-                <mat-option value="opcion2">Juegos de mesa</mat-option>
-                <mat-option value="opcion2">Idiomas</mat-option>
-                <mat-option value="opcion2">Yoya y meditación</mat-option>
-                <mat-option value="opcion2">Computación con lectores de pantalla</mat-option>
-                <mat-option value="opcion2">Arreglo de computadoras</mat-option>
-                <mat-option value="opcion2">Artesano de maderas</mat-option>
-                <mat-option value="opcion2">Arreglo de computadoras</mat-option>
-                <mat-option value="opcion2">Canto</mat-option>
-                <mat-option value="opcion2">Otros (especificar)</mat-option>
-              </mat-select>
-            </div>
-          </div>
-          <div>
-            <button class="bg-blue-700 text-white px-4 py-2 rounded-md" (click)="resetFormAndSaveData()">Enviar</button>
-          </div>
-        </form>
-      </mat-step>
-    </mat-stepper>
   </div>
+
+  </div>
+
 </div>
