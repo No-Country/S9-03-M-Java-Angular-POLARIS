@@ -14,9 +14,26 @@ export class FormVolunteerComponent implements OnInit {
   thirdFormGroup!: FormGroup;
   isEditable: boolean = false;
   showPassword: boolean = false;
+  form!: FormGroup;
+
+  patternDNI = '/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i';
+  patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
+
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {}
+  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {
+
+    this.form = this._formBuilder.group({
+      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      userDNI: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(this.patternDNI)]],
+      writeYourEmail: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
+      province: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      locality: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
+    })
+
+  }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -48,6 +65,31 @@ export class FormVolunteerComponent implements OnInit {
     });
 
   }
+
+  validarDNI(dni: string): boolean {
+    const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+  
+    // Verificar que el DNI cumpla con el formato de 8 dígitos seguido de una letra (mayúscula o minúscula)
+    if (!dniRegex.test(dni)) {
+      return false;
+    }
+  
+    // Extraer los dígitos y la letra del DNI
+    const numerosDNI = dni.slice(0, -1);
+    const letraDNI = dni.slice(-1).toUpperCase();
+  
+    // Calcular la letra correspondiente a los dígitos
+    const letrasValidas = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    const letraCalculada = letrasValidas[parseInt(numerosDNI) % 23];
+  
+    // Verificar que la letra calculada coincida con la letra del DNI
+    return letraDNI === letraCalculada;
+  }
+
+  passwordConfirm() {
+    return this.form.get('confirmPassword')!.touched && ((this.form.get('password')!.value !== this.form.get('confirmPassword')!.value));
+  }
+
   get countriesData(){
     return [...this.countryFormatService.countries];
   }
