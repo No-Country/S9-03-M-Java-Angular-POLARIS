@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { SharedModule } from '../shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -45,6 +46,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
     SharedModule
