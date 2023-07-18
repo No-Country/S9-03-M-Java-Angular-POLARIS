@@ -1,22 +1,21 @@
 package com.polaris.appWebPolaris.domain.repository;
 
-import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
-import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
+import com.polaris.appWebPolaris.domain.dto.InstituteDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IInstitutionRepository {
 
-    List<InstitutionDto> getAll();
+    List<InstituteDto> getAll();
 
-    Optional<InstitutionDto> getInstitutionById(Long id);
+    Optional<InstituteDto> getInstitutionById(Long id);
 
-    Optional<InstitutionDto> getInstitutionByEmail(String email);
+    Optional<InstituteDto> getInstitutionByEmail(String email);
 
-    Optional<InstitutionDto> getInstitutionByName(String name);
+    Optional<InstituteDto> getInstitutionByName(String name);
 
-    InstitutionDto save(InstitutionDto newInstitutionDto);
+    InstituteDto save(InstituteDto newInstitutionDto);
 
     void delete(Long id);
 }

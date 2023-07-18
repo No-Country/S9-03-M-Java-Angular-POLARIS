@@ -2,14 +2,12 @@ package com.polaris.appWebPolaris.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 public class VolunteerDto {
-
 
     private Long id;
     private String firstName;
@@ -21,8 +19,12 @@ public class VolunteerDto {
     private String gender;
     private String province;
     private String locality;
-    private String occupation;
+    private String education;
     private String numberCellphone;
+    private String description;
+    private String availability;
+    private String imageProfile;
+
     private String rol;
 
     @Override
@@ -38,8 +40,12 @@ public class VolunteerDto {
                 ", gender='" + gender + '\'' +
                 ", province='" + province + '\'' +
                 ", locality='" + locality + '\'' +
-                ", occupation='" + occupation + '\'' +
+                ", education='" + education + '\'' +
                 ", numberCellphone='" + numberCellphone + '\'' +
+                ", description='" + description + '\'' +
+                ", availability='" + availability + '\'' +
+                ", imageProfile='" + imageProfile + '\'' +
+                ", rol='" + rol + '\'' +
                 '}';
     }
 }

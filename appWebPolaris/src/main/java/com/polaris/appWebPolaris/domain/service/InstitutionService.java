@@ -1,6 +1,6 @@
 package com.polaris.appWebPolaris.domain.service;
 
-import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
+import com.polaris.appWebPolaris.domain.dto.InstituteDto;
 import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import com.polaris.appWebPolaris.domain.repository.IInstitutionRepository;
 import com.polaris.appWebPolaris.domain.useCase.IInstitutionUseCase;
@@ -25,13 +25,13 @@ public class InstitutionService implements IInstitutionUseCase {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<InstitutionDto> getAll() {
+    public List<InstituteDto> getAll() {
         return iInstitutionRepository.getAll();
     }
 
     @Override
     public ResponseEntity<?> getInstitutionById(Long id) {
-        Optional<InstitutionDto> result = iInstitutionRepository.getInstitutionById(id);
+        Optional<InstituteDto> result = iInstitutionRepository.getInstitutionById(id);
         if(result.isEmpty()){
             return ResponseEntity.badRequest().body("No existe una institución con ese id");
         }
@@ -39,45 +39,45 @@ public class InstitutionService implements IInstitutionUseCase {
     }
 
     @Override
-    public Optional<InstitutionDto> getInstitutionByEmail(String email) {
+    public Optional<InstituteDto> getInstitutionByEmail(String email) {
         return iInstitutionRepository.getInstitutionByEmail(email);
     }
 
-    public Optional<InstitutionDto> getInstitutionByName(String name) {
+    public Optional<InstituteDto> getInstitutionByName(String name) {
         return iInstitutionRepository.getInstitutionByName(name);
     }
 
     @Override
-    public ResponseMessageDto saveInstitution(InstitutionDto newInstitution) {
+    public ResponseMessageDto saveInstitution(InstituteDto newInstitute) {
 
-        if (!newInstitution.getEmail().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+        if (!newInstitute.getEmail().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
             throw new EmailValidationException();
         }
 
-        if (getInstitutionByEmail(newInstitution.getEmail()).isPresent()) {
+        if (getInstitutionByEmail(newInstitute.getEmail()).isPresent()) {
             throw new CustomerExistsException();
         }
 
-        newInstitution.setPassword(passwordEncoder.encode(newInstitution.getPassword()));
-        newInstitution.setRol(Roles.INSTITUTION);
-        iInstitutionRepository.save(newInstitution);
+        newInstitute.setPassword(passwordEncoder.encode(newInstitute.getPassword()));
+        newInstitute.setRol(String.valueOf(Roles.INSTITUTION));
+        iInstitutionRepository.save(newInstitute);
         return new ResponseMessageDto("Institución creada con éxito");
     }
 
     @Override
-    public Optional<InstitutionDto> update(InstitutionDto modifyInstitution) {
-        if (iInstitutionRepository.getInstitutionById(modifyInstitution.getId()).isEmpty()){
+    public Optional<InstituteDto> update(InstituteDto modifyInstitute) {
+        if (iInstitutionRepository.getInstitutionById(modifyInstitute.getId()).isEmpty()){
             return Optional.empty();
         }
-        modifyInstitution.setPassword(passwordEncoder.encode(modifyInstitution.getPassword()));
-        modifyInstitution.setRol(Roles.INSTITUTION);
-        return Optional.of(iInstitutionRepository.save(modifyInstitution));
+        modifyInstitute.setPassword(passwordEncoder.encode(modifyInstitute.getPassword()));
+        modifyInstitute.setRol(String.valueOf(Roles.INSTITUTION));
+        return Optional.of(iInstitutionRepository.save(modifyInstitute));
     }
 
     @Override
     public ResponseEntity<?> delete(Long id) {
-        Optional<InstitutionDto> institutionDB = iInstitutionRepository.getInstitutionById(id);
+        Optional<InstituteDto> institutionDB = iInstitutionRepository.getInstitutionById(id);
         HashMap<String, Object> json = new HashMap<>();
 
         if (institutionDB.isPresent()) {

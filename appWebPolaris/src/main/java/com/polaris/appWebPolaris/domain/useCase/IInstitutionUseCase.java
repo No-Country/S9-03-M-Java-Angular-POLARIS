@@ -1,7 +1,7 @@
 package com.polaris.appWebPolaris.domain.useCase;
 
 
-import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
+import com.polaris.appWebPolaris.domain.dto.InstituteDto;
 import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import org.springframework.http.ResponseEntity;
 
@@ -10,17 +10,17 @@ import java.util.Optional;
 
 public interface IInstitutionUseCase {
 
-    List<InstitutionDto> getAll();
+    List<InstituteDto> getAll();
 
     ResponseEntity<?> getInstitutionById(Long id);
 
-    Optional<InstitutionDto> getInstitutionByEmail(String email);
+    Optional<InstituteDto> getInstitutionByEmail(String email);
 
-    Optional<InstitutionDto> getInstitutionByName(String name);
+    Optional<InstituteDto> getInstitutionByName(String name);
 
-    ResponseMessageDto saveInstitution(InstitutionDto newInstitution);
+    ResponseMessageDto saveInstitution(InstituteDto newInstitution);
 
-    Optional<InstitutionDto> update(InstitutionDto modifyInstitution);
+    Optional<InstituteDto> update(InstituteDto modifyInstitution);
 
     ResponseEntity<?> delete(Long id);
 }

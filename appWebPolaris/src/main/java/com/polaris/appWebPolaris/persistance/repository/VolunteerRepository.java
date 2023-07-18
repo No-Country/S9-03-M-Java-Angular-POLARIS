@@ -16,6 +16,7 @@ public class VolunteerRepository implements IVolunteerRepository {
 
     private final IVolunteerCrudRepository iVolunteerCrudRepository;
     private final IVolunteerMapper iVolunteerMapper;
+
     @Override
     public List<VolunteerDto> getAll() {
         return iVolunteerMapper.toVolunteersDto(iVolunteerCrudRepository.findAll());

@@ -1,9 +1,8 @@
 package com.polaris.appWebPolaris.persistance.repository;
 
-import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
+import com.polaris.appWebPolaris.domain.dto.InstituteDto;
 import com.polaris.appWebPolaris.domain.repository.IInstitutionRepository;
 import com.polaris.appWebPolaris.persistance.crud.IInstitutionCrudRepository;
-import com.polaris.appWebPolaris.persistance.entity.InstitutionEntity;
 import com.polaris.appWebPolaris.persistance.mapper.IInstitutionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,38 +14,42 @@ import java.util.Optional;
 @Repository
 public class InstitutionRepository implements IInstitutionRepository {
 
-    private final IInstitutionCrudRepository institutionCrudRepository;
-
-    private final IInstitutionMapper institutionMapper;
+    private final IInstitutionCrudRepository iInstitutionCrudRepository;
+    private final IInstitutionMapper iInstitutionMapper;
 
     @Override
-    public List<InstitutionDto> getAll() {
-        return institutionMapper.toInstitutionDto(institutionCrudRepository.findAll());
+    public List<InstituteDto> getAll() {
+        return iInstitutionMapper.toInstitutionsDto(iInstitutionCrudRepository.findAll());
     }
 
     @Override
-    public Optional<InstitutionDto> getInstitutionById(Long id) {
-        return institutionCrudRepository.findById(id).map(institutionMapper::toInstitutionDto);
+    public Optional<InstituteDto> getInstitutionById(Long id) {
+        return iInstitutionCrudRepository.findById(id)
+                .map(iInstitutionMapper::toInstitutionDto);
     }
 
     @Override
-    public Optional<InstitutionDto> getInstitutionByEmail(String email) {
-        return institutionCrudRepository.findByEmail(email).map(institutionMapper::toInstitutionDto);
+    public Optional<InstituteDto> getInstitutionByEmail(String email) {
+        return iInstitutionCrudRepository.findByEmail(email)
+                .map(iInstitutionMapper::toInstitutionDto);
     }
 
     @Override
-    public Optional<InstitutionDto> getInstitutionByName(String name) {
-        return institutionCrudRepository.findByName(name).map(institutionMapper::toInstitutionDto);
+    public Optional<InstituteDto> getInstitutionByName(String name) {
+        return iInstitutionCrudRepository.findByName(name)
+                .map(iInstitutionMapper::toInstitutionDto);
     }
 
     @Override
-    public InstitutionDto save(InstitutionDto newInstitutionDto) {
-        InstitutionEntity institutionEntity = institutionMapper.toInstitutionEntity(newInstitutionDto);
-        return institutionMapper.toInstitutionDto(institutionCrudRepository.save(institutionEntity));
+    public InstituteDto save(InstituteDto newInstitution) {
+        return iInstitutionMapper
+                .toInstitutionDto(iInstitutionCrudRepository
+                        .save(iInstitutionMapper
+                                .toInstitutionEntity(newInstitution)));
     }
 
     @Override
     public void delete(Long id) {
-        institutionCrudRepository.deleteById(id);
+        iInstitutionCrudRepository.deleteById(id);
     }
 }

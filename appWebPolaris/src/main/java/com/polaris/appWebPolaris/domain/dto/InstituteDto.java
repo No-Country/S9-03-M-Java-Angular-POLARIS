@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class InstitutionDto {
+public class InstituteDto {
 
     private Long id;
     private String name;
@@ -17,12 +17,13 @@ public class InstitutionDto {
     private String type;
     private String availability;
     private String numberphone;
+    private String imageProfile;
 
     private String rol;
 
     @Override
     public String toString() {
-        return "InstitutionDto{" +
+        return "InstituteDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", cuit='" + cuit + '\'' +
@@ -33,6 +34,7 @@ public class InstitutionDto {
                 ", type='" + type + '\'' +
                 ", availability='" + availability + '\'' +
                 ", numberphone='" + numberphone + '\'' +
+                ", imageProfile='" + imageProfile + '\'' +
                 ", rol='" + rol + '\'' +
                 '}';
     }

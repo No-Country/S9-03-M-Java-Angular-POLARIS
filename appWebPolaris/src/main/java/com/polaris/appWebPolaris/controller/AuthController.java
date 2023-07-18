@@ -3,6 +3,7 @@ package com.polaris.appWebPolaris.controller;
 
 import com.polaris.appWebPolaris.domain.dto.*;
 import com.polaris.appWebPolaris.domain.repository.IAuthUseCase;
+import com.polaris.appWebPolaris.domain.useCase.ICustomerUseCase;
 import com.polaris.appWebPolaris.domain.useCase.IInstitutionUseCase;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ public class AuthController {
     private final IVolunteerUseCase iVolunteerUseCase;
     private final IInstitutionUseCase iInstitutionUseCase;
 
-
     @PostMapping(path = "/registerVolunteer")
     public ResponseEntity<ResponseMessageDto> saveVolunteer(@RequestBody VolunteerDto volunteerDtoNew) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -28,23 +28,19 @@ public class AuthController {
     }
 
     @PostMapping(path = "/registerInstitution")
-    public ResponseEntity<ResponseMessageDto> saveInstitute(@RequestBody InstitutionDto institutionDtoDtoNew) {
+    public ResponseEntity<ResponseMessageDto> saveInstitute(@RequestBody InstituteDto instituteDtoDtoNew) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(iInstitutionUseCase.saveInstitution(institutionDtoDtoNew));
+                .body(iInstitutionUseCase.saveInstitution(instituteDtoDtoNew));
     }
 
-    @PostMapping(path = "/sign-in-volunteer")
+    @PostMapping(path = "/sign-in")
     public ResponseEntity<JwtResponseDto> signInVolunteer(@RequestBody AuthCustomerDto authCustomerDto) {
         return ResponseEntity.ok(iAuthUseCase.signIn(authCustomerDto));
     }
 
-    @PostMapping(path = "/sign-in-institute")
-    public ResponseEntity<JwtResponseDto> signInInstitute(@RequestBody AuthCustomerDto authCustomerDto) {
-        return ResponseEntity.ok(iAuthUseCase.signInInstitution(authCustomerDto));
-    }
 
-/*    @PostMapping(path = "/sign-out")
+    @PostMapping(path = "/sign-out")
     public ResponseEntity<JwtResponseDto> signOut(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String jwt) {
         return ResponseEntity.ok(iAuthUseCase.signOut(jwt));
-    }*/
+    }
 }

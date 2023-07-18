@@ -1,22 +1,28 @@
 package com.polaris.appWebPolaris.persistance.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "institutions")
-public class InstitutionEntity {
+@DiscriminatorValue("Institution")
+public class InstitutionEntity extends CustomerEntity{
 
-    @Id
+/*    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;*/
+
     private String name;
     private String cuit;
-    private String email;
-    private String password;
+/*    private String email;
+    private String password;*/
     private String province;
     private String locality;
     private String type;
@@ -24,7 +30,6 @@ public class InstitutionEntity {
     private String numberphone;
     private String imageProfile;
 
-    private String rol;
-
+    /*private String rol;*/
 
 }
