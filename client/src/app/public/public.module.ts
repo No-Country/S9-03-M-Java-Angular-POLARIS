@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { PublicComponent } from './public.component';
-import { HomeComponent } from './home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FormVolunteerComponent } from './landing-page/components/form-volunteer/form-volunteer.component';
 
@@ -21,24 +20,23 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-page/components/login-form/login-form.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
-import { FormInstitutionComponent } from './landing-page/components/form-institution/form-institution.component';
-import { InstitutionRegFormComponent } from './login-page/components/institution-reg-form/institution-reg-form.component';
+import { FormInstitutionComponent } from './register/register-institution/components/form-institution/form-institution.component';
 import { VolunteerRegFormComponent } from './login-page/components/volunteer-reg-form/volunteer-reg-form.component';
+import { RegisterInstitutionComponent } from './register/register-institution/register-institution.component';
 
 
 
 @NgModule({
   declarations: [
     PublicComponent,
-    HomeComponent,
     LandingPageComponent,
     FormVolunteerComponent,
     LoginPageComponent,
     LoginFormComponent,
     RecoverPasswordComponent,
     FormInstitutionComponent,
-    InstitutionRegFormComponent,
     VolunteerRegFormComponent,
+    RegisterInstitutionComponent,
   ],
   imports: [
     CommonModule,
