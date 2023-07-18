@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./volunteer-reg-form.component.css']
 })
 export class VolunteerRegFormComponent {
+  
+  register: boolean = false
+
+  constructor(){}
+
+
 
 }
