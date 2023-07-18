@@ -23,6 +23,7 @@ import { LoginFormComponent } from './login-page/components/login-form/login-for
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { FormInstitutionComponent } from './landing-page/components/form-institution/form-institution.component';
 import { InstitutionRegFormComponent } from './login-page/components/institution-reg-form/institution-reg-form.component';
+import { VolunteerRegFormComponent } from './login-page/components/volunteer-reg-form/volunteer-reg-form.component';
 
 
 
@@ -37,6 +38,7 @@ import { InstitutionRegFormComponent } from './login-page/components/institution
     RecoverPasswordComponent,
     FormInstitutionComponent,
     InstitutionRegFormComponent,
+    VolunteerRegFormComponent,
   ],
   imports: [
     CommonModule,
