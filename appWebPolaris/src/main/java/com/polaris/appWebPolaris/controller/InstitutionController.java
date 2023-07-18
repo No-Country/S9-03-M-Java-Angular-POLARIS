@@ -46,7 +46,7 @@ public class InstitutionController {
 
     @PatchMapping(path = "/update")
     @PreAuthorize("hasRole('INSTITUTION')")
-    public ResponseEntity<InstituteDto> update(InstituteDto institutionDtoUpdate) {
+    public ResponseEntity<InstituteDto> update(@RequestBody InstituteDto institutionDtoUpdate) {
         return ResponseEntity.of(iInstitutionUseCase.update(institutionDtoUpdate));
     }
 
