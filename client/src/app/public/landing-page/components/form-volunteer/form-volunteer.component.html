@@ -7,7 +7,7 @@
 
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro Voluntario</h1>
         
-        <form class="w-full flex flex-col">
+        <form class="w-full flex flex-col" [formGroup]="form">
 
           <div class="w-full flex px-[5%] lg:py-8 min-[320px]:flex-col lg:flex-row items-center justify-center">
 
@@ -18,28 +18,28 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">El
+                *ngIf="form.controls['nameUser'].hasError('required') && form.controls['nameUser'].touched">El
                 nombre de usuario es requerido.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de usuario debe
+              <mat-error *ngIf="form.controls['nameUser'].hasError('minlength')">El nombre de usuario debe
                 tener al menos 3 caracteres.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe
+              <mat-error *ngIf="form.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe
                 tener como máximo 20 caracteres.</mat-error>
             </div>
 
 
             <!-- DNI -->
             <div class="min-[320px]:w-full lg:w-[50%] mx-4">
-              <input matInput formControlName="dniUser" placeholder="DNI (*)" required
+              <input matInput formControlName="userDNI" placeholder="DNI (*)" required
                 class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">El
-                  nombre de usuario es requerido.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de usuario debe
-                  tener al menos 3 caracteres.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de usuario debe
-                  tener como máximo 20 caracteres.</mat-error>
+                *ngIf="form.controls['userDNI'].hasError('required') && form.controls['userDNI'].touched">El
+                  DNI es requerido.</mat-error>
+              <mat-error *ngIf="form.controls['userDNI'].hasError('minlength')">El DNI debe
+                  tener al menos 11 caracteres.</mat-error>
+              <mat-error *ngIf="form.controls['userDNI'].hasError('maxlength')">El DNI debe
+                  tener como máximo 11 caracteres.</mat-error>
             </div>
 
           </div>
@@ -54,10 +54,10 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('required') && firstFormGroup.controls['writeYourEmail'].touched">El
+                *ngIf="form.controls['writeYourEmail'].hasError('required') && form.controls['writeYourEmail'].touched">El
                 correo electrónico es requerido.</mat-error>
               <mat-error
-                *ngIf="firstFormGroup.controls['writeYourEmail'].hasError('email') && firstFormGroup.controls['writeYourEmail'].touched">El
+                *ngIf="form.controls['writeYourEmail'].hasError('email') && form.controls['writeYourEmail'].touched">El
                 formato del correo electrónico es incorrecto.</mat-error>
             </div>
 
@@ -70,8 +70,14 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['password'].hasError('required') && firstFormGroup.controls['password'].touched">La
+                *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">La
                 contraseña es requerida.</mat-error>
+              <mat-error
+                *ngIf="form.controls['password'].hasError('minlength')">La
+                contraseña debe tener al menos 8 caracteres.</mat-error>
+              <mat-error
+                *ngIf="form.controls['password'].hasError('maxlength')">La
+                contraseña debe tener máximo 16 caracteres.</mat-error>
             </div>
          
 
@@ -83,10 +89,10 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['confirmPassword'].hasError('required') && firstFormGroup.controls['confirmPassword'].touched">Debes
+                *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched">Debes
                 confirmar la contraseña.</mat-error>
               <mat-error
-                *ngIf="firstFormGroup.hasError('passwordMismatch') && firstFormGroup.controls['confirmPassword'].touched && firstFormGroup.controls['confirmPassword'].value !== ''">Las
+                *ngIf="passwordConfirm()">Las
                 contraseñas no coinciden.</mat-error>
             </div>
 
@@ -98,10 +104,10 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">La
-                  Provincia de usuario es requerido.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de Provincia debe tener al menos 3 caracteres.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de Provincia debe tener como máximo 20 caracteres.</mat-error>
+                *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched">El nombre de la
+                  Provincia es requerido.</mat-error>
+              <mat-error *ngIf="form.controls['province'].hasError('minlength')">El nombre de Provincia debe tener al menos 3 caracteres.</mat-error>
+              <mat-error *ngIf="form.controls['province'].hasError('maxlength')">El nombre de Provincia debe tener como máximo 30 caracteres.</mat-error>
             </div>
 
             
@@ -112,10 +118,10 @@
             </div>
             <div>
               <mat-error
-                *ngIf="firstFormGroup.controls['nameUser'].hasError('required') && firstFormGroup.controls['nameUser'].touched">La
+                *ngIf="form.controls['locality'].hasError('required') && form.controls['locality'].touched">La
                   Provincia de usuario es requerido.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('minlength')">El nombre de la Localidad debe tener al menos 3 caracteres.</mat-error>
-              <mat-error *ngIf="firstFormGroup.controls['nameUser'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 20 caracteres.</mat-error>
+              <mat-error *ngIf="form.controls['locality'].hasError('minlength')">El nombre de la Localidad debe tener al menos 5 caracteres.</mat-error>
+              <mat-error *ngIf="form.controls['locality'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 30 caracteres.</mat-error>
             </div>
 
             <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
