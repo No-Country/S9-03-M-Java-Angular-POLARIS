@@ -1,8 +1,14 @@
 package com.polaris.appWebPolaris.security;
 
-public class Roles {
+public enum Roles {
 
-    public static final String VOLUNTEER = "Volunteer";
+    VOLUNTEER("Volunteer"),
+    INSTITUTION("Institution");
 
-    public static final String INSTITUTION = "Institution";
+    private String name;
+
+    Roles(String name) {
+        this.name = name;
+    }
+
 }

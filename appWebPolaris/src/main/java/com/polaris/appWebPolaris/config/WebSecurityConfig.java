@@ -44,11 +44,11 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/volunteers/**").hasAnyRole(Roles.VOLUNTEER, Roles.INSTITUTION)
-                                .requestMatchers(HttpMethod.DELETE, "/volunteers/**").hasRole(Roles.VOLUNTEER)
+                                .requestMatchers(HttpMethod.GET, "/volunteers/**").hasAnyRole("Volunteer", "Institution")
+                                .requestMatchers(HttpMethod.DELETE, "/volunteers/**").hasRole("Volunteer")
 
-                                .requestMatchers(HttpMethod.GET, "/institutions/**").hasAnyRole(Roles.VOLUNTEER, Roles.INSTITUTION)
-                                .requestMatchers(HttpMethod.DELETE, "/institutions/**").hasRole(Roles.INSTITUTION)
+                                .requestMatchers(HttpMethod.GET, "/institutions/**").hasAnyRole("Volunteer", "Institution")
+                                .requestMatchers(HttpMethod.DELETE, "/institutions/**").hasRole("Institution")
 
                                 .anyRequest().authenticated()
 

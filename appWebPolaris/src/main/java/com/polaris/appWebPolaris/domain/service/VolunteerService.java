@@ -23,6 +23,7 @@ public class VolunteerService implements IVolunteerUseCase {
 
     private final IVolunteerRepository iVolunteerRepository;
     private final PasswordEncoder passwordEncoder;
+
     @Override
     public List<VolunteerDto> getAll() {
         return iVolunteerRepository.getAll();
@@ -55,7 +56,7 @@ public class VolunteerService implements IVolunteerUseCase {
         }
 
         newVolunteer.setPassword(passwordEncoder.encode(newVolunteer.getPassword()));
-        newVolunteer.setRol(Roles.VOLUNTEER);
+        newVolunteer.setRol(String.valueOf(Roles.VOLUNTEER));
         iVolunteerRepository.save(newVolunteer);
 
         return new ResponseMessageDto("Voluntario registrado Correctamente");
@@ -68,7 +69,7 @@ public class VolunteerService implements IVolunteerUseCase {
             return Optional.empty();
         }
         modifyVolunteer.setPassword(passwordEncoder.encode(modifyVolunteer.getPassword()));
-        modifyVolunteer.setRol(Roles.VOLUNTEER);
+        modifyVolunteer.setRol(String.valueOf(Roles.VOLUNTEER));
         return Optional.of(iVolunteerRepository.save(modifyVolunteer));
     }
 

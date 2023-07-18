@@ -1,6 +1,6 @@
 package com.polaris.appWebPolaris.controller;
 
-import com.polaris.appWebPolaris.domain.dto.InstitutionDto;
+import com.polaris.appWebPolaris.domain.dto.InstituteDto;
 import com.polaris.appWebPolaris.domain.useCase.IInstitutionUseCase;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class InstitutionController {
 
     @GetMapping(path = "/getAll")
     @PreAuthorize("hasRole('INSTITUTION')")
-    public ResponseEntity<List<InstitutionDto>> getAll() {
+    public ResponseEntity<List<InstituteDto>> getAll() {
         return ResponseEntity.ok(iInstitutionUseCase.getAll());
     }
 
@@ -33,21 +33,25 @@ public class InstitutionController {
     }
 
     @GetMapping(path = "/email/{email}")
-    public ResponseEntity<InstitutionDto> getInstitutionByEmail(@PathVariable String email) {
+    @PreAuthorize("hasRole('INSTITUTION')")
+    public ResponseEntity<InstituteDto> getInstitutionByEmail(@PathVariable String email) {
         return ResponseEntity.of(iInstitutionUseCase.getInstitutionByEmail(email));
     }
 
     @GetMapping(path = "/name/{name}")
-    public ResponseEntity<InstitutionDto> getInstitutionByName(@PathVariable String name) {
+    @PreAuthorize("hasRole('INSTITUTION')")
+    public ResponseEntity<InstituteDto> getInstitutionByName(@PathVariable String name) {
         return ResponseEntity.of(iInstitutionUseCase.getInstitutionByName(name));
     }
 
     @PatchMapping(path = "/update")
-    public ResponseEntity<InstitutionDto> update(InstitutionDto institutionDtoUpdate) {
+    @PreAuthorize("hasRole('INSTITUTION')")
+    public ResponseEntity<InstituteDto> update(InstituteDto institutionDtoUpdate) {
         return ResponseEntity.of(iInstitutionUseCase.update(institutionDtoUpdate));
     }
 
     @DeleteMapping(path = "/deleteId/{id}")
+    @PreAuthorize("hasRole('INSTITUTION')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return iInstitutionUseCase.delete(id);
     }
