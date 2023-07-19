@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
+  showNavbar: boolean = true;
   constructor( private router: Router,){}
 
-  ngOnInit():void{}
+  ngOnInit():void{
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Verifica la URL actual y oculta el navbar en la página de inicio de sesión (login)
+        this.showNavbar = this.router.url !== '/login';
+      }
+    });
+  }
 
   login(){
     this.router.navigateByUrl("/login");

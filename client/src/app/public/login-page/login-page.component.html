@@ -1,11 +1,13 @@
 <div class="w-full h-screen flex items-start">
 
-    <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block">
-        <div class="absolute top-[20%] left-[15%] flex flex-col">
+    <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block" 
+    style="display: flex;align-items: center; justify-content: center;">
+        <div class="absolute top-[20%] flex flex-col" style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+            <img class="object-contain mr-4 transform scale-x-[-1] flex-shrink-0 w-16 sm:w-24 lg:w-35" src="../../../assets/logo.svg" alt="Logo">
             <h1 class="sm:text-5xl text-4xl font-bold text-white animate__animated animate__zoomIn">POLARIS</h1>
         </div>
 
-        <div class="absolute top-[47%] left-[15%] flex flex-col">
+        <div class="absolute top-[40%] left-[15%] flex flex-col">
             <p class="max-w-[80%] lg:text-4xl sm:text-xl text-center pt-4 text-white animate__animated animate__fadeIn">"¡Bienvenido de nuevo!, inicia sesión para acceder a tu cuenta y continuar haciendo la diferencia juntos."</p>
         </div>
 
@@ -16,10 +18,10 @@
     <div class="relative min-[320px]:w-full md:w-1/2 h-full justify-normal flex flex-col bg-white">
 
         
-        <div class="pl-[10%] pt-5 w-full">
-            <button (click)="inicio()"><h1 class="pt-20 text-xl text-gray-700 font-extralight cursor-pointer hover:underline pb-5">&lt; Regresar</h1></button>
+        <div class="pl-[10%] pt-[8%] w-full">
+            <button (click)="inicio()"><h1 class="pt-2 text-xl text-gray-700 font-extralight cursor-pointer hover:underline pb-5">&lt; Regresar</h1></button>
         
-            <h1 class="sm:pt-[30%] md:pt-[10%] md:text-2xl sm:text-xl font-semibold mb-4">¡Bienvenido de nuevo!</h1>
+            <h1 class="sm:pt-[30%] md:pt-[4%] md:text-2xl sm:text-xl font-semibold mb-4">¡Bienvenido de nuevo!</h1>
             
             <div class="w-full flex flex-col">
                 <app-login-form></app-login-form>
