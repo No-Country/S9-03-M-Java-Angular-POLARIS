@@ -1,10 +1,7 @@
-<div class="w-full h-screen flex items-start">
-
+<div>
     <img src="../../../assets/img/bgInstitutionForm.png" class="w-full h-screen object-cover absolute object-left">
 
-    <div class="w-full h-screen absolute left-0 bg-white/20">
-    </div>
-
+ <div *ngIf="!register" class="w-full h-screen flex items-start">
     <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block">
         <div class="absolute top-[30%] left-[20%] right-[20%] flex flex-col">
             <div class="bg-[#0878BE8C] rounded-[88px]">
@@ -25,4 +22,11 @@
             Juntos, construyendo un futuro inclusivo
         </div>
     </div>
+ </div>
 
+ <div *ngIf="register" class="h-screen bg-black opacity-60 z-0">
+    <app-welcome></app-welcome>
+ </div>
+
+ <button (click)="register = !register">x</button>
+</div>

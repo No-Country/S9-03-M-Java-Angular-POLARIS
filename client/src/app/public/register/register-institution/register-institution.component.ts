@@ -5,6 +5,14 @@ import { Component } from '@angular/core';
   templateUrl: './register-institution.component.html',
   styleUrls: ['./register-institution.component.css']
 })
+
+
 export class RegisterInstitutionComponent {
 
+  register: boolean = false
+
+  constructor(){}
+
+
+  
 }

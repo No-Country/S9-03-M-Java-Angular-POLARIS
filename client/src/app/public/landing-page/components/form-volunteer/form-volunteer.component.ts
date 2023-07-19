@@ -1,8 +1,7 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn, FormControl,FormArray   } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from '@angular/forms';
 import { CountryFormatServiceService } from '../../services/country-format-service.service';
 import { MatStepper } from '@angular/material/stepper';
-import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-form-volunteer',
@@ -15,19 +14,12 @@ export class FormVolunteerComponent implements OnInit {
   thirdFormGroup!: FormGroup;
   isEditable: boolean = false;
   showPassword: boolean = false;
-  phoneNumberPlaceholder: string = 'Número de celular';
-  selectedCountryCode!: string;
-  skillsHobbiesArray!: FormArray;
-  dataSkillsHobbies!:string[];
   form!: FormGroup;
 
   patternDNI = '/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
 
   @ViewChild('stepper') stepper!: MatStepper;
-  @ViewChild('datePicker') datePicker!: MatDatepicker<Date>;
-
-
 
   constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {
 
@@ -58,34 +50,21 @@ export class FormVolunteerComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       Sex:['', Validators.required],
       birthdate: ['', Validators.required],
-      documentNumber: ['', Validators.required],
+      documentNumber: ['', [Validators.required, Validators.pattern('')]],
       address: ['', Validators.required],
       location: ['', Validators.required],
       province: ['', Validators.required],
       country: ['', Validators.required],
-      codeCelphone: ['', Validators.required],
       cellphoneNumber: ['', Validators.required],
     });
-
     
     this.thirdFormGroup = this._formBuilder.group({
       timeAvailability: ['', Validators.required],
       profession: ['', Validators.required],
-      skillsHobbies: [[], Validators.required],
+      skillsHobbies: ['', Validators.required],
     });
 
   }
-
-  isSelected(option: any): boolean {
-    const selectedOptions = this.thirdFormGroup.get('skillsHobbies')?.value;
-    return selectedOptions && selectedOptions.includes(option.value);
-  }
-  
-  toggleOption(option: any): void {
-    this.dataSkillsHobbies=[...this.thirdFormGroup.get('skillsHobbies')?.value];
-  }
-
-
 
   validarDNI(dni: string): boolean {
     const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
@@ -114,32 +93,20 @@ export class FormVolunteerComponent implements OnInit {
   get countriesData(){
     return [...this.countryFormatService.countries];
   }
-
-  get dataSkillHobbies(){
-    return [...this.countryFormatService.options]
+  getDocumentFormatByCountry(country: string): RegExp | undefined {
+    return this.countryFormatService.countryFormats[country];
   }
-
-  openDatePicker() {
-    this.datePicker.open();
-  }
-
 
   getDocumentPlaceholder(): string {
     const selectedCountry = this.secondFormGroup.get('country')?.value;
     return selectedCountry ? `Ingrese su ${this.getDocumentType(selectedCountry)}` : 'Ingrese su documento de identidad';
   }
-  
 
-  getDocumentPattern(): string | RegExp | null {
+  getDocumentPattern(): string | null {
     const selectedCountry = this.secondFormGroup.get('country')?.value;
-    const format = this.getDocumentFormatByCountry(selectedCountry);
-    return format || null;
+    const format = this.countryFormatService.countryFormats[selectedCountry];
+    return format ? format.source : null;
   }
-  getDocumentFormatByCountry(country: string): RegExp | undefined {
-    return this.countryFormatService.countryFormats[country];
-  }
-
-
   getDocumentType(country: string): string {
     switch (country) {
       case 'Perú':
@@ -152,18 +119,11 @@ export class FormVolunteerComponent implements OnInit {
         return 'DNI';
       case 'Colombia':
         return 'cédula';
-      case 'México':
-        return 'CURP (Ej: LOPE900101HDFRNR04)'
       // Resto de los casos
       default:
         return 'documento de identidad';
     }
   }
-
-  get documentControl(): FormControl {
-    return this.secondFormGroup.get('documentNumber') as FormControl;
-  }
-
   saveFormData() {
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       // Realizar acciones con los datos del formulario
@@ -202,7 +162,6 @@ export class FormVolunteerComponent implements OnInit {
 
   resetFormAndSaveData() {
     // Guardar los datos del formulario
-    console.log("data info selec",this.dataSkillsHobbies);
     const formData = {...this.firstFormGroup.value,...this.secondFormGroup.value};
 
     console.log('Datos del formulario:', formData);
@@ -214,25 +173,4 @@ export class FormVolunteerComponent implements OnInit {
     // Reiniciar el stepper
     this.stepper.reset();
   }
-
-
-
-  get documentNumberControl(): AbstractControl | null {
-    const documentNumberControl = this.secondFormGroup.get('documentNumber');
-    const documentNumberValue = documentNumberControl?.value;
-    const documentPattern = this.getDocumentPattern();
-  
-    if (documentNumberValue && documentPattern) {
-      const regex = new RegExp(documentPattern);
-      const isMatch = regex.test(documentNumberValue);
-  
-      if (!isMatch) {
-        documentNumberControl?.setErrors({ pattern: true });
-      }
-    }
-  
-    return documentNumberControl;
-  }
-
-
 }
