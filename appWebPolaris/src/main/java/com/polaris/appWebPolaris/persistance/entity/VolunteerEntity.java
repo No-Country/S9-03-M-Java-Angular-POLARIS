@@ -1,5 +1,6 @@
 package com.polaris.appWebPolaris.persistance.entity;
 
+import com.polaris.appWebPolaris.enums.SkillsEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,6 +39,8 @@ public class VolunteerEntity extends CustomerEntity{
     private String description;
     private String availability;
     private String imageProfile;
+    private String otherSkills;
+    private List<SkillsEnum> skillList;
 
     /*private String rol;*/
 
