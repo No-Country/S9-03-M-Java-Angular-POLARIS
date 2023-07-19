@@ -2,24 +2,24 @@
 
     <img src="../../../assets/img/ninoFondo1.png" class="w-full h-screen object-cover absolute object-left">
     
-<div *ngIf="!register" class="w-full h-screen flex items-start">
-    <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block">
-        <div class="absolute top-[30%] left-[20%] right-[20%] flex flex-col">
-            <div class="bg-[#0878BE8C] rounded-[88px]">
-                <p class="pt-16 pb-16 pl-4 pr-4 lg:text-3xl sm:text-xl text-center text-white animate__animated animate__fadeIn">"¿Listo para marcar la diferencia?. Únete a nuestro programa de voluntariado y obtén calificaciones en la web para fortalecer tu currículum en el campo de la atención especializada."</p>
+    <div *ngIf="!register" class="w-full h-screen flex items-start">
+        <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block">
+            <div class="absolute top-[30%] left-[20%] right-[20%] flex flex-col">
+                <div class="bg-[#0878BE8C] rounded-[88px]">
+                    <p class="pt-16 pb-16 pl-4 pr-4 lg:text-3xl sm:text-xl text-center text-white animate__animated animate__fadeIn">"¿Listo para marcar la diferencia?. Únete a nuestro programa de voluntariado y obtén calificaciones en la web para fortalecer tu currículum en el campo de la atención especializada."</p>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="relative min-[320px]:w-full md:w-1/2 justify-normal flex flex-col">
+        <div class="relative min-[320px]:w-full md:w-1/2 justify-normal flex flex-col">
 
-        <div class="w-full flex flex-col">
-            <app-form-volunteer></app-form-volunteer>
+            <div class="w-full flex flex-col">
+                <app-form-volunteer></app-form-volunteer>
+            </div>
+                
         </div>
-            
     </div>
-</div>
 
 <div *ngIf="register" class="h-screen bg-black opacity-60 z-0">
     <app-welcome></app-welcome>
