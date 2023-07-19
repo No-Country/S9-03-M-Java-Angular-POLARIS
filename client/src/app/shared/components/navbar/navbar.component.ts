@@ -15,6 +15,8 @@ export class NavbarComponent {
   login(){
     this.router.navigateByUrl("/login");
   }
-
+  inicio(){
+    this.router.navigateByUrl('');
+  }
   
 }
