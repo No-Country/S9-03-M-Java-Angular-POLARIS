@@ -1,52 +1,45 @@
 <div class="w-full h-screen flex items-start">
 
-  <div class="w-[90%]">
+  <div class="w-[90%] m-auto">
     
-    <div class="pt-[10%] pl-[10%]">
-      <div class="container bg-white bg-opacity-10 z-2 rounded-[48px] shadow-3xl border border-r-0 border-b-0 border-opacity-30 backdrop-filter backdrop-blur-sm w-full">
-
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro institución</h1>
+    <div class="mx-auto">
+      <div class="container  w-full">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro institución</h1>
         
         <form class="w-full flex flex-col" [formGroup]="form">
-
-          <div class="w-full flex px-[5%] lg:py-8 min-[320px]:flex-col lg:flex-row items-center justify-center">
-
-            <!-- Nombre y Apellido -->
-            <div class="min-[320px]:w-full lg:w-[50%] mx-4 min-[320px]:pb-6 lg:py-0">
-              <input matInput formControlName="nameInstitution" placeholder="Nombre institucion(*)" required
-              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
-            </div>
-            <div>
-              <mat-error
-                *ngIf="form.controls['nameInstitution'].hasError('required') && form.controls['nameInstitution'].touched">El
-                nombre de la institución es requerido.</mat-error>
-              <mat-error *ngIf="form.controls['nameInstitution'].hasError('minlength')">El nombre de la institución  debe
-                tener al menos 3 caracteres.</mat-error>
-              <mat-error *ngIf="form.controls['nameInstitution'].hasError('maxlength')">El nombre de la institución  debe
-                tener como máximo 20 caracteres.</mat-error>
-            </div>
-
-
-            <!-- DNI -->
-            <div class="min-[320px]:w-full lg:w-[50%] mx-4">
-              <input matInput formControlName="institutionCuit" placeholder="CUIT (*)" required
-                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
-            </div>
-            <div>
-              <mat-error
-                *ngIf="form.controls['institutionCuit'].hasError('required') && form.controls['institutionCuit'].touched">El
-                  CUIT es requerido.</mat-error>
-              <mat-error *ngIf="form.controls['institutionCuit'].hasError('minlength')">El CUIT debe
-                  tener al menos 15 caracteres.</mat-error>
-              <mat-error *ngIf="form.controls['institutionCuit'].hasError('maxlength')">El CUIT debe
-                  tener como máximo 15 caracteres.</mat-error>
-            </div>
-
-          </div>
-          
-
           <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
 
+            <div class="w-full flex min-[320px]:flex-col lg:flex-row items-center justify-center">
+              <!-- Nombre y Apellido -->
+              <div class="w-full flex flex-col lg:px-[2%] pb-6">
+                <input matInput formControlName="nameInstitution" placeholder="Nombre institucion(*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+              </div>
+              <div>
+                <mat-error
+                  *ngIf="form.controls['nameInstitution'].hasError('required') && form.controls['nameInstitution'].touched">El
+                  nombre de la institución es requerido.</mat-error>
+                <mat-error *ngIf="form.controls['nameInstitution'].hasError('minlength')">El nombre de la institución  debe
+                  tener al menos 3 caracteres.</mat-error>
+                <mat-error *ngIf="form.controls['nameInstitution'].hasError('maxlength')">El nombre de la institución  debe
+                  tener como máximo 20 caracteres.</mat-error>
+              </div>
+              <!-- DNI -->
+              <div class="w-full flex flex-col lg:px-[2%] pb-6">
+                <input matInput formControlName="institutionCuit" placeholder="CUIT (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+              </div>
+              <div>
+                <mat-error
+                  *ngIf="form.controls['institutionCuit'].hasError('required') && form.controls['institutionCuit'].touched">El
+                    CUIT es requerido.</mat-error>
+                <mat-error *ngIf="form.controls['institutionCuit'].hasError('minlength')">El CUIT debe
+                    tener al menos 15 caracteres.</mat-error>
+                <mat-error *ngIf="form.controls['institutionCuit'].hasError('maxlength')">El CUIT debe
+                    tener como máximo 15 caracteres.</mat-error>
+              </div>
+  
+            </div>
             <!-- Correo Electrónico -->
             <div class="w-full flex flex-col lg:px-[2%] pb-6">
               <input matInput formControlName="writeYourEmail" placeholder="Correo Electrónico (*)" required
@@ -96,12 +89,12 @@
                 contraseñas no coinciden.</mat-error>
             </div>
 
-
+            <div class="w-full flex  min-[320px]:flex-col lg:flex-row items-center justify-center">
             <!-- Provincia -->
             <div class="w-full flex flex-col lg:px-[2%] pb-6">
               <input matInput formControlName="province" placeholder="Provincia" required
                 class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
-            </div>
+            </div>           
             <div>
               <mat-error
                 *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched">El nombre de la
@@ -123,9 +116,10 @@
               <mat-error *ngIf="form.controls['locality'].hasError('minlength')">El nombre de la Localidad debe tener al menos 5 caracteres.</mat-error>
               <mat-error *ngIf="form.controls['locality'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 30 caracteres.</mat-error>
             </div>
+          </div>
 
             <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
-              <button class="bg-[#3498db] text-white px-4 py-2 rounded-md" (click)="resetFormAndSaveData()">Crear Cuenta</button>
+              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="resetFormAndSaveData()">Crear Cuenta</button>
             </div>
 
           </div>
