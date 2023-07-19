@@ -1,9 +1,11 @@
 package com.polaris.appWebPolaris.domain.dto;
 
+import com.polaris.appWebPolaris.enums.SkillsEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +26,8 @@ public class VolunteerDto {
     private String description;
     private String availability;
     private String imageProfile;
+    private String otherSkills;
+    private List<SkillsEnum> skillList;
 
     private String rol;
 
