@@ -1,11 +1,11 @@
-<div class="w-full h-screen flex items-start">
+<div class="w-full min-h-screen flex items-start">
 
   <div class="w-[90%]">
     
-    <div class="pt-[10%] pl-[10%]">
-      <div class="container bg-white bg-opacity-10 z-2 rounded-[48px] shadow-3xl border border-r-0 border-b-0 border-opacity-30 backdrop-filter backdrop-blur-sm w-full">
+    <div class="pt-[10%]">
+      <div class="w-full">
 
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro Voluntario</h1>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro Voluntario</h1>
         
         <form class="w-full flex flex-col" [formGroup]="form">
 
@@ -124,7 +124,7 @@
               <mat-error *ngIf="form.controls['locality'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 30 caracteres.</mat-error>
             </div>
 
-            <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
+            <div class="w-[60%] flex flex-col lg:px-[2%] pt-6">
               <button class="bg-[#3498db] text-white px-4 py-2 rounded-md" (click)="resetFormAndSaveData()">Crear Cuenta</button>
             </div>
 
@@ -132,29 +132,31 @@
 
         </form>
 
-        <div class="w-[93%] flex items-center relative py-2 justify-between">
-          <div class="w-[20%] h-[1px] bg-white ml-[7%] pl-[10%]"></div>
-          <p class="flex-row text-lg absolute text-white bg-transparent justify-center pl-[3%] min-[320px]:ml-[28%] lg:ml-[40%]">O registrate con</p>
-          <div class="w-[20%] h-[1px] bg-white ml-[30%] pr-[1%]"></div>
-        </div>
-    
-        <div class="w-[90%] flex lg:flex-row min-[320px]:flex-col py-[4%] items-center justify-center ml-[5%]">
-    
-          <div class="text-black my-2 lg:mr-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
-            <img class="h-6 mr-2" src="../../../../../assets/img/icons/google.png" alt="">
-            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Google</p>
+        <div class="hidden">
+          <div class="w-[93%] items-center relative py-2 justify-between">
+            <div class="w-[20%] h-[1px] bg-white ml-[7%] pl-[10%]"></div>
+            <p class="flex-row text-lg absolute text-white bg-transparent justify-center pl-[3%] min-[320px]:ml-[28%] lg:ml-[40%]">O registrate con</p>
+            <div class="w-[20%] h-[1px] bg-white ml-[30%] pr-[1%]"></div>
           </div>
-    
-          <div class="text-black my-2 lg:ml-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
-            <img class="h-6 mr-2" src="../../../../../assets/img/icons/facebook.png" alt="">
-            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Facebook</p>
+      
+          <div class="w-[90%] flex lg:flex-row min-[320px]:flex-col py-[4%] items-center justify-center ml-[5%]">
+      
+            <div class="text-black my-2 lg:mr-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+              <img class="h-6 mr-2" src="../../../../../assets/img/icons/google.png" alt="">
+              <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Google</p>
+            </div>
+      
+            <div class="text-black my-2 lg:ml-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+              <img class="h-6 mr-2" src="../../../../../assets/img/icons/facebook.png" alt="">
+              <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Facebook</p>
+            </div>
+      
           </div>
-    
         </div>
         
       </div>
 
-      <div class="text-white text-center text-[32px] font-normal">
+      <div class="text-white text-center text-[32px] font-normal hidden">
         Juntos, construyendo un futuro inclusivo
       </div>
 

@@ -1,32 +1,24 @@
-<div>
-    <img src="../../../assets/img/bgInstitutionForm.png" class="w-full h-screen object-cover absolute object-left">
 
- <div *ngIf="!register" class="w-full h-screen flex items-start">
+ <div class="w-full h-screen flex items-start">
+
     <div class="relative w-1/2 h-full flex-col sm:display hidden sm:block">
-        <div class="absolute top-[30%] left-[20%] right-[20%] flex flex-col">
+
+        <div class="absolute top-[20%] left-[20%] right-[20%] flex flex-col">
             <div class="bg-[#0878BE8C] rounded-[88px]">
                 <p class="pt-16 pb-16 pl-4 pr-4 lg:text-3xl sm:text-xl text-center text-white animate__animated animate__fadeIn">
                     ¿Buscas voluntarios altamente calificados? Regístrense ahora y accedan a una lista de voluntarios especializados, evaluados y clasificados por zona geográfica."</p>
             </div>
         </div>
+
+        <img src="../../../assets/img/bgInstitutionForm.png" alt="" class="w-full h-full object-cover">
     </div>
 
 
-    <div class="my-5 mx-8 relative min-[320px]:w-full md:w-1/2 justify-normal flex flex-col">
+    <div class="relative min-[320px]:w-full md:w-1/2 h-full justify-normal flex flex-col bg-white">
+  
+            <div class="w-full flex flex-col">
+                <app-form-institution></app-form-institution>
+            </div>
 
-        <div class="w-full flex flex-col">
-          
-          <app-form-institution></app-form-institution>
-        </div>
-        <div class="text-white text-center text-[32px] font-normal">
-            Juntos, construyendo un futuro inclusivo
-        </div>
     </div>
  </div>
-
- <div *ngIf="register" class="h-screen bg-black opacity-60 z-0">
-    <app-welcome></app-welcome>
- </div>
-
- <button (click)="register = !register">x</button>
-</div>

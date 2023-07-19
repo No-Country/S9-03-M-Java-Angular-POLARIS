@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-institution',
@@ -11,8 +12,14 @@ export class RegisterInstitutionComponent {
 
   register: boolean = false
 
-  constructor(){}
 
+  constructor( private router: Router){}
+
+  ngOnInit():void{}
+
+  inicio(){
+    this.router.navigateByUrl('');
+  }
 
   
 }
