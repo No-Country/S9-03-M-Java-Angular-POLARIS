@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { PrivateModule } from './private/private.module';
 import { PublicModule } from './public/public.module';
-import { DashboardVolunteerComponent } from './dashboard-volunteer/dashboard-volunteer.component';
+import { DashboardVolunteerComponent } from './private/dashboard-volunteer/dashboard-volunteer.component';
 
 
 @NgModule({
