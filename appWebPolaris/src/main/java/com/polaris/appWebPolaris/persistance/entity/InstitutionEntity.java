@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -29,7 +31,10 @@ public class InstitutionEntity extends CustomerEntity{
     private String availability;
     private String numberphone;
     private String imageProfile;
-
+    @OneToMany(mappedBy = "institution",cascade = CascadeType.ALL)
+    private List<VolunteerInstitutionEntity> volunteerInstitutionList;
+    @OneToMany(mappedBy = "institution",cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList;
     /*private String rol;*/
 
 }
