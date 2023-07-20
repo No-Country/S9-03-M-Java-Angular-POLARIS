@@ -43,6 +43,8 @@ public class VolunteerEntity extends CustomerEntity{
     private List<SkillsEnum> skillList;
     @OneToMany(mappedBy = "volunteer",cascade = CascadeType.ALL)
     private List<VolunteerInstitutionEntity> volunteerInstitutionList;
+    @OneToMany(mappedBy = "volunteer",cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList;
 
     /*private String rol;*/
 

@@ -33,7 +33,8 @@ public class InstitutionEntity extends CustomerEntity{
     private String imageProfile;
     @OneToMany(mappedBy = "institution",cascade = CascadeType.ALL)
     private List<VolunteerInstitutionEntity> volunteerInstitutionList;
-
+    @OneToMany(mappedBy = "institution",cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviewList;
     /*private String rol;*/
 
 }
