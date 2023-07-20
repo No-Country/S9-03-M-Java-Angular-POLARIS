@@ -1,0 +1,25 @@
+/* Estilos para ocultar el botón "Elegir archivo" */
+input[type="file"] {
+    display: none;
+  }
+  
+  /* Estilos para el ícono de la cámara y el label que actúa como botón */
+  .camera-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #camera-icon {
+    font-size: 40px;
+    color: #333; /* Cambia el color del ícono según tus preferencias */
+  }
+  .camera-icon {
+    border: 2px solid white;
+    padding: 4px;
+    border-radius: 50%;
+    clip-path: polygon(50% 0%, 90% 20%, 90% 80%, 50% 100%, 10% 80%, 10% 20%);
+  }

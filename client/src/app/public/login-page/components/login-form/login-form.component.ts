@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder,FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/shared/models/user/LoginUser';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginFormComponent {
   password: string="";
 
 
-  constructor(private formBuilder:FormBuilder, private router: Router) {
+  constructor(private formBuilder:FormBuilder, private router: Router,private authService: AuthService) {
     this.loginForm = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -40,6 +41,26 @@ export class LoginFormComponent {
   }
   get Password() {
     return this.loginForm.get('password')
+  }
+
+  login() {
+      const credentials = this.loginForm.value;
+      console.log("credenciales",credentials)
+      this.authService.login(credentials).subscribe(
+        (response) => {
+          console.log("ccama",response)
+          // Aquí obtendrás el token de la respuesta del servidor
+          const token = response.jwt;
+          
+          // Guardar el token en el localStorage
+          localStorage.setItem('token', token);
+
+          // Redirigir a la otra página solo si el token existe
+          if (token) {
+            this.router.navigate(['/dashboard-volunteer']);
+          }
+        }
+      );
   }
 
 }
