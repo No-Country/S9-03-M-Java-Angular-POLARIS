@@ -57,7 +57,7 @@ export class LoginFormComponent {
 
           // Redirigir a la otra página solo si el token existe
           if (token) {
-            this.router.navigate(['/dashboard-volunteer']);
+            this.router.navigate(['/user']);
           }
         }
       );
