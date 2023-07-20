@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="w-[90%] flex flex-col" (ngSubmit)="onLogin($event)" autocomplete="off">          
+<form [formGroup]="loginForm" class="w-[90%] flex flex-col" (ngSubmit)="login()" autocomplete="off">          
     <!----Ingrese su email---->
     <div class="flex flex-col pt-[4%] w-full">
       <label class="text-xs text-gray-500 mb-[.01%]" for="email">Correo electrónico (*)</label>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="pt-[4%] w-full flex flex-col my-4">
-      <button class="w-full text-white bg-[#008eefff] rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-[#008eefff]/90" type="submit" [disabled]="!loginForm.valid">Iniciar sesión</button>
+      <button class="w-full text-white bg-[#008eefff] rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-[#008eefff]/90" type="submit">Iniciar sesión</button>
     </div>
 
     <div class="w-full flex items-center justify-center relative py-2 pt-[7%]">

@@ -16,20 +16,23 @@
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div class="relative flex sm:none">
             <div class="hidden sm:flex" style="color: #0878BE;">
-              <div class="mx-2">
+              <div class="mx-2" *ngIf="!username">
                 <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
                   Conoce mas!
                 </button>
               </div>
-              <div class="mx-2">
+              <div class="mx-2" *ngIf="!username">
                   <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-8 border-2 rounded" style="border-color: #0878BE;">
                       Registro
                   </button>
               </div>
-              <div class="ml-2">
+              <div class="ml-2" *ngIf="!username">
                 <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
                     Iniciar sesión
                 </button>
+              </div>
+              <div class="ml-2">
+                <span *ngIf="username">{{ username }}</span>
               </div>
             </div>
           </div>

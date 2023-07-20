@@ -6,6 +6,7 @@ import { RecoverPasswordComponent } from './public/recover-password/recover-pass
 import { InstitutionDashboardComponent } from './private/institution/institution-dashboard/institution-dashboard.component';
 import { VolunteerRegFormComponent } from './public/login-page/components/volunteer-reg-form/volunteer-reg-form.component';
 import { RegisterInstitutionComponent } from './public/register/register-institution/register-institution.component';
+import { VolunteerDashboardComponent } from './private/volunteer/volunteer-dashboard/volunteer-dashboard.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'recover-password', component: RecoverPasswordComponent},
   { path: 'register-institution', component: RegisterInstitutionComponent},
   { path: 'dashboard-institution', component: InstitutionDashboardComponent},
+  { path: 'dashboard-volunteer', component: VolunteerDashboardComponent},
   { path: '**', component: LandingPageComponent},
 
 ];
