@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrivateComponent } from './private.component';
 const routes: Routes = [];
 
+const routes: Routes = [];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

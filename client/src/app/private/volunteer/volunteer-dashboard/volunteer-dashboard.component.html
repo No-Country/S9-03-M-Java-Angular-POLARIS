@@ -1,0 +1,52 @@
+
+<div class="h-full text-white " style="background-image: linear-gradient(to bottom, #1360a4 0% 0%, #8d77b5 50%, #c75aac 100%);">
+    <div class="container m-auto" >
+        <div class="grid grid-cols-1 md:grid-cols-2 h-screen w-full">
+            <div class="flex justify-center items-center h-full">
+                <div class="w-full max-w-md relative">
+                    <div class="user-image-container relative" style="display: flex; align-items: center; justify-content: center;">
+                        <!-- Contenedor para la imagen de usuario o imagen seleccionada -->
+                        <div class="image-container relative">
+                            <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen de usuario" class="object-cover w-40 h-40 rounded-full">
+                            <img *ngIf="!imageUrl" src="../../../../assets/user.png" alt="Usuario vacío" class="object-cover w-40 h-40">
+                            <label for="file-input" class="camera-button absolute bottom-8 right-0 mt-1 mr-1 w-8 h-8 flex items-center justify-center bg-white rounded-full cursor-pointer">
+                                <img id="camera-icon" src="../../../../assets/camerass.png" alt="Cámara" class="w-20 h-20 object-contain rounded-full">
+                            </label>
+                        </div>
+                        <input id="file-input" type="file" (change)="onFileSelected($event)" class="hidden">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                        <h1 class="text-2xl font-bold text-center mt-8">Sobre ti</h1>
+                        <div class="border border-white-200 p-3 rounded-lg mt-6 w-full">
+                            <p class="leading-normal text-base text-white text-center font-roboto text-2xl font-normal">
+                                Proporciona una plataforma intuitiva y segura, que permite a los 
+                                usuarios encontrar coincidencias, coordinar actividades de voluntariado 
+                                y compartir experiencias valiosas para crear un entorno inclusivo y 
+                                enriquecedor.
+                            </p>
+                        </div>
+                        <h1 class="text-2xl font-bold text-center mt-8">Instituciones Registradas</h1>
+                        <div class="border border-white-200 p-3 rounded-lg mt-6 w-full">
+                            <p class="leading-normal text-base text-white text-center font-roboto text-2xl font-normal">
+                                Proporciona una plataforma intuitiva y segura, que permite a los 
+                                usuarios encontrar coincidencias, coordinar actividades de voluntariado 
+                                y compartir experiencias valiosas para crear un entorno inclusivo y 
+                                enriquecedor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-center">
+                <div class="max-w-md mx-auto md:text-center">
+                    <p class="text-xl md:text-2xl font-bold leading-loose">Escuela especial distrital nro. 20</p>
+                    <p class="text-lg md:text-xl leading-loose">Caballito, Reconquista ---</p>
+                    <p class="text-lg md:text-xl leading-loose">
+                        <span>tel.: 1234-5678 </span>
+                        <span>escuela.10@email.com</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { PrivateModule } from './private/private.module';
 import { PublicModule } from './public/public.module';
 import { DashboardVolunteerComponent } from './private/dashboard-volunteer/dashboard-volunteer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DashboardVolunteerComponent } from './private/dashboard-volunteer/dashb
     BrowserAnimationsModule,
     SharedModule,
     PrivateModule,
-    PublicModule
+    PublicModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

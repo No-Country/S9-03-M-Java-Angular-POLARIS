@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,11 +16,17 @@ export class LandingPageComponent {
 
   public randomBackgroundImage!: string;
 
+  constructor(private router: Router){
+  }
   ngOnInit(){
     const randomIndex = Math.floor(Math.random() * this.backgroundImages.length);
     this.randomBackgroundImage = `${this.backgroundImages[randomIndex]}`;
 
     console.log(this.randomBackgroundImage);
     
+  }
+
+  navigateTo(route: string) {
+    this.router.navigateByUrl(route)
   }
 }

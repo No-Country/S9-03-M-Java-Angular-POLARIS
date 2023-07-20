@@ -1,0 +1,13 @@
+<div *ngFor="let volunteer of voluntaries" 
+        class="border-4 p-5 border-[#FFFFFF] w-[400px] md:w-[920px] md:h-[260px] mx-auto md:mx-0 my-12 rounded-[50px] md:flex md:flex-row">
+    <div class="m-auto">
+        <img class="m-auto rounded-full w-28 h-28 md:w-40 md:h-40 border-2 border-slate-500" [src]="volunteer.avatar" alt="volunteer-avatar">
+    </div>
+
+    <div class="md:basis-1/4 md:text-[24px] text-center max-sm:border-b md:m-auto">
+        <p>{{volunteer.firstName}} {{volunteer.lastName}}</p>
+        <p>{{volunteer.occupation}}</p>
+        <p>{{volunteer.locality}}, {{volunteer.province}}</p>
+    </div>
+    <div class="md:basis-2/4 text-[20px] md:text-[32px] text-center m-auto">Cuidados especiales, charlas, sobre cuidado personal</div>
+</div>
