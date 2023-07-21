@@ -22,10 +22,10 @@ public class VolunteerInstitutionEntity {
     private LocalDate startDate;
     private Boolean active;
     @ManyToOne
-    @JoinColumn(name = "id_volunteer", nullable = false, updatable = false,insertable = false)
+    @JoinColumn(name = "idVolunteer", nullable = false, updatable = false,insertable = false)
     private VolunteerEntity volunteer;
     @ManyToOne
-    @JoinColumn(name = "id_institution", nullable = false, updatable = false,insertable = false)
+    @JoinColumn(name = "idInstitution", nullable = false, updatable = false,insertable = false)
     private InstitutionEntity institution;
 
 }
