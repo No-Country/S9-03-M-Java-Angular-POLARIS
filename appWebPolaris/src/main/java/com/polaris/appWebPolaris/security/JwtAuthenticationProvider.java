@@ -47,6 +47,7 @@ public class JwtAuthenticationProvider {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
         String tokenCreated = JWT.create()
+                .withClaim("Id", customerJwt.getId())
                 .withClaim("email", customerJwt.getEmail())
                 .withClaim("rol", customerJwt.getRol())
                 .withIssuedAt(now)
