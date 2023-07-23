@@ -56,13 +56,13 @@ export class AuthService {
     return tokenExpiration < now;
   }
 
-  onLogout(): void {
-    // Eliminar el token del localStorage
-    localStorage.removeItem('token');
+  // onLogout(): void {
+  //   // Eliminar el token del localStorage
+  //   localStorage.removeItem('token');
 
-    // Navegar a la página de inicio de sesión o la página de aterrizaje y limpiar la navegación
-    this.router.navigate(['/login'], { replaceUrl: true }).then(() => {
-      window.history.replaceState(null, '', '/login');
-    });
-  }
+  //   // Navegar a la página de inicio de sesión o la página de aterrizaje y limpiar la navegación
+  //   this.router.navigate(['/'], { replaceUrl: true }).then(() => {
+  //     window.history.replaceState(null, '', '/');
+  //   });
+  // }
 }
