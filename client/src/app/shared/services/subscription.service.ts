@@ -32,7 +32,7 @@ export class SubscriptionService {
           if (userRole === 'Volunteer') {
             this.router.navigateByUrl('/user', { skipLocationChange: true });
             this.router.navigate(['/user']);
-          } else if (userRole === 'Institución') {
+          } else if (userRole === 'Institution') {
             this.router.navigateByUrl('/dashboard-institution', { skipLocationChange: true });
             this.router.navigate(['/dashboard-institution']);
           }
