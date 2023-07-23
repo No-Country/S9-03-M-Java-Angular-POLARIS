@@ -16,23 +16,32 @@
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div class="relative flex sm:none">
             <div class="hidden sm:flex" style="color: #0878BE;">
-              <div class="mx-2" *ngIf="!username">
+              <div class="mx-2" *ngIf="!user?.firstName">
                 <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
                   Conoce mas!
                 </button>
               </div>
-              <div class="mx-2" *ngIf="!username">
+              <div class="mx-2" *ngIf="!user?.firstName">
                   <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-8 border-2 rounded" style="border-color: #0878BE;">
                       Registro
                   </button>
               </div>
-              <div class="ml-2" *ngIf="!username">
+              <div class="ml-2" *ngIf="!user?.firstName">
                 <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
                     Iniciar sesión
                 </button>
               </div>
-              <div class="ml-2">
-                <span *ngIf="username">{{ username }}</span>
+              <div *ngIf="user" class="ml-2 flex items-center flex-row gap-6">
+                <!-- Muestra la imagen circular del usuario si user?.Image está disponible -->
+                <img class="h-12 w-12 rounded-full object-cover" *ngIf="user?.imageProfile" [src]="user?.imageProfile" alt="Imagen del usuario">
+                <div class="flex items-center flex-col text-black">
+                  <span *ngIf="user?.firstName">Hola, {{ user?.firstName}}</span>
+                  <div class="flex items-center flex-row gap-2">
+                    <span>Mi Perfil |</span>
+                    <span (click)="logout()">Salir</span>
+                  </div>
+                </div>
+                <!-- Si no hay una imagen del usuario, muestra un texto descriptivo -->
               </div>
             </div>
           </div>
