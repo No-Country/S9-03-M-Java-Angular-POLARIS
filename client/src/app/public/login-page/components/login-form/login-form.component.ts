@@ -61,10 +61,12 @@ export class LoginFormComponent {
             const decodedToken: any = jwt_decode(token);
             // Verificar el rol del token
             const userRole = decodedToken.rol;
+            console.log("ingreso rol",userRole)
             // Redirigir según el rol del usuario
             if (userRole === 'Volunteer') {
               this.router.navigate(['/user']);
-            } else if (userRole === 'Institución') {
+            } else if (userRole === 'Institution') {
+              console.log("ingreso")
               this.router.navigate(['/dashboard-institution']);
             }
           }
