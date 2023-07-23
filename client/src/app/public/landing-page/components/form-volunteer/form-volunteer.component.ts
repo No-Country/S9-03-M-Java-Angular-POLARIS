@@ -16,7 +16,7 @@ export class FormVolunteerComponent implements OnInit {
   showPassword: boolean = false;
   form!: FormGroup;
 
-  patternDNI = '/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i';
+  patternDNI = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
 
   @ViewChild('stepper') stepper!: MatStepper;
@@ -25,7 +25,7 @@ export class FormVolunteerComponent implements OnInit {
 
     this.form = this._formBuilder.group({
       nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      userDNI: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(this.patternDNI)]],
+      userDNI: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9), Validators.pattern(this.patternDNI)]],
       writeYourEmail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
@@ -64,6 +64,16 @@ export class FormVolunteerComponent implements OnInit {
       skillsHobbies: ['', Validators.required],
     });
 
+  }
+
+  
+  onKeyPress(event: KeyboardEvent) {
+    const inputChar = String.fromCharCode(event.keyCode);
+
+    // Solo permitir caracteres numéricos y la tecla "borrar"
+    if (!/^\d+$/.test(inputChar) && event.keyCode !== 8) {
+      event.preventDefault();
+    }
   }
 
   validarDNI(dni: string): boolean {
