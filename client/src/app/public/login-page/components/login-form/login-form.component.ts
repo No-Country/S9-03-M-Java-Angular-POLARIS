@@ -3,6 +3,7 @@ import { FormBuilder,FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUser } from 'src/app/shared/models/user/LoginUser';
 import { AuthService } from '../../../../shared/services/auth.service';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -57,7 +58,15 @@ export class LoginFormComponent {
 
           // Redirigir a la otra página solo si el token existe
           if (token) {
-            this.router.navigate(['/user']);
+            const decodedToken: any = jwt_decode(token);
+            // Verificar el rol del token
+            const userRole = decodedToken.rol;
+            // Redirigir según el rol del usuario
+            if (userRole === 'Volunteer') {
+              this.router.navigate(['/user']);
+            } else if (userRole === 'Institución') {
+              this.router.navigate(['/dashboard-institution']);
+            }
           }
         }
       );

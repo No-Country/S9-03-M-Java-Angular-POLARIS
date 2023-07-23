@@ -8,6 +8,7 @@ import { InstitutionDashboardComponent } from './private/institution/institution
 import { VolunteerRegFormComponent } from './public/login-page/components/volunteer-reg-form/volunteer-reg-form.component';
 import { RegisterInstitutionComponent } from './public/register/register-institution/register-institution.component';
 import { VolunteerDashboardComponent } from './private/volunteer/volunteer-dashboard/volunteer-dashboard.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -16,8 +17,8 @@ const routes: Routes = [
   { path: 'register-volunteer', component: VolunteerRegFormComponent},
   { path: 'recover-password', component: RecoverPasswordComponent},
   { path: 'register-institution', component: RegisterInstitutionComponent},
-  { path: 'dashboard-institution', component: InstitutionDashboardComponent},
-  { path: 'user', component:DashboardVolunteerComponent },
+  { path: 'dashboard-institution', component: InstitutionDashboardComponent,canActivate:[authGuard]},
+  { path: 'user', component:DashboardVolunteerComponent,canActivate:[authGuard] },
   { path: '**', component: LandingPageComponent},
 
 ];
