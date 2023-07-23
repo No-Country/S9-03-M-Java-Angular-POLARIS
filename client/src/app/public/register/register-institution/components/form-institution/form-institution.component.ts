@@ -65,6 +65,15 @@ export class FormInstitutionComponent implements OnInit {
     });
 
   }
+    
+  onKeyPress(event: KeyboardEvent) {
+    const inputChar = String.fromCharCode(event.keyCode);
+
+    // Solo permitir caracteres numéricos y la tecla "borrar"
+    if (!/^\d+$/.test(inputChar) && event.keyCode !== 11) {
+      event.preventDefault();
+    }
+  }
 
   validarDNI(dni: string): boolean {
     const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;

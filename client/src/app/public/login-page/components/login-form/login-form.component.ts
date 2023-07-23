@@ -19,7 +19,7 @@ export class LoginFormComponent {
   loginUser: LoginUser={email:"",password:""};
   emailUsuario: string="";
   password: string="";
-
+  showPassword: boolean = false;
 
   constructor(private formBuilder:FormBuilder, private router: Router,private authService: AuthService) {
     this.loginForm = this.formBuilder.group(
