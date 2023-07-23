@@ -31,7 +31,7 @@
                     Iniciar sesión
                 </button>
               </div>
-              <div *ngIf="user" class="ml-2 flex items-center flex-row gap-6">
+              <div *ngIf="user && dataToken" class="ml-2 flex items-center flex-row gap-6">
                 <!-- Muestra la imagen circular del usuario si user?.Image está disponible -->
                 <img class="h-12 w-12 rounded-full object-cover" *ngIf="user?.imageProfile" [src]="user?.imageProfile" alt="Imagen del usuario">
                 <div class="flex items-center flex-col text-black">
