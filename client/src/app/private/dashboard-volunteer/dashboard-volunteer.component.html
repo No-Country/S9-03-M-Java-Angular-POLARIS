@@ -1,18 +1,24 @@
 <div style="background-size: cover; background-image: url(../../../assets/img/userDashboard/Rectangle.png); background-repeat: no-repeat;"
     class="text-white">
     <div class="container mx-auto">
-        <div class="grid lg:grid-cols-6 lg:gap-4 mx-4">
+        <div class="grid lg:grid-cols-6 lg:gap-10 mx-10">
             <div class="col-span-2">
                 <div class="grid grid-rows-5 items-center p-4">
-                    <div class="row-span-1 text-center m-auto">
-                        <div class="flex items-center">
-                          <img src="../../../assets/img/userDashboard/Ellipse 8.png" class="w-100" style="height: 20%!important;" alt="">
+                    <div class="user-image-container relative" style="display: flex; align-items: center; justify-content: center;">
+                        <!-- Contenedor para la imagen de usuario o imagen seleccionada -->
+                        <div class="image-container relative">
+                            <img *ngIf="imageUrl; else serverImage" [src]="imageUrl" alt="Imagen de usuario" class="object-cover w-40 h-40 rounded-full">
+                            <ng-template #serverImage>
+                                <img [src]="user?.imageProfile || '../../../../assets/usuarios.png'" alt="Usuario vacío" class="object-cover w-40 h-40 rounded-full">
+                            </ng-template>
+                            <label for="file-input" class="camera-button absolute bottom-8 right-0 mt-1 mr-1 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer">
+                              <img id="camera-icon" src="../../../../assets/camerass.png" alt="Cámara" class="w-20 h-20 object-contain rounded-full">
+                            </label>
                         </div>
-                        <input class="input-file" style="display:none;" #fileInput type="file">
-                        <button class="btn rounded-pill btn-payment m-2" (click)="fileInput.click()">Seleccionar archivo</button>
-                      </div>
+                        <input id="file-input" type="file" (change)="onFileSelected($event)" class="hidden">
+                    </div>
                     <div class="row-span-2">
-                        <h1 class="text-3xl	mb-10 text-center">Sobre ti:</h1>
+                        <h1 class="text-3xl	mb-10 text-center mt-4">Sobre ti:</h1>
                         <div class="container new p-10 px-5 gap-x-20">
                             <p class="text-2xl">"Soy un voluntario apasionado que busca marcar la diferencia. Me motiva
                                 brindar apoyo y generar un impacto positivo en aquellos que enfrentan desafíos. Mi
