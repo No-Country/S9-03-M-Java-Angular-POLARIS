@@ -4,7 +4,7 @@
     
     <div class="mx-auto">
       <div class="container  w-full">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro institución</h1>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro voluntario</h1>
         
         <form class="w-full flex flex-col" [formGroup]="form">
           <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
@@ -20,9 +20,9 @@
                   <mat-error
                     *ngIf="form.controls['nameUser'].hasError('required') && form.controls['nameUser'].touched">El
                     nombre es requerido.</mat-error>
-                  <mat-error *ngIf="form.controls['nameUser'].hasError('minlength')">El nombre de la institución  debe
+                  <mat-error *ngIf="form.controls['nameUser'].hasError('minlength')">El nombre debe
                     tener al menos 3 caracteres.</mat-error>
-                  <mat-error *ngIf="form.controls['nameUser'].hasError('maxlength')">El nombre de la institución  debe
+                  <mat-error *ngIf="form.controls['nameUser'].hasError('maxlength')">El nombre debe
                     tener como máximo 20 caracteres.</mat-error>
                 </div>
               </div>
@@ -30,16 +30,17 @@
               <div class="w-full flex flex-col lg:px-[2%]">
                 <div>
                 <input matInput formControlName="userDNI" placeholder="DNI (*)" required
-                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"  
+                  (keypress)="onKeyPress($event)">
                 </div>
                 <div>
                   <mat-error
                     *ngIf="form.controls['userDNI'].hasError('required') && form.controls['userDNI'].touched">El
                       DNI es requerido.</mat-error>
                   <mat-error *ngIf="form.controls['userDNI'].hasError('minlength')">El DNI debe
-                      tener al menos 15 caracteres.</mat-error>
+                      tener al menos 8 caracteres.</mat-error>
                   <mat-error *ngIf="form.controls['userDNI'].hasError('maxlength')">El DNI debe
-                      tener como máximo 15 caracteres.</mat-error>
+                      tener como máximo 9 caracteres.</mat-error>
                 </div>
               </div>
             </div>

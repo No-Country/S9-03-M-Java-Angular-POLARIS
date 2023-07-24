@@ -30,14 +30,15 @@
               <div class="w-full flex flex-col lg:px-[2%]">
                 <div>
                 <input matInput formControlName="institutionCuit" placeholder="CUIT (*)" required
-                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"
+                  (keypress)="onKeyPress($event)">
                 </div>
                 <div>
                   <mat-error
                     *ngIf="form.controls['institutionCuit'].hasError('required') && form.controls['institutionCuit'].touched">El
                       CUIT es requerido.</mat-error>
                   <mat-error *ngIf="form.controls['institutionCuit'].hasError('minlength')">El CUIT debe
-                      tener al menos 15 caracteres.</mat-error>
+                      tener al menos 11 caracteres.</mat-error>
                   <mat-error *ngIf="form.controls['institutionCuit'].hasError('maxlength')">El CUIT debe
                       tener como máximo 15 caracteres.</mat-error>
                 </div>
