@@ -34,8 +34,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
      */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        System.out.println("en esta peticion se rompe");
-        System.out.println(request.getRequestURI());
         return urlsToSkip.stream().anyMatch(url -> request.getRequestURI().contains(url));
     }
 
@@ -73,17 +71,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             Authentication auth = jwtAuthenticationProvider.validateToken(authElements[1]);
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            System.out.println("voy a imprimir el context");
-            System.out.println(SecurityContextHolder.getContext());
-            System.out.println("voy a imprimir la autenticacion");
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
         } catch (RuntimeException e) {
             SecurityContextHolder.clearContext();
-            System.out.println("se estalló");
-            System.out.println(e);
             throw new RuntimeException(e);
         }
-        System.out.println("llegué aqui");
 
         filterChain.doFilter(request, response);
     }

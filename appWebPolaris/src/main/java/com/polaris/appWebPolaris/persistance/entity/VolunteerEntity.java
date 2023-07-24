@@ -20,14 +20,8 @@ import java.util.List;
 @DiscriminatorValue("Volunteer")
 public class VolunteerEntity extends CustomerEntity{
 
-/*    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
-
     private String firstName;
     private String lastName;
-/*    private String email;
-    private String password;*/
     private String dni;
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
@@ -45,7 +39,5 @@ public class VolunteerEntity extends CustomerEntity{
     private List<VolunteerInstitutionEntity> volunteerInstitutionList;
     @OneToMany(mappedBy = "volunteer",cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList;
-
-    /*private String rol;*/
 
 }

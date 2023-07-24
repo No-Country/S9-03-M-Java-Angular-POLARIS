@@ -3,6 +3,8 @@ package com.polaris.appWebPolaris.domain.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class InstituteDto {
@@ -18,6 +20,7 @@ public class InstituteDto {
     private String availability;
     private String numberphone;
     private String imageProfile;
+    private List<ReviewDto> reviewList;
 
     private String rol;
 
@@ -35,6 +38,7 @@ public class InstituteDto {
                 ", availability='" + availability + '\'' +
                 ", numberphone='" + numberphone + '\'' +
                 ", imageProfile='" + imageProfile + '\'' +
+                ", reviewList=" + reviewList +
                 ", rol='" + rol + '\'' +
                 '}';
     }

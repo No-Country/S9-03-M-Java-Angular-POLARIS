@@ -1,9 +1,11 @@
 package com.polaris.appWebPolaris.persistance.repository;
 
 import com.polaris.appWebPolaris.domain.dto.InstituteDto;
+import com.polaris.appWebPolaris.domain.dto.ResponseReviewDto;
 import com.polaris.appWebPolaris.domain.dto.ReviewDto;
 import com.polaris.appWebPolaris.domain.repository.IReviewRepository;
 import com.polaris.appWebPolaris.persistance.crud.IReviewCrudRepository;
+import com.polaris.appWebPolaris.persistance.entity.ReviewEntity;
 import com.polaris.appWebPolaris.persistance.mapper.IInstitutionMapper;
 import com.polaris.appWebPolaris.persistance.mapper.IReviewMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +22,14 @@ public class ReviewRepository implements IReviewRepository {
     private final IReviewMapper iReviewMapper;
 
     @Override
-    public List<ReviewDto> getAll() {
-        return iReviewMapper.toReviewsDto(iReviewCrudRepository.findAll());
+    public List<ResponseReviewDto> getAll() {
+        return iReviewMapper.toResponseReviewsDto(iReviewCrudRepository.findAll());
     }
 
     @Override
-    public Optional<ReviewDto> getReviewById(Long id) {
+    public Optional<ResponseReviewDto> getReviewById(Long id) {
         return iReviewCrudRepository.findById(id)
-                .map(iReviewMapper::toReviewDto);
+                .map(iReviewMapper::toResponseReviewDto);
     }
 
     @Override
@@ -36,5 +38,18 @@ public class ReviewRepository implements IReviewRepository {
                 .toReviewDto(iReviewCrudRepository
                         .save(iReviewMapper
                                 .toReviewEntity(newReview)));
+    }
+
+    @Override
+    public Optional<List<ResponseReviewDto>> getAllByVolunteerId(Long idVolunteer) {
+        return iReviewCrudRepository.findAllByVolunteerId(idVolunteer)
+                .map(iReviewMapper::toResponseReviewsDto);
+
+    }
+
+    @Override
+    public Optional<List<ResponseReviewDto>> getAllByInstitutionId(Long idInstitution) {
+        return iReviewCrudRepository.findAllByInstitutionId(idInstitution)
+                .map(iReviewMapper::toResponseReviewsDto);
     }
 }

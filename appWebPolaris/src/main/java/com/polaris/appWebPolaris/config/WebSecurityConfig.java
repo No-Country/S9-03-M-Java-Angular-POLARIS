@@ -50,6 +50,9 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/institutions/**").hasAnyRole("Volunteer", "Institution")
                                 .requestMatchers(HttpMethod.DELETE, "/institutions/**").hasRole("Institution")
 
+                                .requestMatchers(HttpMethod.GET, "/reviews/**").hasAnyRole("Volunteer", "Institution")
+                                .requestMatchers(HttpMethod.POST, "/reviews/**").hasAnyRole("Volunteer", "Institution")
+
                                 .anyRequest().authenticated()
 
                 );
