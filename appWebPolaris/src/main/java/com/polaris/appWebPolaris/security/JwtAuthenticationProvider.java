@@ -69,9 +69,6 @@ public class JwtAuthenticationProvider {
      */
     public Authentication validateToken(String token) throws AuthenticationException {
 
-        System.out.println("entre tambien aqui");
-        System.out.println(token);
-
         //verifica el token como su firma y expiración, lanza una excepcion si algo falla
         JWT.require(Algorithm.HMAC256(secretKey)).build().verify(token);
 

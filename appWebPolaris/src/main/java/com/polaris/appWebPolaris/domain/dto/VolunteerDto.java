@@ -28,6 +28,7 @@ public class VolunteerDto {
     private String imageProfile;
     private String otherSkills;
     private List<SkillsEnum> skillList;
+    private List<ReviewDto> reviewList;
 
     private String rol;
 
@@ -49,6 +50,9 @@ public class VolunteerDto {
                 ", description='" + description + '\'' +
                 ", availability='" + availability + '\'' +
                 ", imageProfile='" + imageProfile + '\'' +
+                ", otherSkills='" + otherSkills + '\'' +
+                ", skillList=" + skillList +
+                ", reviewList=" + reviewList +
                 ", rol='" + rol + '\'' +
                 '}';
     }

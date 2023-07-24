@@ -17,14 +17,8 @@ import java.util.List;
 @DiscriminatorValue("Institution")
 public class InstitutionEntity extends CustomerEntity{
 
-/*    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
-
     private String name;
     private String cuit;
-/*    private String email;
-    private String password;*/
     private String province;
     private String locality;
     private String type;
@@ -35,6 +29,5 @@ public class InstitutionEntity extends CustomerEntity{
     private List<VolunteerInstitutionEntity> volunteerInstitutionList;
     @OneToMany(mappedBy = "institution",cascade = CascadeType.ALL)
     private List<ReviewEntity> reviewList;
-    /*private String rol;*/
 
 }
