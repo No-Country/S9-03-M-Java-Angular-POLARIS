@@ -1,19 +1,19 @@
 <div class="w-full flex items-start">
 
-  <div class="w-[90%]  m-auto">
+  <div class="w-[90%]">
     
     <div class="mx-auto">
-      <div class="container  w-full">
+      <div class="container w-full">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro voluntario</h1>
         
         <form class="w-full flex flex-col" [formGroup]="form">
           <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
 
             <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
-              <!-- Nombre y Apellido -->
-              <div class="w-full flex flex-col lg:px-[2%]">
+              <!-- Nombre -->
+              <div class="w-full flex flex-col lg:px-[2%] md:pb-6 lg:pb-0">
                 <div>
-                  <input matInput formControlName="nameUser" placeholder="Nombre y apellido(*)" required
+                  <input matInput formControlName="nameUser" placeholder="Nombre (*)" required
                   class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
                 </div>
                 <div class="max-sm:mb-6">
@@ -26,6 +26,44 @@
                     tener como máximo 20 caracteres.</mat-error>
                 </div>
               </div>
+
+              <!-- Apellido -->
+              <div class="w-full flex flex-col lg:px-[2%]">
+                <div>
+                  <input matInput formControlName="secondNameUser" placeholder="Apellido (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+                </div>
+                <div class="sm:mb-6">
+                  <mat-error
+                    *ngIf="form.controls['secondNameUser'].hasError('required') && form.controls['secondNameUser'].touched">El
+                    apellido es requerido.</mat-error>
+                  <mat-error *ngIf="form.controls['secondNameUser'].hasError('minlength')">El apellido debe
+                    tener al menos 3 caracteres.</mat-error>
+                  <mat-error *ngIf="form.controls['secondNameUser'].hasError('maxlength')">El apellido debe
+                    tener como máximo 20 caracteres.</mat-error>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
+
+              <!-- Género -->
+              <div class="w-full flex flex-col lg:px-[2%] min-[320px]:pb-6 lg:pb-0">
+                <div>
+                <select matInput formControlName="genre" placeholder="Género (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"  
+                  (keypress)="onKeyPress($event)">
+                  <option value="" disabled selected>Género (*)</option>
+                <option *ngFor="let genero of generoOptions" [value]="genero.value">{{ genero.label }}</option>
+                </select>
+                </div>
+                <div>
+                  <mat-error
+                    *ngIf="form.controls['genre'].hasError('required') && form.controls['genre'].touched">El género es requerido.</mat-error>
+                </div>
+              </div>
+
               <!-- DNI -->
               <div class="w-full flex flex-col lg:px-[2%]">
                 <div>
@@ -44,6 +82,8 @@
                 </div>
               </div>
             </div>
+
+            
             <!-- Correo Electrónico -->
             <div class="w-full flex flex-col lg:px-[2%]">
               <input matInput formControlName="writeYourEmail" placeholder="Correo Electrónico (*)" required
@@ -94,8 +134,9 @@
             </div>
 
             <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
+
             <!-- Provincia -->
-            <div class="w-full flex flex-col lg:px-[2%] max-sm:mb-6">
+            <div class="w-full flex flex-col lg:px-[2%] max-sm:mb-6 md:pb-6 lg:pb-0">
               <div>
               <input matInput formControlName="province" placeholder="Provincia" 
                 class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
@@ -119,7 +160,7 @@
           </div>
 
             <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
-              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="resetFormAndSaveData()">Crear Cuenta</button>
+              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="onSubmit()">Crear Cuenta</button>
             </div>
 
           </div>

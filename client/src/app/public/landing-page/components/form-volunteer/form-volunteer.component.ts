@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from '@angular/forms';
 import { CountryFormatServiceService } from '../../services/country-format-service.service';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-volunteer',
@@ -18,13 +19,23 @@ export class FormVolunteerComponent implements OnInit {
 
   patternDNI = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
+  generoOptions = [
+    { label: 'Hombre', value: 'Hombre'},
+    { label: 'Mujer', value: 'Mujer'},
+    { label: 'Otro', value: 'Otro'},
+  ];
+
+  private apiURL = 'https://polaris-backend.onrender.com/auth/registerVolunteer';
+
 
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {
+  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService, private http: HttpClient) {
 
     this.form = this._formBuilder.group({
       nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      secondNameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      genre: ['', [Validators.required]],
       userDNI: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9), Validators.pattern(this.patternDNI)]],
       writeYourEmail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
@@ -36,36 +47,23 @@ export class FormVolunteerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
-      typeUser: ['', Validators.required],
-      nameUsernameUser:['', Validators.required],
-    }, {
-      validators: this.passwordMatchValidator
-    });
-
-    this.secondFormGroup = this._formBuilder.group({
-      Sex:['', Validators.required],
-      birthdate: ['', Validators.required],
-      documentNumber: ['', [Validators.required, Validators.pattern('')]],
-      address: ['', Validators.required],
-      location: ['', Validators.required],
-      province: ['', Validators.required],
-      country: ['', Validators.required],
-      cellphoneNumber: ['', Validators.required],
-    });
     
-    this.thirdFormGroup = this._formBuilder.group({
-      timeAvailability: ['', Validators.required],
-      profession: ['', Validators.required],
-      skillsHobbies: ['', Validators.required],
-    });
 
   }
 
+  onSubmit(){
+    //console.log(this.form.value);
+    
+    this.http.post<any>(this.apiURL, this.form.value).subscribe(
+      (res) => {
+        console.log('respuesta', res);
+        
+      }, (error) => {
+        console.log(error);
+        
+      }
+    )
+  }
   
   onKeyPress(event: KeyboardEvent) {
     const inputChar = String.fromCharCode(event.keyCode);
