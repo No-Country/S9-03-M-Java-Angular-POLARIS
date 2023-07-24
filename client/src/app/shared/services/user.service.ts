@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Volunteer } from '../models/user/Volunteer';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,5 +43,21 @@ export class UserService {
         throw error;
       })
     );
+  }
+
+
+  getAllVoluntaries(authToken: string):Observable<Volunteer[]>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const url = 'https://polaris-backend.onrender.com/volunteers/getAll';
+
+    return this.http.get<Volunteer[]>(url,{headers}).pipe(
+      catchError((error) => {
+        // Aquí puedes manejar errores, si lo deseas.
+        console.error('Error al obtener el listado de voluntarios:', error);
+        throw error;
+      })
+      );
   }
 }
