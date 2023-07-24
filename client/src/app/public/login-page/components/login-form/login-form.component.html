@@ -15,8 +15,21 @@
     <!----Ingrese la contraseña--->
     <div class="lex flex-col pt-[5%] w-full">
       <label class="text-xs text-gray-500 mb-[.01%]" for="password">Contraseña (*)</label>
-      <input  id="password" name="password" formControlName="password" class="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none mt-0 rounded-sm" [ngClass]="{'is-valid':!Password?.errors&&Password?.touched}"/>
-     
+      <div class="password-input-container">
+        <input
+          id="password"
+          name="password"
+          type="{{ showPassword ? 'text' : 'password' }}"
+          formControlName="password"
+          class="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none mt-0 rounded-sm"
+          [ngClass]="{'is-valid': !Password?.errors && Password?.touched}"
+        />
+        <i
+          class="fa password-toggle-icon"
+          [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"
+          (click)="togglePasswordVisibility()"
+        ></i>
+      </div>
       <div *ngIf="Password?.errors && Password?.touched">
         <p *ngIf="Password?.hasError('required')" class="text-red-600">
           Ingrese su contraseña

@@ -7,10 +7,12 @@
                     <div class="user-image-container relative" style="display: flex; align-items: center; justify-content: center;">
                         <!-- Contenedor para la imagen de usuario o imagen seleccionada -->
                         <div class="image-container relative">
-                            <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen de usuario" class="object-cover w-40 h-40 rounded-full">
-                            <img *ngIf="!imageUrl" src="../../../../assets/user.png" alt="Usuario vacío" class="object-cover w-40 h-40">
+                            <img *ngIf="imageUrl; else serverImage" [src]="imageUrl" alt="Imagen de usuario" class="object-cover w-40 h-40 rounded-full">
+                            <ng-template #serverImage>
+                                <img [src]="user?.imageProfile || '../../../../assets/user.png'" alt="Usuario vacío" class="object-cover w-40 h-40">
+                            </ng-template>
                             <label for="file-input" class="camera-button absolute bottom-8 right-0 mt-1 mr-1 w-8 h-8 flex items-center justify-center bg-white rounded-full cursor-pointer">
-                                <img id="camera-icon" src="../../../../assets/camerass.png" alt="Cámara" class="w-20 h-20 object-contain rounded-full">
+                              <img id="camera-icon" src="../../../../assets/camerass.png" alt="Cámara" class="w-20 h-20 object-contain rounded-full">
                             </label>
                         </div>
                         <input id="file-input" type="file" (change)="onFileSelected($event)" class="hidden">

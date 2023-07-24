@@ -19,7 +19,7 @@ export class LoginFormComponent {
   loginUser: LoginUser={email:"",password:""};
   emailUsuario: string="";
   password: string="";
-
+  showPassword: boolean = false;
 
   constructor(private formBuilder:FormBuilder, private router: Router,private authService: AuthService) {
     this.loginForm = this.formBuilder.group(
@@ -31,6 +31,17 @@ export class LoginFormComponent {
 
   ngOnInit(): void {}
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    const passwordInput = document.getElementById('password');
+    if (passwordInput) {
+      if (this.showPassword) {
+        passwordInput.setAttribute('type', 'text');
+      } else {
+        passwordInput.setAttribute('type', 'password');
+      }
+    }
+  }
   // OnLogin
   onLogin(event: any) {
    console.log("usuario logeado")

@@ -1,0 +1,19 @@
+/* Agrega estilos para la posición relativa del contenedor y ajusta el ancho para encajar el ícono */
+.password-input-container {
+    position: relative;
+    width: 100%; /* Cambiamos fit-content por 100% */
+  }
+  
+  /* Posiciona el ícono en la esquina superior derecha del campo de contraseña */
+  .password-toggle-icon {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Ajusta el padding derecho para que el texto no se superponga con el ícono */
+  .password-input-container input[type="password"],
+  .password-input-container input[type="text"] {
+    padding-right: 30px; /* Ajusta este valor según tus necesidades */
+  }
