@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Volunteer } from 'src/app/shared/models/user/Volunteer';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-volunteer-resume',
@@ -8,34 +9,20 @@ import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 })
 export class VolunteerResumeComponent {
 
-  voluntaries: Volunteer[]=[
-    {
-      firstName:'Javier',
-      lastName: 'Molina',
-      province: "Bs. As.",
-      locality: "Parque Patricios, CABA",
-      occupation: "Terapeuta",
-      numberCellphone:"+54 11 2222-4444",
-      avatar:"https://reqres.in/img/faces/8-image.jpg"
-    },
-    {
-      firstName:'María',
-      lastName: 'Guzman',
-      province: "Santafe",
-      locality: "Rosario",
-      occupation: "Enfermera",
-      numberCellphone:"+54 11 2222-4444",
-      avatar:"https://reqres.in/img/faces/7-image.jpg"
-    },   
-    {
-      firstName:'Nestor',
-      lastName: 'Barrera',
-      province: "Entre Rios",
-      locality: "Nogoyá",
-      occupation: "Estudiante",
-      numberCellphone:"+54 11 2222-4444",
-      avatar:"https://reqres.in/img/faces/9-image.jpg"
-    }
-  ]
+  voluntaries: Volunteer[]=[];
+  dataToken: any
+
+  constructor(private userService: UserService){}
+
+  ngOnInit(): void {
+    this.volunteerList();
+  }
+
+
+  volunteerList(): void {
+    const token = localStorage.getItem('token');
+    this.dataToken=token;
+    this.userService.getAllVoluntaries(this.dataToken).subscribe(data => { this.voluntaries = data });
+  }
 
 }
