@@ -12,8 +12,6 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-
-
   loginForm:FormGroup;
   isLogged:boolean=false;
   loginUser: LoginUser={email:"",password:""};
@@ -42,7 +40,7 @@ export class LoginFormComponent {
       }
     }
   }
-  // OnLogin
+
   onLogin(event: any) {
    console.log("usuario logeado")
   }
