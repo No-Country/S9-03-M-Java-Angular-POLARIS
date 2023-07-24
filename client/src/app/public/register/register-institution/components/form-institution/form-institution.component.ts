@@ -1,7 +1,11 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn, ValidationErrors  } from '@angular/forms';
 import { CountryFormatServiceService } from 'src/app/public/landing-page/services/country-format-service.service';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/enviroments/enviroment';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-institution',
@@ -19,53 +23,71 @@ export class FormInstitutionComponent implements OnInit {
   patternCUIT = '/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
 
+  private apiURL = environment.apiURL;
+
+
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {
+  constructor(private _formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
 
     this.form = this._formBuilder.group({
-      nameInstitution: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      institutionCuit: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(15), Validators.pattern(this.patternCUIT)]],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      cuit: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(15), this.cuitValidator]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
-      province: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      province: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       locality: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
     })
 
   }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
-      typeUser: ['', Validators.required],
-      nameUsernameUser:['', Validators.required],
-    }, {
-      validators: this.passwordMatchValidator
-    });
-
-    this.secondFormGroup = this._formBuilder.group({
-      Sex:['', Validators.required],
-      birthdate: ['', Validators.required],
-      documentNumber: ['', [Validators.required, Validators.pattern('')]],
-      address: ['', Validators.required],
-      location: ['', Validators.required],
-      province: ['', Validators.required],
-      country: ['', Validators.required],
-      cellphoneNumber: ['', Validators.required],
-    });
     
-    this.thirdFormGroup = this._formBuilder.group({
-      timeAvailability: ['', Validators.required],
-      profession: ['', Validators.required],
-      skillsHobbies: ['', Validators.required],
-    });
 
   }
-    
+
+  onSubmit(){
+
+    console.log(this.form.value);
+
+    if(this.form.valid){
+      
+      const newURL = (`${this.apiURL}/auth/registerInstitution`);
+      this.http.post<any>(newURL, this.form.value).subscribe(
+        (res) => {
+          console.log(res);
+        }, (error) => {
+          console.log(error);
+        }
+      );
+
+      this.msgAlert('success', 'Cuenta creada con éxito');
+      this.router.navigate(['/login']);
+
+    }else{
+      this.msgAlert('error', 'Error al crear cuenta');
+    }
+
+  }
+
+
+  cuitValidator(control: AbstractControl): ValidationErrors | null {
+    const cuit = control.value;
+
+    if (!cuit) {
+      return null; // Si el campo está vacío, no se realiza la validación
+    }
+
+    // Verificar que sea un número válido
+    if (!/^\d+$/.test(cuit)) {
+      return { cuitInvalid: true };
+    }
+
+    return null; // CUIT válido
+  }
+  
+  
   onKeyPress(event: KeyboardEvent) {
     const inputChar = String.fromCharCode(event.keyCode);
 
@@ -99,23 +121,14 @@ export class FormInstitutionComponent implements OnInit {
     return this.form.get('confirmPassword')!.touched && ((this.form.get('password')!.value !== this.form.get('confirmPassword')!.value));
   }
 
-  get countriesData(){
-    return [...this.countryFormatService.countries];
-  }
-  getDocumentFormatByCountry(country: string): RegExp | undefined {
-    return this.countryFormatService.countryFormats[country];
-  }
+  
 
   getDocumentPlaceholder(): string {
     const selectedCountry = this.secondFormGroup.get('country')?.value;
     return selectedCountry ? `Ingrese su ${this.getDocumentType(selectedCountry)}` : 'Ingrese su documento de identidad';
   }
 
-  getDocumentPattern(): string | null {
-    const selectedCountry = this.secondFormGroup.get('country')?.value;
-    const format = this.countryFormatService.countryFormats[selectedCountry];
-    return format ? format.source : null;
-  }
+  
   getDocumentType(country: string): string {
     switch (country) {
       case 'Perú':
@@ -182,4 +195,27 @@ export class FormInstitutionComponent implements OnInit {
     // Reiniciar el stepper
     this.stepper.reset();
   }
+
+  // alerta con sweetAlert
+  msgAlert = (icon: any, title: any) =>{
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+
+    })
+
+    Toast.fire({
+      icon: icon,
+      title: title
+    })
+  }
+
 }

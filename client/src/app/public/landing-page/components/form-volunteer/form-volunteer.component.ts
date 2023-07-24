@@ -3,6 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from
 import { CountryFormatServiceService } from '../../services/country-format-service.service';
 import { MatStepper } from '@angular/material/stepper';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
+import { RegisterService } from 'src/app/shared/services/register.service';
+import Swal from 'sweetalert2';
+import { environment } from 'src/enviroments/enviroment';
 
 @Component({
   selector: 'app-form-volunteer',
@@ -25,19 +30,19 @@ export class FormVolunteerComponent implements OnInit {
     { label: 'Otro', value: 'Otro'},
   ];
 
-  private apiURL = 'https://polaris-backend.onrender.com/auth/registerVolunteer';
+  private apiURL = environment.apiURL;
 
 
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService, private http: HttpClient) {
+  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService, private http: HttpClient, private register: RegisterService, private router: Router) {
 
     this.form = this._formBuilder.group({
-      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      secondNameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      genre: ['', [Validators.required]],
-      userDNI: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9), Validators.pattern(this.patternDNI)]],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      gender: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
       province: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -51,18 +56,42 @@ export class FormVolunteerComponent implements OnInit {
 
   }
 
+  
+
   onSubmit(){
+    /*if(this.form){
+      this.register.newUser(this.form.value).subscribe(
+        (res: any) => {
+          console.log(this.form.value);
+          console.log(res);
+          
+          
+          alert('Usuario creado correctamente');
+          this.router.navigate(['/login']);
+        }
+      )
+    }else{
+      alert('Error');
+    }*/
     //console.log(this.form.value);
+
+    if(this.form.valid){
+      const newURL = (`${this.apiURL}/auth/registerVolunteer`);
+      this.http.post<any>(newURL, this.form.value).subscribe(
+        (res) => {
+          console.log(res);
+        }, (error) => {
+          console.log(error);
+        }
+      );
+
+      this.msgAlert('success', 'Cuenta creada con éxito');
+      this.router.navigate(['/login']);
+    }else{
+      this.msgAlert('error', 'Error al crear cuenta');
+    }
     
-    this.http.post<any>(this.apiURL, this.form.value).subscribe(
-      (res) => {
-        console.log('respuesta', res);
-        
-      }, (error) => {
-        console.log(error);
-        
-      }
-    )
+    
   }
   
   onKeyPress(event: KeyboardEvent) {
@@ -180,5 +209,27 @@ export class FormVolunteerComponent implements OnInit {
 
     // Reiniciar el stepper
     this.stepper.reset();
+  }
+
+  // alerta con sweetAlert
+  msgAlert = (icon: any, title: any) =>{
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+
+    })
+
+    Toast.fire({
+      icon: icon,
+      title: title
+    })
   }
 }
