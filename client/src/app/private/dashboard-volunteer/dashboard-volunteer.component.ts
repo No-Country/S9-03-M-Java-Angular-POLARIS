@@ -12,6 +12,7 @@ export class DashboardVolunteerComponent implements OnInit {
   userData: any | null = null; // Variable para almacenar el nombre de usuario
   user:any;
   dataToken:any;
+  agregaDesc: string = "Añade una descripcion";
 
   constructor(private authService: AuthService,private userService: UserService) { }
 
@@ -36,11 +37,13 @@ export class DashboardVolunteerComponent implements OnInit {
     this.userService.getUserById(Id, this.dataToken).subscribe({
       next: (userData) => {
         this.user = userData;
-        console.log("joseeeee")
+        console.log(this.user)
       },
       error: (error) => {
         console.error('Error al obtener el usuario:', error);
       }
     });
   }
+
+
 }
