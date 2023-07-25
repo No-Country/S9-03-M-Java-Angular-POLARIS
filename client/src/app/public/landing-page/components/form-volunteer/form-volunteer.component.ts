@@ -2,6 +2,12 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from '@angular/forms';
 import { CountryFormatServiceService } from '../../services/country-format-service.service';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
+import { RegisterService } from 'src/app/shared/services/register.service';
+import Swal from 'sweetalert2';
+import { environment } from 'src/enviroments/enviroment';
 
 @Component({
   selector: 'app-form-volunteer',
@@ -18,17 +24,27 @@ export class FormVolunteerComponent implements OnInit {
 
   patternDNI = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
+  generoOptions = [
+    { label: 'Hombre', value: 'Hombre'},
+    { label: 'Mujer', value: 'Mujer'},
+    { label: 'Otro', value: 'Otro'},
+  ];
+
+  private apiURL = environment.apiURL;
+
 
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService) {
+  constructor(private _formBuilder: FormBuilder,private countryFormatService: CountryFormatServiceService, private http: HttpClient, private register: RegisterService, private router: Router) {
 
     this.form = this._formBuilder.group({
-      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      userDNI: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9), Validators.pattern(this.patternDNI)]],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
-      confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      gender: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPassword: ['', [Validators.required]],
       province: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       locality: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
     })
@@ -36,36 +52,47 @@ export class FormVolunteerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      nameUser: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      writeYourEmail: ['', [Validators.required, Validators.email]],
-      typeUser: ['', Validators.required],
-      nameUsernameUser:['', Validators.required],
-    }, {
-      validators: this.passwordMatchValidator
-    });
-
-    this.secondFormGroup = this._formBuilder.group({
-      Sex:['', Validators.required],
-      birthdate: ['', Validators.required],
-      documentNumber: ['', [Validators.required, Validators.pattern('')]],
-      address: ['', Validators.required],
-      location: ['', Validators.required],
-      province: ['', Validators.required],
-      country: ['', Validators.required],
-      cellphoneNumber: ['', Validators.required],
-    });
     
-    this.thirdFormGroup = this._formBuilder.group({
-      timeAvailability: ['', Validators.required],
-      profession: ['', Validators.required],
-      skillsHobbies: ['', Validators.required],
-    });
 
   }
 
+  
+
+  onSubmit(){
+    /*if(this.form){
+      this.register.newUser(this.form.value).subscribe(
+        (res: any) => {
+          console.log(this.form.value);
+          console.log(res);
+          
+          
+          alert('Usuario creado correctamente');
+          this.router.navigate(['/login']);
+        }
+      )
+    }else{
+      alert('Error');
+    }*/
+    //console.log(this.form.value);
+
+    if(this.form.valid){
+      const newURL = (`${this.apiURL}/auth/registerVolunteer`);
+      this.http.post<any>(newURL, this.form.value).subscribe(
+        (res) => {
+          console.log(res);
+        }, (error) => {
+          console.log(error);
+        }
+      );
+
+      this.msgAlert('success', 'Cuenta creada con éxito');
+      this.router.navigate(['/login']);
+    }else{
+      this.msgAlert('error', 'Error al crear cuenta');
+    }
+    
+    
+  }
   
   onKeyPress(event: KeyboardEvent) {
     const inputChar = String.fromCharCode(event.keyCode);
@@ -182,5 +209,27 @@ export class FormVolunteerComponent implements OnInit {
 
     // Reiniciar el stepper
     this.stepper.reset();
+  }
+
+  // alerta con sweetAlert
+  msgAlert = (icon: any, title: any) =>{
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+
+    })
+
+    Toast.fire({
+      icon: icon,
+      title: title
+    })
   }
 }

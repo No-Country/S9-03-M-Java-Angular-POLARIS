@@ -10,51 +10,51 @@
           <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
 
             <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
-              <!-- Nombre y Apellido -->
+              <!-- Nombre Institución -->
               <div class="w-full flex flex-col lg:px-[2%]">
                 <div>
-                  <input matInput formControlName="nameInstitution" placeholder="Nombre institucion(*)" required
+                  <input matInput formControlName="name" placeholder="Nombre institucion(*)" required
                   class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
                 </div>
                 <div class="max-sm:mb-6">
                   <mat-error
-                    *ngIf="form.controls['nameInstitution'].hasError('required') && form.controls['nameInstitution'].touched">El
+                    *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched">El
                     nombre es requerido.</mat-error>
-                  <mat-error *ngIf="form.controls['nameInstitution'].hasError('minlength')">El nombre de la institución  debe
+                  <mat-error *ngIf="form.controls['name'].hasError('minlength')">El nombre de la institución  debe
                     tener al menos 3 caracteres.</mat-error>
-                  <mat-error *ngIf="form.controls['nameInstitution'].hasError('maxlength')">El nombre de la institución  debe
+                  <mat-error *ngIf="form.controls['name'].hasError('maxlength')">El nombre de la institución  debe
                     tener como máximo 20 caracteres.</mat-error>
                 </div>
               </div>
               <!-- DNI -->
               <div class="w-full flex flex-col lg:px-[2%]">
                 <div>
-                <input matInput formControlName="institutionCuit" placeholder="CUIT (*)" required
+                <input matInput formControlName="cuit" placeholder="CUIT (*)" required
                   class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"
                   (keypress)="onKeyPress($event)">
                 </div>
                 <div>
                   <mat-error
-                    *ngIf="form.controls['institutionCuit'].hasError('required') && form.controls['institutionCuit'].touched">El
+                    *ngIf="form.controls['cuit'].hasError('required') && form.controls['cuit'].touched">El
                       CUIT es requerido.</mat-error>
-                  <mat-error *ngIf="form.controls['institutionCuit'].hasError('minlength')">El CUIT debe
+                  <mat-error *ngIf="form.controls['cuit'].hasError('minlength')">El CUIT debe
                       tener al menos 11 caracteres.</mat-error>
-                  <mat-error *ngIf="form.controls['institutionCuit'].hasError('maxlength')">El CUIT debe
+                  <mat-error *ngIf="form.controls['cuit'].hasError('maxlength')">El CUIT debe
                       tener como máximo 15 caracteres.</mat-error>
                 </div>
               </div>
             </div>
             <!-- Correo Electrónico -->
             <div class="w-full flex flex-col lg:px-[2%]">
-              <input matInput formControlName="writeYourEmail" placeholder="Correo Electrónico (*)" required
-              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off" email>
+              <input matInput formControlName="email" placeholder="Correo Electrónico (*)" required
+              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off" type="email">
             </div>
             <div class="mb-6">
               <mat-error
-                *ngIf="form.controls['writeYourEmail'].hasError('required') && form.controls['writeYourEmail'].touched">El
+                *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">El
                 correo electrónico es requerido.</mat-error>
               <mat-error
-                *ngIf="form.controls['writeYourEmail'].hasError('email') && form.controls['writeYourEmail'].touched">El
+                *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">El
                 formato del correo electrónico es incorrecto.</mat-error>
             </div>
 
@@ -99,7 +99,18 @@
               <div>
               <input matInput formControlName="province" placeholder="Provincia" 
                 class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
-              </div>           
+              </div>       
+              <div class="mb-6">
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched">La
+                  provincia es requerida.</mat-error>
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('minlength')">La
+                  provincia debe tener al menos 5 caracteres.</mat-error>
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('maxlength')">La
+                  provincia debe tener máximo 30 caracteres.</mat-error>
+              </div>    
             </div>
             
             <!-- Localidad -->
@@ -119,7 +130,7 @@
           </div>
 
             <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
-              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="resetFormAndSaveData()">Crear Cuenta</button>
+              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="onSubmit()" [disabled]="form.invalid">Crear Cuenta</button>
             </div>
 
           </div>
