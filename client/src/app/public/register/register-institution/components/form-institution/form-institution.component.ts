@@ -34,8 +34,8 @@ export class FormInstitutionComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       cuit: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(15), this.cuitValidator]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16), Validators.pattern(this.patternPassword)]],
-      confirmPassword: ['', [Validators.required, Validators.pattern(this.patternPassword)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPassword: ['', [Validators.required]],
       province: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       locality: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
     })

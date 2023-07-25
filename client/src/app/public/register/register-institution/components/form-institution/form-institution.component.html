@@ -130,7 +130,7 @@
           </div>
 
             <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
-              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="onSubmit()">Crear Cuenta</button>
+              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="onSubmit()" [disabled]="form.invalid">Crear Cuenta</button>
             </div>
 
           </div>
