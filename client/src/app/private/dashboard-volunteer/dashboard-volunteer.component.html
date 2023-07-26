@@ -52,33 +52,31 @@
             <div class="col-span-4">
                 <div>
                     <!-- Row de datos personales -->
-                    <div>
+                    <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal">
                         <h1 class="text-3xl	my-10 text-center">Datos personales</h1>
                         <div
                             class="container new p-10 grid md:px-20 grid-cols-1 xl:gap-x-10 xl:grid-cols-2 grid-rows-6 xl:grid-rows-4 mr-4">
                             <div class="col-span-1 flex items-center">
                                 <i class="fa-solid fa-user text-3xl mx-2"></i>
-                                Gonzalo Benegas
+                                {{ user.firstName + ' ' + user.lastName }}
 
                             </div>
                             <div class="col-span-1 row-start-2 flex items-center">
 
                                 <i class="fa-solid fa-envelope text-3xl mx-2 inline-block"></i>
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" placeholder="ejemplo@ejemplo.com"
-                                        class="w-full rounded inputs-correo border-none">
+                                    <input type="email" [value]="user.email" placeholder="ejemplo@ejemplo.com"
+                                        class="w-full rounded inputs-correo border-none" disabled>
                                 </div>
                             </div>
                             <div class="col-span-1 row-start-3 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
                                     <input type="email" placeholder="Capital Federal, Argentina"
-                                        class="w-full rounded inputs-correo">
+                                        class="w-full rounded inputs-correo" [value]="user.locality + ', ' + user.province">
                                 </div>
                             </div>
                             <div class="col-span-1 xl:row-start-1 xl:col-start-2 row-start-4 flex items-center">
-                                <div class="">
-                                    08/07/89
-                                </div>
+                                <input type="date" class="bg-transparent">
                             </div>
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
@@ -86,12 +84,11 @@
                                         class="w-full rounded inputs-correo">
                                 </div>
                             </div>
-                            <button type="button"
-                                class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn">Guardar</button>
+                            <button type="button" class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn">Guardar</button>
                         </div>
 
 
-                    </div>
+                    </form>
                     <!-- Row de datos del voluntario -->
                     <div>
                         <h1 class="text-3xl	my-10 text-center">Datos de voluntario</h1>
