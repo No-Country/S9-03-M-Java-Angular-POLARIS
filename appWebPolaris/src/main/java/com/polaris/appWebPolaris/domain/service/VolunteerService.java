@@ -65,12 +65,66 @@ public class VolunteerService implements IVolunteerUseCase {
 
     @Override
     public Optional<VolunteerDto> update(VolunteerDto modifyVolunteer) {
-        if (iVolunteerRepository.getVolunteerById(modifyVolunteer.getId()).isEmpty()){
+
+        Optional<VolunteerDto> volunteerBD = iVolunteerRepository.getVolunteerById(modifyVolunteer.getId());
+
+        if (volunteerBD.isEmpty()){
             return Optional.empty();
         }
-        modifyVolunteer.setPassword(passwordEncoder.encode(modifyVolunteer.getPassword()));
-        modifyVolunteer.setRol(String.valueOf(Roles.VOLUNTEER));
-        return Optional.of(iVolunteerRepository.save(modifyVolunteer));
+        if (modifyVolunteer.getFirstName()!= null){
+            volunteerBD.get().setFirstName(modifyVolunteer.getFirstName());
+        }
+        if (modifyVolunteer.getLastName()!= null){
+            volunteerBD.get().setLastName(modifyVolunteer.getLastName());
+        }
+        if (modifyVolunteer.getEmail()!= null){
+            volunteerBD.get().setEmail(modifyVolunteer.getEmail());
+        }
+        if (modifyVolunteer.getPassword()!= null){
+            volunteerBD.get().setPassword(passwordEncoder.encode(modifyVolunteer.getPassword()));
+        }
+        if (modifyVolunteer.getDni()!= null){
+            volunteerBD.get().setDni(modifyVolunteer.getDni());
+        }
+        if (modifyVolunteer.getDateOfBirth()!= null){
+            volunteerBD.get().setDateOfBirth(modifyVolunteer.getDateOfBirth());
+        }
+        if (modifyVolunteer.getGender()!= null){
+            volunteerBD.get().setGender(modifyVolunteer.getGender());
+        }
+        if (modifyVolunteer.getProvince()!= null){
+            volunteerBD.get().setProvince(modifyVolunteer.getProvince());
+        }
+        if (modifyVolunteer.getLocality()!= null){
+            volunteerBD.get().setLocality(modifyVolunteer.getLocality());
+        }
+        if (modifyVolunteer.getEducation()!= null){
+            volunteerBD.get().setEducation(modifyVolunteer.getEducation());
+        }
+        if (modifyVolunteer.getAvailability()!= null){
+            volunteerBD.get().setAvailability(modifyVolunteer.getAvailability());
+        }
+        if (modifyVolunteer.getNumberCellphone()!= null){
+            volunteerBD.get().setNumberCellphone(modifyVolunteer.getNumberCellphone());
+        }
+        if (modifyVolunteer.getDescription()!= null){
+            volunteerBD.get().setDescription(modifyVolunteer.getDescription());
+        }
+        if (modifyVolunteer.getImageProfile()!= null){
+            volunteerBD.get().setImageProfile(modifyVolunteer.getImageProfile());
+        }
+        if (modifyVolunteer.getOtherSkills() != null){
+            volunteerBD.get().setOtherSkills(modifyVolunteer.getOtherSkills());
+        }
+        if (modifyVolunteer.getSkillList() != null){
+            volunteerBD.get().setSkillList(modifyVolunteer.getSkillList());
+        }
+        if (modifyVolunteer.getReviewList() != null){
+            volunteerBD.get().setReviewList(modifyVolunteer.getReviewList());
+        }
+
+        volunteerBD.get().setRol(String.valueOf(Roles.VOLUNTEER));
+        return Optional.of(iVolunteerRepository.save(volunteerBD.get()));
     }
 
     @Override
