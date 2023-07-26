@@ -23,7 +23,7 @@ export class FormInstitutionComponent implements OnInit {
   patternCUIT = '/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i';
   patternPassword = '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,}';
 
-  private apiURL = environment.apiURL;
+    private apiURL = environment.apiURL;
 
 
   @ViewChild('stepper') stepper!: MatStepper;

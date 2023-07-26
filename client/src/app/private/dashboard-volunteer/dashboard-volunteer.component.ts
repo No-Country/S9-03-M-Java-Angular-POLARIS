@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { VolunteerFilterService } from 'src/app/shared/services/volunteer-filter.service';
 import { environment } from 'src/enviroments/enviroment';
 
 @Component({
@@ -18,22 +19,33 @@ export class DashboardVolunteerComponent implements OnInit {
   agregaDesc: string = "Añade una descripcion";
   PersonalData: FormGroup;
 
+
   private apiURL = environment.apiURL; //Url
 
 
-  userId:number = this.userData.Id;
+  userId?: number = 27;
   /* PersonalData Personal Data */
 
-  userPhone?: number;
+  userPhone?: string;
 
-  constructor(private authService: AuthService, private http: HttpClient, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(
+    private SVolunteer: VolunteerFilterService, 
+    private authService: AuthService, 
+    private http: HttpClient, 
+    private formBuilder: FormBuilder, 
+    private userService: UserService) {
     this.PersonalData = this.formBuilder.group({
-      phone: [this.userPhone],
+      numberCellphone: [this.userPhone],
+      id: [this.userId],
     })
   }
 
-  get phone() {
+  get numberCellphone() {
     return this.PersonalData.get('phone');
+  }
+
+  get id(){
+    return this.userId;
   }
 
   ngOnInit(): void {
@@ -58,7 +70,8 @@ export class DashboardVolunteerComponent implements OnInit {
     this.userService.getUserById(Id, this.dataToken).subscribe({
       next: (userData) => {
         this.user = userData;
-        console.log(this.user)
+        this.userId = this.user.id;
+        console.log(this.user.numberCellphone + 'hola')
       },
       error: (error) => {
         console.error('Error al obtener el usuario:', error);
@@ -68,11 +81,11 @@ export class DashboardVolunteerComponent implements OnInit {
 
   SendPersonal() {
     console.log(this.PersonalData.value)
-
-    if (this.PersonalData.valid) {
-
+    const datos = this.PersonalData.value
+    const token = localStorage.getItem('token');
+    if (token) {
       const newURL = (`${this.apiURL}/volunteers/update`);
-      this.http.patch<any>(newURL, this.PersonalData.value).subscribe(
+      this.SVolunteer.upadateVolunteer(datos,token).subscribe(
         (res) => {
           console.log(res);
         }, (error) => {

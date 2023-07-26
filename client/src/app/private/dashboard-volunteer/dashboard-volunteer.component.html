@@ -80,8 +80,8 @@
                             </div>
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" placeholder="+54 - 11-3485 - 6274"
-                                        class="w-full rounded inputs-correo" formControlName="phone">
+                                    <input type="email" placeholder="Ej: +54 - 11-3485 - 6274"
+                                        class="w-full rounded inputs-correo outline-none focus:outline-none" [value]="user.numberCellphone" formControlName="numberCellphone">
                                 </div>
                             </div>
                             <button type="button" class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn" (click)="SendPersonal()">Guardar</button>
@@ -113,18 +113,11 @@
                             </div>
                             <div class="lg:col-span-2 gap-x-4 flex items-center">
 
-                                <div class="flex items-center">
-                                    <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                    <p class="text-2xl ml-2 my-0">
-                                        Mañana
-                                    </p>
+                                <div class="inputs-vol rounded w-full bg-white p-2">
+                                    <input type="email" placeholder="Ej.: Mañana, Tarde"
+                                        class="w-full rounded inputs-correo">
                                 </div>
-                                <div class="flex items-center">
-                                    <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                    <p class="text-2xl ml-2 my-0">
-                                        Tarde
-                                    </p>
-                                </div>
+
                             </div>
                             <div class="flex items-center">
                                 <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
