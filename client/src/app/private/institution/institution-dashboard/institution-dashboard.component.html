@@ -14,17 +14,36 @@
                     </label>
                 </div>
                 <div class="basis-3/5 m-auto max-sm:text-center">
-                    <p class="text-[22px] md:text-[40px] font-bold leading-loose">
-                        <i class="fa-solid fa-school fa-xs mr-2"></i>{{institution.name}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></p>
-                    <p class="text-[20px] md:text-[32px] leading-loose">
-                        <i class="fa-solid fa-location-dot fa-2xs mr-2"></i>{{institution.locality}}, {{institution.province}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></p>
-                    <p class="text-[20px] md:text-[32px] leading-loose">
-                        <span class="mr-3"><i class="fa-solid fa-phone fa-2xs mr-2"></i>tel.: {{institution.numberphone}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></span>
-                        <span>{{institution.email}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></span>
-                          
-                    </p>
+                    <div class="text-[22px] md:text-[40px] font-bold leading-loose">
+                        <p [hidden]="editState" >
+                            <i class="fa-solid fa-school fa-xs mr-2"></i>{{institution.name}} <button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></p>
+                     
+                            <input [hidden]="!editState" type="text" class="form-control bg-transparent" id="institutionName" name="institutionName"
+                            [(ngModel)]="institution.name" required><button [hidden]="!editState" (click)="editInstitution()"><i class="text-[22px] md:text-[40px] fa-solid fa-circle-check  fa-2xs mx-2"></i></button>
+                    </div>
+                    <div class="text-[20px] md:text-[32px] leading-loose">
+                        <p [hidden]="editState" >
+                            <i class="fa-solid fa-location-dot fa-2xs mr-2"></i>{{institution.locality}}, {{institution.province}}<button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></p>
+                           
+                            <input [hidden]="!editState" type="text" class="form-control bg-transparent" id="localityProvincce" name="institutionName"
+                            [(ngModel)]="institution.locality" required><button [hidden]="!editState" (click)="editInstitution()"><i class="text-[22px] md:text-[40px] fa-solid fa-circle-check  fa-2xs mx-2"></i></button>
+                    </div>
+                   
+                      
+                    <div class="text-[20px] md:text-[32px] leading-loose">
+                        <span [hidden]="editState" class="mr-3"><i class="fa-solid fa-phone fa-2xs mr-2"></i>tel.: {{institution.numberphone}}<button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></span>
+                        <input [hidden]="!editState" type="text" class="form-control bg-transparent" id="phone" name="institutionphone"
+                        [(ngModel)]="institution.numberphone" required><button [hidden]="!editState" (click)="editInstitution()"><i class="text-[22px] md:text-[40px] fa-solid fa-circle-check  fa-2xs mx-2"></i></button>
+
+                        <span [hidden]="editState" >{{institution.email}}<button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></span>
+                        <input [hidden]="!editState" type="text" class="form-control bg-transparent" id="email" name="institutionemail"
+                        [(ngModel)]="institution.email" required><button [hidden]="!editState" (click)="editInstitution()"><i class="text-[22px] md:text-[40px] fa-solid fa-circle-check  fa-2xs mx-2"></i></button>
+                    </div>
+                    
+              
                 </div>
             </div>
+
         </div>
 
         <div class="sm:w-11/12 max-sm:mt-32 sm:mx-auto md:ml-80 md:mr-12 md:basis-3/4">
