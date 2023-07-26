@@ -7,7 +7,7 @@ import { PrivateComponent } from './private.component';
 import { InstitutionDashboardComponent } from './institution/institution-dashboard/institution-dashboard.component';
 import { VolunteerResumeComponent } from './institution/institution-dashboard/components/volunteer-resume/volunteer-resume.component';
 import { VolunteerDashboardComponent } from './volunteer/volunteer-dashboard/volunteer-dashboard.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { VolunteerDashboardComponent } from './volunteer/volunteer-dashboard/vol
   imports: [
     CommonModule,
     PrivateRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class PrivateModule { }

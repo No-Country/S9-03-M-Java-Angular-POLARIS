@@ -10,7 +10,8 @@ export class Volunteer{
     locality!: String ;
     occupation!: String ;
     numberCellphone!: String ;
-    avatar!: String ;
+    imageProfile!: String ;
+    skillList?:[];
 }
 
 
