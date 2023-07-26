@@ -11,6 +11,7 @@ export class Volunteer{
     occupation!: String ;
     numberCellphone!: String ;
     avatar!: String ;
+    skillList?:[];
 }
 
 

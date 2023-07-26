@@ -9,13 +9,18 @@
             <div class="max-sm:mt-14 md:basis-3/4 flex flex-col md:flex-row">
                 <div class="m-auto">
                     <img class="rounded-full w-40 h-h40 md:w-52 md:h-52 border-2 border-slate-500" src="../../../assets/img/bgInstitutionForm.png" alt="institution-avatar">
+                    <label for="file-input" class=" mb-5 ml-36 flex items-center justify-center cursor-pointer">
+                        <i class="fa-solid fa-camera fa-2xl "></i>
+                    </label>
                 </div>
                 <div class="basis-3/5 m-auto max-sm:text-center">
-                    <p class="text-[22px] md:text-[40px] font-bold leading-loose">Escuela especial distrital nro. 10</p>
-                    <p class="text-[20px] md:text-[32px] leading-loose">Caballito, Reconquista ---</p>
+                    <p class="text-[22px] md:text-[40px] font-bold leading-loose">
+                        <i class="fa-solid fa-school fa-xs mr-2"></i>{{institution.name}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></p>
                     <p class="text-[20px] md:text-[32px] leading-loose">
-                        <span>tel.: 1234-5678 </span>
-                        <span>escuela.10@email.com</span><i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-location-dot fa-2xs mr-2"></i>{{institution.locality}}, {{institution.province}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></p>
+                    <p class="text-[20px] md:text-[32px] leading-loose">
+                        <span class="mr-3"><i class="fa-solid fa-phone fa-2xs mr-2"></i>tel.: {{institution.numberphone}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></span>
+                        <span>{{institution.email}}<i class="fa-solid fa-pen fa-2xs mx-2"></i></span>
                           
                     </p>
                 </div>
