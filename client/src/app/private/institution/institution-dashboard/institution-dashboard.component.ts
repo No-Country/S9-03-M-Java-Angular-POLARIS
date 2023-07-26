@@ -15,13 +15,16 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./institution-dashboard.component.css']
 })
 export class InstitutionDashboardComponent {
-
+imageUrl: string | null = null;
 editState: Boolean = false
 instData: any | null = null;
 institution: any;
 dataToken: any;
 
-constructor(private authService: AuthService, private userService: UserService, private institutionService: InstitutionService){}
+constructor(
+  private authService: AuthService, 
+  private userService: UserService, 
+  private institutionService: InstitutionService){}
 
 ngOnInit():void{
 this.getInstitutionData();
@@ -58,14 +61,13 @@ editInstitution(){
     name: this.institution.name,
     cuit: this.institution.cuit,//
     email: this.institution.email,
-    password: this.institution.password,//
+    password: "12345678",//
     province: this.institution.province,
     locality: this.institution.locality,
     type: this.institution.type,
     availability: this.institution.availability,
     numberphone: this.institution.numberphone,
-    imageProfile: this.institution.imageProfile,
-    rol: this.institution.rol//
+    imageProfile: this.institution.imageProfile
   };
   const token = localStorage.getItem('token');
   this.dataToken=token;
@@ -85,12 +87,21 @@ editInstitution(){
 this.editState = false;
 }
 
+onFileSelected(event: any): void {
+  const file = event.target.files[0];
+  if (file) {
+    // Crea un objeto URL para mostrar la imagen seleccionada
+    this.imageUrl = URL.createObjectURL(file);
+  }
+}
 
 
 editar(){
   this.editState = true;
 }
-
+cancelEdit(){
+  this.editState = false;
+}
 
 
 }
