@@ -52,7 +52,7 @@
             <div class="col-span-4">
                 <div>
                     <!-- Row de datos personales -->
-                    <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal">
+                    <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal()">
                         <h1 class="text-3xl	my-10 text-center">Datos personales</h1>
                         <div
                             class="container new p-10 grid md:px-20 grid-cols-1 xl:gap-x-10 xl:grid-cols-2 grid-rows-6 xl:grid-rows-4 mr-4">
@@ -81,10 +81,10 @@
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
                                     <input type="email" placeholder="+54 - 11-3485 - 6274"
-                                        class="w-full rounded inputs-correo">
+                                        class="w-full rounded inputs-correo" formControlName="phone">
                                 </div>
                             </div>
-                            <button type="button" class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn">Guardar</button>
+                            <button type="button" class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn" (click)="SendPersonal()">Guardar</button>
                         </div>
 
 
