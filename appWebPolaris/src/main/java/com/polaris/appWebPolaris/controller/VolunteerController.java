@@ -2,6 +2,7 @@ package com.polaris.appWebPolaris.controller;
 
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
+import com.polaris.appWebPolaris.enums.SkillsEnum;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class VolunteerController {
         return ResponseEntity.ok(iVolunteerUseCase.getAll());
     }
 
+    @GetMapping(path = "/getAllBySkillList/{skillsEnum}")
+    @PreAuthorize("hasRole('VOLUNTEER')")
+    public ResponseEntity<List<VolunteerDto>>  getAllBySkillList(@PathVariable SkillsEnum skillsEnum){
+        return ResponseEntity.ok(iVolunteerUseCase.getAllBySkillList(skillsEnum));
+    }
     @GetMapping(path = "/getById/{id}")
     @PreAuthorize("hasRole('VOLUNTEER')")
     public ResponseEntity<?> getVolunteerById(@PathVariable Long id) {

@@ -2,13 +2,16 @@ package com.polaris.appWebPolaris.persistance.repository;
 
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.repository.IVolunteerRepository;
+import com.polaris.appWebPolaris.enums.SkillsEnum;
 import com.polaris.appWebPolaris.persistance.crud.IVolunteerCrudRepository;
 import com.polaris.appWebPolaris.persistance.mapper.IVolunteerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Repository
@@ -20,6 +23,15 @@ public class VolunteerRepository implements IVolunteerRepository {
     @Override
     public List<VolunteerDto> getAll() {
         return iVolunteerMapper.toVolunteersDto(iVolunteerCrudRepository.findAll());
+    }
+
+    @Override
+    public List<VolunteerDto> getAllBySkillList(SkillsEnum skillsEnum) {
+        List<VolunteerDto> volunteerDtoList = getAll();
+        List<VolunteerDto> volunteerDtoListFilter = volunteerDtoList.stream()
+                .filter(volunteer -> volunteer.getSkillList().contains(skillsEnum))
+                .collect(Collectors.toList());
+        return volunteerDtoListFilter;
     }
 
     @Override

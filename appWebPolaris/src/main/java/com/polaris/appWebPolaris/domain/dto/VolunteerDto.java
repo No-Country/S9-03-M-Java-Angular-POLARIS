@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,7 @@ public class VolunteerDto {
     private String availability;
     private String imageProfile;
     private String otherSkills;
-    private List<SkillsEnum> skillList;
+    private List<SkillsEnum> skillList = new ArrayList<>();
     private List<ReviewDto> reviewList;
 
     private String rol;

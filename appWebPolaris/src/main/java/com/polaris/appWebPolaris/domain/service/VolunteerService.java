@@ -4,6 +4,7 @@ import com.polaris.appWebPolaris.domain.dto.ResponseMessageDto;
 import com.polaris.appWebPolaris.domain.dto.VolunteerDto;
 import com.polaris.appWebPolaris.domain.repository.IVolunteerRepository;
 import com.polaris.appWebPolaris.domain.useCase.IVolunteerUseCase;
+import com.polaris.appWebPolaris.enums.SkillsEnum;
 import com.polaris.appWebPolaris.exception.CustomerExistsException;
 import com.polaris.appWebPolaris.exception.EmailValidationException;
 import com.polaris.appWebPolaris.security.Roles;
@@ -41,6 +42,11 @@ public class VolunteerService implements IVolunteerUseCase {
     @Override
     public Optional<VolunteerDto> getVolunteerByEmail(String email) {
         return iVolunteerRepository.getVolunteerByEmail(email);
+    }
+
+    @Override
+    public List<VolunteerDto> getAllBySkillList(SkillsEnum skillsEnum){
+        return iVolunteerRepository.getAllBySkillList(skillsEnum);
     }
 
     @Override
