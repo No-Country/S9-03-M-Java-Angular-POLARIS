@@ -3,7 +3,7 @@
     <div class="container mx-auto">
         <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal()" class="grid lg:grid-cols-6 lg:gap-10 mx-10">
             <div class="col-span-2">
-                <div class="grid grid-rows-5 items-center p-4">
+                <div class="grid grid-rows-3 items-center p-4">
                     <div class="user-image-container relative"
                         style="display: flex; align-items: center; justify-content: center;">
                         <div class="image-container relative">
@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="row-span-2">
-                        <!-- Contenedor del contenido de las instituciones -->
+                        <h1 class="text-3xl	mb-10 text-center mt-4">Instituciones Registradas:</h1>
                         <div class="container new p-10 grid-rows-3 px-5 gap-5">
                           <!-- Utilizando *ngFor para mostrar solo los elementos entre startIndex y endIndex -->
                           <div *ngFor="let institution of Institution.slice(startIndex, endIndex + 1)" class="container text-center new p-5 px-5 mb-5 gap-x-20">
