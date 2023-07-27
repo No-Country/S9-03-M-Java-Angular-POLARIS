@@ -207,6 +207,7 @@ export class DashboardVolunteerComponent implements OnInit {
       numberCellphone: this.user.numberCellphone,
       description: this.user.description,
       avatar: this.user.avatar,
+      otherSkills: this.user.skillList,
       imageProfile: this.user.imageProfile,
       skillList: this.user.skillList
     };
