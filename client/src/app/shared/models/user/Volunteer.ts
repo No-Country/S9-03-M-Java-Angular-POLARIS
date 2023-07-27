@@ -1,4 +1,7 @@
+import { Call } from "@angular/compiler";
+
 export class Volunteer{
+    id!: Number;
     firstName!: String ;
     lastName!: String ;
     email?: String ;
@@ -8,10 +11,17 @@ export class Volunteer{
     gender?: String ;
     province!: String ;
     locality!: String ;
-    occupation!: String ;
+    availability!: String ;
     numberCellphone!: String ;
+    avatar!: String ;
+    description!: String;
     imageProfile!: String ;
-    skillList?:[];
+    skillList?:any[];
+    reviewList?:any[];
+}
+
+export class ParaDash{
+    skillList?:string[]
 }
 
 
