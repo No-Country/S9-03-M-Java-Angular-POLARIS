@@ -201,7 +201,6 @@ export class DashboardVolunteerComponent implements OnInit {
       lastName: this.user.lastName,
       email: this.user.email,//
       dni: this.user.dni,
-      dateOfBirth: this.user.dateOfBirth,
       province: this.user.province,
       locality: this.user.locality,
       availability: this.user.availability,
