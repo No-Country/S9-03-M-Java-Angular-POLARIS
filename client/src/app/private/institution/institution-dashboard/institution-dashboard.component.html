@@ -17,7 +17,7 @@
                 <div class="basis-3/5 m-auto max-sm:text-center">
                     <div class="text-[22px] md:text-[40px] font-bold leading-loose">
                         <p [hidden]="editState" >
-                            <i class="fa-solid fa-school fa-xs mr-2"></i>{{institution.name}} <button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></p>
+                            <i class="fa-solid fa-school fa-xs mr-2"></i>{{institution.name + 'test'}} <button (click)="editar()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button></p>
                      
                             <input [hidden]="!editState" type="text" class="border-b-2 form-control bg-transparent" id="institutionName" name="institutionName"
                             [(ngModel)]="institution.name" required>

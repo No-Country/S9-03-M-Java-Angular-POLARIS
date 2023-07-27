@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { VolunteerFilterService } from 'src/app/shared/services/volunteer-filter.service';
@@ -15,6 +16,7 @@ export class DashboardVolunteerComponent implements OnInit {
   imageUrl: string | null = null;
   userData: any | null = null; // Variable para almacenar el nombre de usuario
   user: any;
+  edit: Boolean = false;
   dataToken: any;
   agregaDesc: string = "Añade una descripcion";
   PersonalData: FormGroup;
@@ -79,20 +81,56 @@ export class DashboardVolunteerComponent implements OnInit {
     });
   }
 
+  mix(){
+    this.CancelEdit();
+    this.SendPersonal();
+  }
   SendPersonal() {
-    console.log(this.PersonalData.value)
-    const datos = this.PersonalData.value
+    const datos: Volunteer = {
+      id: this.userData.id,
+      firstName: this.userData.firstName,
+      lastName: this.userData.lastName,
+      email: this.userData.email,
+      password: this.userData.password,//
+      dni: this.userData.dni,
+      dateOfBirth: this.userData.dateOfBirth,
+      province: this.userData.province,
+      locality: this.userData.locality,
+      occupation: this.userData.occupation,
+      numberCellphone: this.userData.numberCellphone,
+      description: this.userData.description,
+      avatar: this.userData.avatar,
+      imageProfile: this.userData.imageProfile,
+      skillList: this.userData.skillList
+    };
     const token = localStorage.getItem('token');
     if (token) {
       const newURL = (`${this.apiURL}/volunteers/update`);
-      this.SVolunteer.upadateVolunteer(datos,token).subscribe(
-        (res) => {
+      this.SVolunteer.upadateVolunteer(this.PersonalData.value,token).subscribe(
+        res => {
           console.log(res);
         }, (error) => {
           console.log(error);
         }
       );
     }
+  }
+  
+
+  ActiveEdit(){
+    const input = document.getElementById('email') as HTMLInputElement;
+    input.disabled = false;
+    this.edit = true
+    console.log(this.edit);
+    
+  }
+
+  CancelEdit(){
+    const input = document.getElementById('email') as HTMLInputElement;
+    input.disabled = true;
+    this.edit = false;
+    console.log('test');
+    
   }
 
 }

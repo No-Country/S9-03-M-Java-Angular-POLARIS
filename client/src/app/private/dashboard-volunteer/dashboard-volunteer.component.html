@@ -65,7 +65,7 @@
 
                                 <i class="fa-solid fa-envelope text-3xl mx-2 inline-block"></i>
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" [value]="user.email" placeholder="ejemplo@ejemplo.com"
+                                    <input type="email" id="email" [value]="user.email" placeholder="ejemplo@ejemplo.com"
                                         class="w-full rounded inputs-correo border-none" disabled>
                                 </div>
                             </div>
@@ -80,11 +80,12 @@
                             </div>
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" placeholder="Ej: +54 - 11-3485 - 6274"
-                                        class="w-full rounded inputs-correo outline-none focus:outline-none" [value]="user.numberCellphone" formControlName="numberCellphone">
+                                    <input [disabled]="true" type="email" id="email" placeholder="Ej: +54 - 11-3485 - 6274"
+                                        class="w-full rounded inputs-correo outline-none focus:outline-none" [(ngModel)]="user.numberCellphone" formControlName="numberCellphone">
                                 </div>
                             </div>
-                            <button type="button" class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn" (click)="SendPersonal()">Guardar</button>
+                            <button [hidden]="edit" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="ActiveEdit()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button>
+                            <button [hidden]="!edit" type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
                         </div>
 
 
