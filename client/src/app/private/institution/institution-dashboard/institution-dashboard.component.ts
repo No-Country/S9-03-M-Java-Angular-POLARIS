@@ -2,9 +2,11 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn  } from '@angular/forms';
 import { CountryFormatServiceService } from 'src/app/public/landing-page/services/country-format-service.service';
 import { Institution } from 'src/app/shared/models/user/Institution';
+import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { InstitutionService } from 'src/app/shared/services/institution.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { VolunteerFilterService } from 'src/app/shared/services/volunteer-filter.service';
 
 
 
@@ -21,15 +23,37 @@ instData: any | null = null;
 institution: any;
 dataToken: any;
 
+public voluntaries: Volunteer[] =[];
+
 constructor(
   private authService: AuthService, 
   private userService: UserService, 
-  private institutionService: InstitutionService){}
+  private institutionService: InstitutionService,
+  private volunteerFilterService: VolunteerFilterService,
+  ){
+   
+  }
 
 ngOnInit():void{
 this.getInstitutionData();
 }
 
+applyFilter(selectedSkill: string) {
+  
+  console.log('Selected Skill:', selectedSkill); 
+  const token = localStorage.getItem('token');
+  this.dataToken=token;
+  // Llama al servicio para obtener los voluntarios filtrados por la skill seleccionada
+  if(token){
+    this.volunteerFilterService.filterVolunterSkill(selectedSkill, token).subscribe(
+    (response: any) => {
+      this.voluntaries = response; // Actualiza la lista de voluntarios con los datos filtrados
+    },
+    (error: any) => {
+      console.error('Error al obtener voluntarios filtrados:', error);
+    }
+  )};
+}
 
 getInstitutionData(){
   const instDataRaw= this.authService.getUsernameFromToken() ;
@@ -61,7 +85,6 @@ editInstitution(){
     name: this.institution.name,
     cuit: this.institution.cuit,//
     email: this.institution.email,
-    password: "12345678",//
     province: this.institution.province,
     locality: this.institution.locality,
     type: this.institution.type,

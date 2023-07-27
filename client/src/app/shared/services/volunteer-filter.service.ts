@@ -11,13 +11,16 @@ type SkillKey = keyof typeof Skill;
   providedIn: 'root'
 })
 export class VolunteerFilterService {
-  constructor(private http: HttpClient) { }
-  private apiUrl = environment.apiURL;
-  private selectedSkillsSubject: BehaviorSubject<SkillKey[]> = new BehaviorSubject<SkillKey[]>([]);
-  selectedSkills$: Observable<SkillKey[]> = this.selectedSkillsSubject.asObservable();
+  private url='https://polaris-backend.onrender.com/volunteers/'
 
-  setSelectedSkills(skills: SkillKey[]): void {
-    this.selectedSkillsSubject.next(skills);
+  constructor(private http: HttpClient) { }
+
+  filterVolunterSkill(skill: string ,authToken: string){
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    return this.http.get(this.url + `getAllBySkillList/${skill}`, { headers });
   }
 
   upadateVolunteer(user: Volunteer, authToken:string){
@@ -29,3 +32,4 @@ export class VolunteerFilterService {
 
   }
 }
+

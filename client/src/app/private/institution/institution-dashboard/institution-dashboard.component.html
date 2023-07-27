@@ -66,19 +66,20 @@
                 
                 <div>
                     <div class="bg-gray-50 my-2 m-auto md:mx-24 h-8 w-64 px-5 pt-1 rounded-full text-sm focus:outline-none">
-                        <mat-select formControlName="skillsHobbies" placeholder="Habilidades o pasatiempos" class="w-full focus:border-transparent outline-none custom-input">
-                          <mat-option value="opcion1">Taller de arte</mat-option>
-                          <mat-option value="opcion2">Taller de lectura</mat-option>
-                          <mat-option value="opcion3">Lenguaje de Señas</mat-option>
-                          <mat-option value="opcion4">Yoga y meditación</mat-option>
-                          <mat-option value="opcion5">Deportes</mat-option>
-                          <mat-option value="opcion6">Idiomas</mat-option>
-                        
-                        </mat-select>
+                      <mat-select formControlName="skillsHobbies" (selectionChange)="applyFilter($event.value)" placeholder="Habilidades o pasatiempos" class="w-full focus:border-transparent outline-none custom-input">
+                        <mat-option value="TALLER_DE_ARTE">Taller de arte</mat-option>
+                        <mat-option value="TALLER_DE_LECTURA">Taller de lectura</mat-option>
+                        <mat-option value="LENGUAJE_DE_SENAS">Lenguaje de Señas</mat-option>
+                        <mat-option value="YOGA_Y_MEDITACION">Yoga y meditación</mat-option>
+                        <mat-option value="DEPORTES">Deportes</mat-option>
+                        <mat-option value="IDIOMAS">Idiomas</mat-option>
+                        <mat-option value="OTROS">Otros</mat-option>
+                      </mat-select>
                     </div>
-                </div>
+                  </div>
+                  
               </div>
-              <app-volunteer-resume></app-volunteer-resume>
+              <app-volunteer-resume [voluntaries]="voluntaries"></app-volunteer-resume>
         </div>
     </div>
 </div>
