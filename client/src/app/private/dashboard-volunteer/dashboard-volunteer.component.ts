@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -16,9 +16,12 @@ import { environment } from 'src/enviroments/enviroment';
 export class DashboardVolunteerComponent implements OnInit {
   imageUrl: string | null = null;
   userData: any | null = null; // Variable para almacenar el nombre de usuario
-  user: any;
+  @Input() Institution: any[]=[];
+  user:any;
+  dataToken:any;
+  startIndex = 0;
+  endIndex = 2;
   edit: Boolean = false;
-  dataToken: any;
   agregaDesc: string = "Añade una descripcion";
   PersonalData: FormGroup;
 
@@ -84,6 +87,7 @@ export class DashboardVolunteerComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataUserVolunteer();
+    this.institutionList();
   }
 
   isSkillSelected(skill: string): boolean {
@@ -157,6 +161,26 @@ export class DashboardVolunteerComponent implements OnInit {
         console.error('Error al obtener el usuario:', error);
       }
     });
+  }
+  institutionList():void{
+    const token = localStorage.getItem('token');
+    this.dataToken=token;
+    this.userService.getInstutionAll(this.dataToken).subscribe(data => { this.Institution = data })
+  }
+
+  // Funciones para navegar entre los elementos
+  showNextThree() {
+    if (this.endIndex + 3 < this.Institution.length) {
+      this.startIndex += 3;
+      this.endIndex += 3;
+    }
+  }
+
+  showPreviousThree() {
+    if (this.startIndex - 3 >= 0) {
+      this.startIndex -= 3;
+      this.endIndex -= 3;
+    }
   }
 
   

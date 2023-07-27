@@ -30,23 +30,22 @@
 
                     </div>
                     <div class="row-span-2">
-                        <h1 class="text-3xl	mb-10 text-center">Instituciones registradas:</h1>
+                        <!-- Contenedor del contenido de las instituciones -->
                         <div class="container new p-10 grid-rows-3 px-5 gap-5">
-                            <div class="container text-center new p-5 px-5 mb-5">
-                                <p class="">Escuela Especial Distrital N*14</p>
-                                <p class="">Barrio San Jose , Caba</p>
+                          <!-- Utilizando *ngFor para mostrar solo los elementos entre startIndex y endIndex -->
+                          <div *ngFor="let institution of Institution.slice(startIndex, endIndex + 1)" class="container text-center new p-5 px-5 mb-5 gap-x-20">
+                            <p class="">{{ institution.name }}</p>
+                            <p>{{ institution.province }}, {{ institution.locality }}</p>
+                          </div>
+                          <div class="grid grid-cols-2">
+                            <div class="container text-center p-5">
+                                <i class="fas fa-chevron-left" (click)="showPreviousThree()"></i>
                             </div>
-                            <div class="container text-center new p-5 px-5 mb-5 gap-x-20">
-                                <p class="">Taller de Artes Comunal N*20
-                                    </p>
-                                <p class="">Uspallata 2032  , Retiro</p>
+                            <div class="container text-center p-5">
+                                <i class="fas fa-chevron-right" (click)="showNextThree()"></i>
                             </div>
-                            <div class="container text-center new p-5 px-5 gap-x-20">
-                                <p class="">Centro de Rehabilitacion Estrella</p>
-                                <p class="">Paseo Colon, San Miguel</p>
-                            </div>
+                          </div>
                         </div>
-
                     </div>
                 </div>
             </div>
