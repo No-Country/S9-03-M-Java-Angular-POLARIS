@@ -59,4 +59,18 @@ export class UserService {
       })
       );
   }
+
+  getInstutionAll(authToken: string):Observable<any[]>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const url = 'https://polaris-backend.onrender.com/institutions/getAll';
+
+    return this.http.get<any[]>(url,{headers}).pipe(
+      catchError((error) => {
+        console.error('Error al obtener el listado de voluntarios:', error);
+        throw error;
+      })
+      );
+  }
 }

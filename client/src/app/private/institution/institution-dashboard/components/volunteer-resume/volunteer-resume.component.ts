@@ -13,6 +13,7 @@ type SkillKey = keyof typeof Skill;
 })
 export class VolunteerResumeComponent {
   @Input() voluntaries: Volunteer[]=[];
+  @Input() Institution: any[]=[];
   dataToken: any
   voluntarieSkills: Skill[]=[];
 
@@ -20,6 +21,7 @@ export class VolunteerResumeComponent {
 
   ngOnInit(): void {
     this.volunteerList();
+    this.institutionList();
   }
 
 
@@ -34,5 +36,14 @@ export class VolunteerResumeComponent {
       return [];
     }
     return skills.map(skill => Skill[skill] || skill);
+  }
+  institutionList():void{
+    console.log('gaaa')
+    const token = localStorage.getItem('token');
+    this.dataToken=token;
+    this.userService.getInstutionAll(this.dataToken).subscribe(data => {
+      this.Institution = data;
+      console.log('feriado',data);
+    });
   }
 }

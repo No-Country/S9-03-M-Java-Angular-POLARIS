@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -10,13 +10,17 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class DashboardVolunteerComponent implements OnInit {
   imageUrl: string | null = null;
   userData: any | null = null; // Variable para almacenar el nombre de usuario
+  @Input() Institution: any[]=[];
   user:any;
   dataToken:any;
-
+  startIndex = 0;
+  endIndex = 2;
+  
   constructor(private authService: AuthService,private userService: UserService) { }
 
   ngOnInit():void{
     this.dataUserVolunteer();
+    this.institutionList();
   }
   
   onFileSelected(event: any): void {
@@ -41,5 +45,25 @@ export class DashboardVolunteerComponent implements OnInit {
         console.error('Error al obtener el usuario:', error);
       }
     });
+  }
+  institutionList():void{
+    const token = localStorage.getItem('token');
+    this.dataToken=token;
+    this.userService.getInstutionAll(this.dataToken).subscribe(data => { this.Institution = data })
+  }
+
+  // Funciones para navegar entre los elementos
+  showNextThree() {
+    if (this.endIndex + 3 < this.Institution.length) {
+      this.startIndex += 3;
+      this.endIndex += 3;
+    }
+  }
+
+  showPreviousThree() {
+    if (this.startIndex - 3 >= 0) {
+      this.startIndex -= 3;
+      this.endIndex -= 3;
+    }
   }
 }
