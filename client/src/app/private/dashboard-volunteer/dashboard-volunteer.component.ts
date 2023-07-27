@@ -26,10 +26,10 @@ export class DashboardVolunteerComponent implements OnInit {
   private apiURL = environment.apiURL; //Url
 
 
-  userId?: number = 27;
+  userId?: number;
   // Skills
 
-  selectedSkills: string[] = []; // Para mantener las habilidades seleccionadas
+  selectedSkills: any[] = []; // Para mantener las habilidades seleccionadas
   availableSkills: string[] = [
     'Taller de Arte',
     'Lenguaje de Señas',
@@ -38,7 +38,9 @@ export class DashboardVolunteerComponent implements OnInit {
     'Yoga y Meditación',
     'Idiomas',]
 
-  /* PersonalData Personal Data */
+  userSkills?:string;
+
+  /* PersonalData Form */
 
   userPhone?: string;
   userEducation?: string;
@@ -85,16 +87,16 @@ export class DashboardVolunteerComponent implements OnInit {
   }
 
   isSkillSelected(skill: string): boolean {
-    console.log(this.selectedSkills.includes(skill));
     
-    return this.selectedSkills.includes(skill);
+    
+    return this.user.skillList.includes(this.Conversor(skill));
   }
   
   onSkillCheckboxChange(skill: string, event: any) {
     if (event.target.checked) {
       if (!this.selectedSkills.includes(skill)) {
-        this.selectedSkills.push(skill);
-        console.log(this.selectedSkills);
+        this.user.skillList.push(skill);
+        console.log(this.user.skillList);
         
       }
     } else {
@@ -105,7 +107,25 @@ export class DashboardVolunteerComponent implements OnInit {
     }
   }
 
+  Conversor(skill:string){
+    switch (skill) {
+      case 'Taller de Arte':
+        return 'TALLER_DE_ARTE';
+      case 'Lenguaje de Señas':
+        return 'LENGUAJE_DE_SEÑAS';
+      case 'Deportes':
+        return 'DEPORTES';
+      case 'Taller de Lectura':
+        return 'TALLER_DE_LECTURA';
+      case 'Yoga y Meditación':
+        return 'YOGA_Y_MEDITACION';
+      case 'Idiomas':
+        return 'IDIOMAS';
 
+        default:
+          return '';
+    }
+  }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -126,6 +146,9 @@ export class DashboardVolunteerComponent implements OnInit {
       next: (userData) => {
         this.user = userData;
         this.userId = this.user.id;
+        
+        console.log(this.selectedSkills);
+        
         console.log(this.user.numberCellphone + 'hola')
       },
       error: (error) => {
@@ -133,6 +156,8 @@ export class DashboardVolunteerComponent implements OnInit {
       }
     });
   }
+
+  
 
   mix() {
     this.CancelEdit();

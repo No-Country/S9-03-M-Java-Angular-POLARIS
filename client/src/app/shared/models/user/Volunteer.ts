@@ -1,3 +1,5 @@
+import { Call } from "@angular/compiler";
+
 export class Volunteer{
     id!: Number;
     firstName!: String ;
@@ -14,7 +16,12 @@ export class Volunteer{
     avatar!: String ;
     description!: String;
     imageProfile!: String ;
-    skillList?:[];
+    skillList?:any[];
+    reviewList?:any[];
+}
+
+export class ParaDash{
+    skillList?:string[]
 }
 
 
