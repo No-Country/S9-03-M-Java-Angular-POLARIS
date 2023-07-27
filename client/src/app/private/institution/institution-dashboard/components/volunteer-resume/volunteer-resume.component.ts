@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Skill } from 'src/app/shared/enums/skill-enum';
@@ -12,8 +12,7 @@ type SkillKey = keyof typeof Skill;
   styleUrls: ['./volunteer-resume.component.css']
 })
 export class VolunteerResumeComponent {
-
-  voluntaries: Volunteer[]=[];
+  @Input() voluntaries: Volunteer[]=[];
   dataToken: any
   voluntarieSkills: Skill[]=[];
 
