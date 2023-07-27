@@ -22,7 +22,7 @@ export class DashboardVolunteerComponent implements OnInit {
   agregaDesc: string = "Añade una descripcion";
   PersonalData: FormGroup;
 
-
+  OtrosSkill:string = 'Otros';
   private apiURL = environment.apiURL; //Url
 
 
@@ -121,6 +121,8 @@ export class DashboardVolunteerComponent implements OnInit {
         return 'YOGA_Y_MEDITACION';
       case 'Idiomas':
         return 'IDIOMAS';
+      case 'Otros':
+        return 'OTROS'
 
         default:
           return '';

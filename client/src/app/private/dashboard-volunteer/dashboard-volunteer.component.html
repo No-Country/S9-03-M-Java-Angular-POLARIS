@@ -37,12 +37,13 @@
                                 <p class="">Barrio San Jose , Caba</p>
                             </div>
                             <div class="container text-center new p-5 px-5 mb-5 gap-x-20">
-                                <p class="">Escuela Especial Distrital N*14</p>
-                                <p class="">Barrio San Jose , Caba</p>
+                                <p class="">Taller de Artes Comunal N*20
+                                    </p>
+                                <p class="">Uspallata 2032  , Retiro</p>
                             </div>
                             <div class="container text-center new p-5 px-5 gap-x-20">
-                                <p class="">Escuela Especial Distrital N*14</p>
-                                <p class="">Barrio San Jose , Caba</p>
+                                <p class="">Centro de Rehabilitacion Estrella</p>
+                                <p class="">Paseo Colon, San Miguel</p>
                             </div>
                         </div>
 
@@ -70,22 +71,25 @@
                                 </div>
                             </div>
                             <div class="col-span-1 row-start-3 flex items-center">
+                                <i class="fa-solid fa-location-dot text-3xl mx-2 inline-block"></i>
                                 <div class="inputs-vol rounded w-full bg-white p-2">
                                     <input type="email" placeholder="Capital Federal, Argentina"
                                         class="w-full rounded inputs-correo" [value]="user.locality + ', ' + user.province" disabled>
                                 </div>
                             </div>
+                            
                             <div class="col-span-1 xl:row-start-1 xl:col-start-2 row-start-4 flex items-center">
+                                <i class="fa-solid fa-calendar-days text-3xl mx-2 inline-block"></i>
                                 <input type="date" class="bg-transparent">
                             </div>
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
+                                <i class="fa-solid fa-phone text-3xl mx-2 inline-block"></i>
                                 <div class="inputs-vol rounded w-full bg-white p-2">
                                     <input type="email" id="email" placeholder="Ej: +54 - 11-3485 - 6274"
                                         class="w-full rounded inputs-correo outline-none focus:outline-none" [(ngModel)]="user.numberCellphone" formControlName="numberCellphone">
                                 </div>
                             </div>
-                            <button [hidden]="edit" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="ActiveEdit()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button>
-                            <button [hidden]="!edit" type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
+                            <button type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
                         </div>
 
 
@@ -127,20 +131,25 @@
                                   [checked]="isSkillSelected(skill)"
                                   (change)="onSkillCheckboxChange(Conversor(skill), $event)"
                                 />
-                                <p class="text-2xl ml-2 my-0">{{ skill }}</p>
+                                <p class="text-2xl ml-2 my-0">{{ skill }} hola</p>
                               </div>
                             <div class="flex items-center text-right">
                                 <div class="espaciado ml-auto flex items-center text-right text-2xl">
                                     <p class="text-2xl">
                                         Otros
                                     </p>
-                                    <input type="checkbox" placeholder="" class="ml-3 rounded w-7 h-7 inputs-correo">
+                                    <input
+                                  type="checkbox"
+                                  class="rounded w-7 h-7 inputs-correo"
+                                  [checked]="isSkillSelected(OtrosSkill)"
+                                  (change)="onSkillCheckboxChange(Conversor(OtrosSkill), $event)"
+                                />
                                 </div>
                             </div>
                             <div class="col-span-2">
 
                                 <div class="inputs-vol rounded w-full bg-white p-2 espaciado">
-                                    <input type="email" placeholder="ejemplo@ejemplo.com"
+                                    <input type="email" placeholder=""
                                         class="w-full rounded inputs-correo">
                                 </div>
                             </div>
@@ -153,20 +162,9 @@
                     <!-- Row de Reseñas -->
                     <div>
                         <h1 class="text-3xl	my-10 text-center">Reseñas</h1>
-                        <div class="container new p-5 px-10 grid grid-rows-3 gap-4 grid-cols-3 gap-x-5">
-                            <div class="row-span-3 text-center  ">
-                                <div class="flex items-center">
-                                    <img src="../../../assets/img/userDashboard/Ellipse 15.png" class="w-100"
-                                        style="height: 20%!important;" alt="">
-                                </div>
-                            </div>
-                            <div class="col-span-1 text-2xl ">Javier Molina</div>
-                            <div class="col-span-1 col-start-2 row-start-2">{{ user.reviewList[0].comment }}</div>
-                            <div class="col-span-1 col-start-2 row-start-3">Parque Patricios Caba</div>
-                            <div class="row-span-2 col-start-3 row-start-1">{{ user.reviewList[0].comment }}</div>
-                            <div class="col-span-1 col-start-3 row-start-3">
-                                <div class="container new">+54-11-3497 -5562</div>
-                            </div>
+                        <div class="container new p-5 px-10 grid grid-rows-2 gap-4 grid-cols-3 gap-x-5">
+                            <div class="col-span-3 col-start-1 text-center row-start-1 text-2xl ">Centro de Rehabilitacion Estrella</div>
+                            <div class="col-span-3 row-start-2">Emiliano resultó altamente recomendado por su dedicación y habilidades excepcionales en el cuidado de personas con discapacidad.</div>
                         </div>
 
 
