@@ -36,7 +36,6 @@ export class DashboardVolunteerComponent implements OnInit {
     this.userService.getUserById(Id, this.dataToken).subscribe({
       next: (userData) => {
         this.user = userData;
-        console.log("joseeeee")
       },
       error: (error) => {
         console.error('Error al obtener el usuario:', error);
