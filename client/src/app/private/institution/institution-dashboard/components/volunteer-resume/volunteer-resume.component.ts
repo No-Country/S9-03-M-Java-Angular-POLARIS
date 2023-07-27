@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Volunteer } from 'src/app/shared/models/user/Volunteer';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Skill } from 'src/app/shared/enums/skill-enum';
+
+
+type SkillKey = keyof typeof Skill;
 
 @Component({
   selector: 'app-volunteer-resume',
@@ -8,9 +12,9 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./volunteer-resume.component.css']
 })
 export class VolunteerResumeComponent {
-
-  voluntaries: Volunteer[]=[];
+  @Input() voluntaries: Volunteer[]=[];
   dataToken: any
+  voluntarieSkills: Skill[]=[];
 
   constructor(private userService: UserService){}
 
@@ -25,4 +29,10 @@ export class VolunteerResumeComponent {
     this.userService.getAllVoluntaries(this.dataToken).subscribe(data => { this.voluntaries = data });
   }
 
+  mapSkillsToEnum(skills?: SkillKey[]): string[] {
+    if (!skills) {
+      return [];
+    }
+    return skills.map(skill => Skill[skill] || skill);
+  }
 }

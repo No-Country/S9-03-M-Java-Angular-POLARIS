@@ -54,7 +54,6 @@ export class UserService {
 
     return this.http.get<Volunteer[]>(url,{headers}).pipe(
       catchError((error) => {
-        // Aquí puedes manejar errores, si lo deseas.
         console.error('Error al obtener el listado de voluntarios:', error);
         throw error;
       })
