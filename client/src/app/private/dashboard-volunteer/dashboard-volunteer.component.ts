@@ -27,19 +27,36 @@ export class DashboardVolunteerComponent implements OnInit {
 
 
   userId?: number = 27;
+  // Skills
+
+  selectedSkills: string[] = []; // Para mantener las habilidades seleccionadas
+  availableSkills: string[] = [
+    'Taller de Arte',
+    'Lenguaje de Señas',
+    'Deportes',
+    'Taller de Lectura',
+    'Yoga y Meditación',
+    'Idiomas',]
+
   /* PersonalData Personal Data */
 
   userPhone?: string;
+  userEducation?: string;
+  userAvailability?: string;
+  userDescription?: string;
 
   constructor(
-    private SVolunteer: VolunteerFilterService, 
-    private authService: AuthService, 
-    private http: HttpClient, 
-    private formBuilder: FormBuilder, 
+    private SVolunteer: VolunteerFilterService,
+    private authService: AuthService,
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
     private userService: UserService) {
     this.PersonalData = this.formBuilder.group({
-      numberCellphone: [this.userPhone],
       id: [this.userId],
+      numberCellphone: [this.userPhone],
+      education: [this.userEducation],
+      availability: [this.userAvailability],
+      description: [this.userDescription]
     })
   }
 
@@ -47,13 +64,48 @@ export class DashboardVolunteerComponent implements OnInit {
     return this.PersonalData.get('phone');
   }
 
-  get id(){
+  get education() {
+    return this.PersonalData.get('education');
+  }
+
+  get availability() {
+    return this.PersonalData.get('availability');
+  }
+
+  get id() {
     return this.userId;
+  }
+
+  get description(){
+    return this.PersonalData.get('description');
   }
 
   ngOnInit(): void {
     this.dataUserVolunteer();
   }
+
+  isSkillSelected(skill: string): boolean {
+    console.log(this.selectedSkills.includes(skill));
+    
+    return this.selectedSkills.includes(skill);
+  }
+  
+  onSkillCheckboxChange(skill: string, event: any) {
+    if (event.target.checked) {
+      if (!this.selectedSkills.includes(skill)) {
+        this.selectedSkills.push(skill);
+        console.log(this.selectedSkills);
+        
+      }
+    } else {
+      const index = this.selectedSkills.indexOf(skill);
+      if (index !== -1) {
+        this.selectedSkills.splice(index, 1);
+      }
+    }
+  }
+
+
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -82,11 +134,16 @@ export class DashboardVolunteerComponent implements OnInit {
     });
   }
 
-  mix(){
+  mix() {
     this.CancelEdit();
     this.SendPersonal();
   }
   SendPersonal() {
+    const storedSelectedSkills = localStorage.getItem('selectedSkills');
+  if (storedSelectedSkills) {
+    this.selectedSkills = JSON.parse(storedSelectedSkills);
+  }
+
     const datos: Volunteer = {
       id: this.user.id,
       firstName: this.user.firstName,
@@ -96,7 +153,7 @@ export class DashboardVolunteerComponent implements OnInit {
       dateOfBirth: this.user.dateOfBirth,
       province: this.user.province,
       locality: this.user.locality,
-      occupation: this.user.occupation,
+      availability: this.user.availability,
       numberCellphone: this.user.numberCellphone,
       description: this.user.description,
       avatar: this.user.avatar,
@@ -106,7 +163,7 @@ export class DashboardVolunteerComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       const newURL = (`${this.apiURL}/volunteers/update`);
-      this.SVolunteer.upadateVolunteer(this.user,token).subscribe(
+      this.SVolunteer.upadateVolunteer(this.user, token).subscribe(
         res => {
           console.log(res);
         }, (error) => {
@@ -115,22 +172,22 @@ export class DashboardVolunteerComponent implements OnInit {
       );
     }
   }
-  
 
-  ActiveEdit(){
+
+  ActiveEdit() {
     const input = document.getElementById('email') as HTMLInputElement;
     input.disabled = false;
     this.edit = true
     console.log(this.edit);
-    
+
   }
 
-  CancelEdit(){
+  CancelEdit() {
     const input = document.getElementById('email') as HTMLInputElement;
     input.disabled = true;
     this.edit = false;
     console.log('test');
-    
+
   }
 
 }

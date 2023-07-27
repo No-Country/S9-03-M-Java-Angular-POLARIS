@@ -9,7 +9,7 @@ export class Volunteer{
     gender?: String ;
     province!: String ;
     locality!: String ;
-    occupation!: String ;
+    availability!: String ;
     numberCellphone!: String ;
     avatar!: String ;
     description!: String;

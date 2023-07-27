@@ -1,7 +1,7 @@
 <div style="background-size: cover; background-image: url(../../../assets/img/userDashboard/Rectangle.png); background-repeat: no-repeat;"
     class="text-white">
     <div class="container mx-auto">
-        <div class="grid lg:grid-cols-6 lg:gap-10 mx-10">
+        <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal()" class="grid lg:grid-cols-6 lg:gap-10 mx-10">
             <div class="col-span-2">
                 <div class="grid grid-rows-5 items-center p-4">
                     <div class="user-image-container relative"
@@ -25,7 +25,7 @@
                     <div class="row-span-2">
                         <h1 class="text-3xl	mb-10 text-center mt-4">Sobre ti:</h1>
                         <div class="container new p-10 px-5 gap-x-20">
-                            <input type="text" class="">
+                            <textarea [(ngModel)]="user.description" class="w-full bg-transparent text-2xl outline-none focus:outline-none rounded" formControlName="description" rows="6"></textarea>
                         </div>
 
                     </div>
@@ -52,7 +52,7 @@
             <div class="col-span-4">
                 <div>
                     <!-- Row de datos personales -->
-                    <form [formGroup]="PersonalData" (ngSubmit)="SendPersonal()">
+                    <div>
                         <h1 class="text-3xl	my-10 text-center">Datos personales</h1>
                         <div
                             class="container new p-10 grid md:px-20 grid-cols-1 xl:gap-x-10 xl:grid-cols-2 grid-rows-6 xl:grid-rows-4 mr-4">
@@ -65,14 +65,14 @@
 
                                 <i class="fa-solid fa-envelope text-3xl mx-2 inline-block"></i>
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" id="email" [value]="user.email" placeholder="ejemplo@ejemplo.com"
+                                    <input type="email" id="no" [value]="user.email" placeholder="ejemplo@ejemplo.com"
                                         class="w-full rounded inputs-correo border-none" disabled>
                                 </div>
                             </div>
                             <div class="col-span-1 row-start-3 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
                                     <input type="email" placeholder="Capital Federal, Argentina"
-                                        class="w-full rounded inputs-correo" [value]="user.locality + ', ' + user.province">
+                                        class="w-full rounded inputs-correo" [value]="user.locality + ', ' + user.province" disabled>
                                 </div>
                             </div>
                             <div class="col-span-1 xl:row-start-1 xl:col-start-2 row-start-4 flex items-center">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-span-1 xl:row-start-2 row-start-5 flex items-center">
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input [disabled]="true" type="email" id="email" placeholder="Ej: +54 - 11-3485 - 6274"
+                                    <input type="email" id="email" placeholder="Ej: +54 - 11-3485 - 6274"
                                         class="w-full rounded inputs-correo outline-none focus:outline-none" [(ngModel)]="user.numberCellphone" formControlName="numberCellphone">
                                 </div>
                             </div>
@@ -89,11 +89,11 @@
                         </div>
 
 
-                    </form>
+                    </div>
                     <!-- Row de datos del voluntario -->
                     <div>
                         <h1 class="text-3xl	my-10 text-center">Datos de voluntario</h1>
-                        <div
+                        <div 
                             class="container new p-10 px-20 grid grid-rows-8 lg:grid-rows-6 gap-4 grid-cols-1 lg:grid-cols-3 gap-x-5">
                             <div class="flex items-center ml-auto text-right">
                                 <div class="text-2xl row-start-1">
@@ -103,8 +103,8 @@
                             <div class="lg:col-span-2 flex items-center">
 
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" placeholder="Ej.: Universidad Nacional Docente"
-                                        class="w-full rounded inputs-correo">
+                                    <input type="text" placeholder="Ej.: Universidad Nacional Docente"
+                                        class="w-full rounded inputs-correo" [(ngModel)]="user.education" formControlName="education">
                                 </div>
                             </div>
                             <div class="flex items-center text-right row-start-3 col-start-1 md:row-start-2">
@@ -115,47 +115,20 @@
                             <div class="lg:col-span-2 gap-x-4 flex items-center">
 
                                 <div class="inputs-vol rounded w-full bg-white p-2">
-                                    <input type="email" placeholder="Ej.: Mañana, Tarde"
-                                        class="w-full rounded inputs-correo">
+                                    <input type="text" placeholder="Ej.: Mañana, Tarde"
+                                        class="w-full rounded inputs-correo"  [(ngModel)]="user.availability" formControlName="availability">
                                 </div>
 
                             </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Taller de arte
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Lenguaje de señas
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Deportes
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Taller de lectura
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Yoga y meditacion
-                                </p>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" class="rounded w-7 h-7 inputs-correo">
-                                <p class="text-2xl ml-2 my-0">
-                                    Idiomas
-                                </p>
-                            </div>
+                            <div *ngFor="let skill of availableSkills" class="flex items-center">
+                                <input
+                                  type="checkbox"
+                                  class="rounded w-7 h-7 inputs-correo"
+                                  [checked]="isSkillSelected(skill)"
+                                  (change)="onSkillCheckboxChange(skill, $event)"
+                                />
+                                <p class="text-2xl ml-2 my-0">{{ skill }}</p>
+                              </div>
                             <div class="flex items-center text-right">
                                 <div class="espaciado ml-auto flex items-center text-right text-2xl">
                                     <p class="text-2xl">
@@ -172,8 +145,8 @@
                                 </div>
                             </div>
                             <div class="col-span-1 col-start-2">
-                                <button [hidden]="edit" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="ActiveEdit()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button>
-                            <button [hidden]="!edit" type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
+                                <!-- <button [hidden]="edit" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="ActiveEdit()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button> -->
+                            <button [hidden]="edit" type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -202,7 +175,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

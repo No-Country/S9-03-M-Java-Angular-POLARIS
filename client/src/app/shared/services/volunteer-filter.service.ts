@@ -14,7 +14,7 @@ export class VolunteerFilterService {
   private url='https://polaris-backend.onrender.com/volunteers/'
 
   constructor(private http: HttpClient) { }
-
+  private apiUrl = environment.apiURL;
   filterVolunterSkill(skill: string ,authToken: string){
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${authToken}`
