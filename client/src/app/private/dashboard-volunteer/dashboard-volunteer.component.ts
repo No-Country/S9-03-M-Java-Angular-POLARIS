@@ -7,6 +7,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { VolunteerFilterService } from 'src/app/shared/services/volunteer-filter.service';
 import { environment } from 'src/enviroments/enviroment';
 
+
 @Component({
   selector: 'app-dashboard-volunteer',
   templateUrl: './dashboard-volunteer.component.html',
@@ -87,26 +88,25 @@ export class DashboardVolunteerComponent implements OnInit {
   }
   SendPersonal() {
     const datos: Volunteer = {
-      id: this.userData.id,
-      firstName: this.userData.firstName,
-      lastName: this.userData.lastName,
-      email: this.userData.email,
-      password: this.userData.password,//
-      dni: this.userData.dni,
-      dateOfBirth: this.userData.dateOfBirth,
-      province: this.userData.province,
-      locality: this.userData.locality,
-      occupation: this.userData.occupation,
-      numberCellphone: this.userData.numberCellphone,
-      description: this.userData.description,
-      avatar: this.userData.avatar,
-      imageProfile: this.userData.imageProfile,
-      skillList: this.userData.skillList
+      id: this.user.id,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,//
+      dni: this.user.dni,
+      dateOfBirth: this.user.dateOfBirth,
+      province: this.user.province,
+      locality: this.user.locality,
+      occupation: this.user.occupation,
+      numberCellphone: this.user.numberCellphone,
+      description: this.user.description,
+      avatar: this.user.avatar,
+      imageProfile: this.user.imageProfile,
+      skillList: this.user.skillList
     };
     const token = localStorage.getItem('token');
     if (token) {
       const newURL = (`${this.apiURL}/volunteers/update`);
-      this.SVolunteer.upadateVolunteer(this.PersonalData.value,token).subscribe(
+      this.SVolunteer.upadateVolunteer(this.user,token).subscribe(
         res => {
           console.log(res);
         }, (error) => {
