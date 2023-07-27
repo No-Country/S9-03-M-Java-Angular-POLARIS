@@ -125,7 +125,7 @@
                                   type="checkbox"
                                   class="rounded w-7 h-7 inputs-correo"
                                   [checked]="isSkillSelected(skill)"
-                                  (change)="onSkillCheckboxChange(skill, $event)"
+                                  (change)="onSkillCheckboxChange(Conversor(skill), $event)"
                                 />
                                 <p class="text-2xl ml-2 my-0">{{ skill }}</p>
                               </div>
@@ -161,11 +161,9 @@
                                 </div>
                             </div>
                             <div class="col-span-1 text-2xl ">Javier Molina</div>
-                            <div class="col-span-1 col-start-2 row-start-2">Terapeuta Especializado</div>
+                            <div class="col-span-1 col-start-2 row-start-2">{{ user.reviewList[0].comment }}</div>
                             <div class="col-span-1 col-start-2 row-start-3">Parque Patricios Caba</div>
-                            <div class="row-span-2 col-start-3 row-start-1">Javier resultó altamente recomendado por su
-                                dedicación y habilidades excepcionales en el cuidado de personas con discapacidad
-                                visual."</div>
+                            <div class="row-span-2 col-start-3 row-start-1">{{ user.reviewList[0].comment }}</div>
                             <div class="col-span-1 col-start-3 row-start-3">
                                 <div class="container new">+54-11-3497 -5562</div>
                             </div>

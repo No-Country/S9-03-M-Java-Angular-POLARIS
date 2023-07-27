@@ -31,5 +31,10 @@ export class VolunteerFilterService {
     return this.http.patch(this.apiUrl + '/volunteers/update', user, { headers });
 
   }
+
+  getData(id:number){
+    const reURL ='https://polaris-backend.onrender.com/reviews/'
+    return this.http.get<any[]>(reURL + `${id}`);
+  }
 }
 
