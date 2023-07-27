@@ -172,8 +172,8 @@
                                 </div>
                             </div>
                             <div class="col-span-1 col-start-2">
-                                <button type="button"
-                                    class="text-center col-span-2 block m-auto rounded px-12 mt-5 py-3 btn">Guardar</button>
+                                <button [hidden]="edit" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="ActiveEdit()"><i class="fa-solid fa-pen fa-2xs mx-2"></i></button>
+                            <button [hidden]="!edit" type="button" class="text-center col-span-2 m-auto rounded px-12 mt-5 py-3 btn" (click)="mix()">Guardar</button>
                             </div>
                         </div>
                     </div>
