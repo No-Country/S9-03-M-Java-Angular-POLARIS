@@ -1,0 +1,16 @@
+<div *ngFor="let volunteer of voluntaries" 
+        class="border-4 p-5 border-[#FFFFFF] w-[400px] md:w-[920px] md:h-[260px] mx-auto md:mx-0 mt-12 rounded-[50px] md:flex md:flex-row">
+    <div class="m-auto">
+        <img class="text-center m-auto rounded-full w-28 h-28 md:w-40 md:h-40 border-2 border-slate-500" [src]="volunteer.imageProfile" alt="volunteer-avatar">
+    </div>
+
+    <div class="md:basis-1/4 md:text-[24px] text-center max-sm:border-b md:m-auto">
+        <p>{{volunteer.firstName}} {{volunteer.lastName}}</p>
+        <p>{{volunteer.availability}}</p>
+        <p>{{volunteer.locality}}, {{volunteer.province}}</p>
+    </div>
+    <div class="md:basis-2/4 text-[20px] md:text-[32px] text-center m-auto">
+        <p class="overflow-hidden">{{ mapSkillsToEnum(volunteer.skillList).join(', ') }}</p>
+        <div class="bg-[#D9D9D9] text-[#4F4F51] rounded-[50px] w-[140px] md:w-[230px] mt-2 md:mt-8 mx-auto text-[16px] md:text-[26px] "><i class="fa-solid fa-phone fa-2xs mr-2"></i>{{volunteer.numberCellphone}}</div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<nav class="sticky z-30" style="background-color: #ffffff;" *ngIf="showNavbar">
+    <div class="mx-auto max-w-7xl px-1 sm:px-6 lg:px-0">
+      <div class="relative flex h-28 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex items-center justify-center" (click)="inicio()" style="cursor: pointer;">
+            <img class="object-contain mr-4 transform scale-x-[-1] flex-shrink-0 w-12 sm:w-18 lg:w-22" src="../../../assets/logoBleu.svg" alt="Logo">
+            <p class="sm:text-3xl text-1xl text-center text-white font-black" style="color: #0878BE;">POLARIS</p>
+          </div>
+        </div>
+
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div class="relative flex sm:none">
+            <div class="hidden sm:flex" style="color: #0878BE;">
+              <div class="mx-2" *ngIf="!user">
+                <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
+                  ¡Conocé mas!
+                </button>
+              </div>
+              <div class="mx-2" *ngIf="!user">
+                  <button class="bg-white hover:bg-gray-700 hover:text-white py-2 px-8 border-2 rounded" style="border-color: #0878BE;">
+                      Registro
+                  </button>
+              </div>
+              <div class="ml-2" *ngIf="!user">
+                <button (click)="login()" class="bg-white hover:bg-gray-700 hover:text-white py-2 px-3 border-2 rounded" style="border-color: #0878BE;">
+                    Iniciar sesión
+                </button>
+              </div>
+              <div *ngIf="user && dataToken" class="ml-2 flex items-center flex-row gap-6">
+                <!-- Muestra la imagen circular del usuario si user?.Image está disponible -->
+                <img class="h-12 w-12 rounded-full object-cover" *ngIf="user?.imageProfile" [src]="user?.imageProfile" alt="Imagen del usuario">
+                <div class="flex items-center flex-col text-black">
+                  <span *ngIf="user">
+                    Hola, {{user?.firstName || user?.name }}
+                  </span>
+                  <div class="flex items-center flex-row gap-2">
+                    <span>Mi Perfil |</span>
+                    <span (click)="logout()">Salir</span>
+                  </div>
+                </div>
+                <!-- Si no hay una imagen del usuario, muestra un texto descriptivo -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2">
+        <button  (click)="login()"  class="w-full text-white block rounded-md px-3 py-2 text-base font-medium bg-gray-700" aria-current="page">
+          Registro
+        </button>
+        <button (click)="login()"  class="w-full text-gray-300 bg-gray-700 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+          Iniciar sesión
+        </button>
+      </div>
+    </div>
+  </nav>

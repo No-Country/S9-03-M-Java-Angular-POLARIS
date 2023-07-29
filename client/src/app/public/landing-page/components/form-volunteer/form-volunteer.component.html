@@ -1,0 +1,208 @@
+<div class="w-full flex items-start">
+
+  <div class="w-[90%]">
+    
+    <div class="mx-auto">
+      <div class="container w-full">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-[#1484CF] text-center pt-8 min-[320px]:pb-6 lg:pb-1">Registro voluntario</h1>
+        
+        <form class="w-full flex flex-col" [formGroup]="form">
+          <div class="w-full flex flex-col px-[5%] items-center justify-center min-[320px]:py-6 lg:py-0">
+
+            <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
+              <!-- Nombre -->
+              <div class="w-full flex flex-col lg:px-[2%] md:pb-6 lg:pb-0">
+                <div>
+                  <input matInput formControlName="firstName" placeholder="Nombre (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+                </div>
+                <div class="max-sm:mb-6">
+                  <mat-error
+                    *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched">El
+                    nombre es requerido.</mat-error>
+                  <mat-error *ngIf="form.controls['firstName'].hasError('minlength')">El nombre debe
+                    tener al menos 3 caracteres.</mat-error>
+                  <mat-error *ngIf="form.controls['firstName'].hasError('maxlength')">El nombre debe
+                    tener como máximo 20 caracteres.</mat-error>
+                </div>
+              </div>
+
+              <!-- Apellido -->
+              <div class="w-full flex flex-col lg:px-[2%]">
+                <div>
+                  <input matInput formControlName="lastName" placeholder="Apellido (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+                </div>
+                <div class="sm:mb-6">
+                  <mat-error
+                    *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">El
+                    apellido es requerido.</mat-error>
+                  <mat-error *ngIf="form.controls['lastName'].hasError('minlength')">El apellido debe
+                    tener al menos 3 caracteres.</mat-error>
+                  <mat-error *ngIf="form.controls['lastName'].hasError('maxlength')">El apellido debe
+                    tener como máximo 20 caracteres.</mat-error>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
+
+              <!-- Género -->
+              <div class="w-full flex flex-col lg:px-[2%] min-[320px]:pb-6 lg:pb-0">
+                <div>
+                <select matInput formControlName="gender" placeholder="Género (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"  
+                  (keypress)="onKeyPress($event)">
+                  <option value="" disabled selected>Género (*)</option>
+                <option *ngFor="let genero of generoOptions" [value]="genero.value">{{ genero.label }}</option>
+                </select>
+                </div>
+                <div>
+                  <mat-error
+                    *ngIf="form.controls['gender'].hasError('required') && form.controls['gender'].touched">El género es requerido.</mat-error>
+                </div>
+              </div>
+
+              <!-- DNI -->
+              <div class="w-full flex flex-col lg:px-[2%]">
+                <div>
+                <input matInput formControlName="dni" placeholder="DNI (*)" required
+                  class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off"  
+                  (keypress)="onKeyPress($event)">
+                </div>
+                <div>
+                  <mat-error
+                    *ngIf="form.controls['dni'].hasError('required') && form.controls['dni'].touched">El
+                      DNI es requerido.</mat-error>
+                  <mat-error *ngIf="form.controls['dni'].hasError('minlength')">El DNI debe
+                      tener al menos 8 caracteres.</mat-error>
+                  <mat-error *ngIf="form.controls['dni'].hasError('maxlength')">El DNI debe
+                      tener como máximo 9 caracteres.</mat-error>
+                </div>
+              </div>
+            </div>
+
+            
+            <!-- Correo Electrónico -->
+            <div class="w-full flex flex-col lg:px-[2%]">
+              <input matInput formControlName="email" placeholder="Correo Electrónico (*)" required
+              class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off" type="email">
+            </div>
+            <div class="mb-6">
+              <mat-error
+                *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">El
+                correo electrónico es requerido.</mat-error>
+              <mat-error
+                *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">El
+                formato del correo electrónico es incorrecto.</mat-error>
+            </div>
+
+
+            <!-- Password -->
+            <div class="w-full flex flex-col lg:px-[2%]">
+              <input matInput formControlName="password" placeholder="Contraseña (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none"
+                [type]="showPassword ? 'text' : 'password'" autocomplete="off">
+            </div>
+            <div class="mb-6">
+              <mat-error
+                *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">La
+                contraseña es requerida.</mat-error>
+              <mat-error
+                *ngIf="form.controls['password'].hasError('minlength')">La
+                contraseña debe tener al menos 8 caracteres.</mat-error>
+              <mat-error
+                *ngIf="form.controls['password'].hasError('maxlength')">La
+                contraseña debe tener máximo 16 caracteres.</mat-error>
+            </div>
+         
+
+            <!-- Password Again -->
+            <div class="w-full flex flex-col lg:px-[2%]">
+              <input matInput formControlName="confirmPassword" placeholder="Verifica tu contraseña (*)" required
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none"
+                [type]="showPassword ? 'text' : 'password'" autocomplete="off">
+            </div>
+            <div class="mb-6">
+              <mat-error
+                *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched">Debes
+                confirmar la contraseña.</mat-error>
+              <mat-error
+                *ngIf="passwordConfirm()">Las
+                contraseñas no coinciden.</mat-error>
+            </div>
+
+            <div class="w-full flex min-[320px]:flex-col lg:flex-row justify-center  mb-6">
+
+            <!-- Provincia -->
+            <div class="w-full flex flex-col lg:px-[2%] max-sm:mb-6 md:pb-6 lg:pb-0">
+              <div>
+              <input matInput formControlName="province" placeholder="Provincia" 
+                class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+              </div>
+              <div class="">
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('required') && form.controls['province'].touched">La
+                  provincia es requerida.</mat-error>
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('minlength')">La
+                  provincia debe tener al menos 8 caracteres.</mat-error>
+                <mat-error
+                  *ngIf="form.controls['province'].hasError('maxlength')">La
+                  provincia debe tener máximo 30 caracteres.</mat-error>
+              </div>        
+            </div>
+            
+            <!-- Localidad -->
+            <div class="w-full flex flex-col lg:px-[2%]">
+               <div>
+               <input matInput formControlName="locality" placeholder="Localidad (*)" required
+                 class="appearance-none block w-full bg-[#e8e8e8] border-b-2 border-black rounded py-3 px-4 outline-none focus:outline-none" autocomplete="off">
+              </div>
+              <div>
+                  <mat-error
+                    *ngIf="form.controls['locality'].hasError('required') && form.controls['locality'].touched">La
+                      localidad es requerida.</mat-error>
+                  <mat-error *ngIf="form.controls['locality'].hasError('minlength')">El nombre de la Localidad debe tener al menos 5 caracteres.</mat-error>
+                  <mat-error *ngIf="form.controls['locality'].hasError('maxlength')">El nombre de la Localidad debe tener como máximo 30 caracteres.</mat-error>
+              </div>
+            </div>
+          </div>
+
+            <div class="w-[60%] flex flex-col lg:px-[2%] pb-6">
+              <button class="bg-[#008eefff] text-white px-4 py-2 rounded-md  hover:bg-[#008eefff]/90"  (click)="onSubmit()" [disabled]="form.invalid">Crear Cuenta</button>
+            </div>
+
+          </div>
+
+        </form>
+
+        <div class="w-[93%] flex items-center relative py-2 justify-between">
+          <div class="w-[20%] h-[1px] bg-white ml-[7%] pl-[10%]"></div>
+          <p class="flex-row text-lg absolute text-white bg-transparent justify-center pl-[3%] min-[320px]:ml-[28%] lg:ml-[40%]">O registrate con</p>
+          <div class="w-[20%] h-[1px] bg-white ml-[30%] pr-[1%]"></div>
+        </div>
+    
+        <div class="w-[90%] flex lg:flex-row min-[320px]:flex-col py-[4%] items-center justify-center ml-[5%]">
+    
+          <div class="text-black my-2 lg:mr-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+            <img class="h-6 mr-2" src="../../../../../assets/img/icons/google.png" alt="">
+            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Google</p>
+          </div>
+    
+          <div class="text-black my-2 lg:ml-4 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex justify-center cursor-pointer shadow-md min-[320px]:w-full lg:w-[40%]">
+            <img class="h-6 mr-2" src="../../../../../assets/img/icons/facebook.png" alt="">
+            <p class="min-[320px]:text-sm lg:text-base">Inicia sesión con Facebook</p>
+          </div>
+    
+        </div>
+        
+      </div>
+
+    
+  </div>
+
+  </div>
+
+</div>
