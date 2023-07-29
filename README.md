@@ -6,7 +6,7 @@
 
   <br>
   
-  ### Presentación de Polarios - Polaris, fue creado con la firme convicción de promover un mundo inclusivo y colaborativo.
+  ### Presentación de Polaris - Polaris, fue creado con la firme convicción de promover un mundo inclusivo y colaborativo.
  
   <br>
   
