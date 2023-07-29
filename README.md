@@ -109,7 +109,12 @@ Al unir fuerzas, creamos una comunidad donde cada voluntario puede contribuir co
 
 #### 👉🏻 Normas de código 📜
     
-- Normas
+- El código debe estar escrito en inglés.
+- Los nombres de los Componentes,Servicios,Modelos,Interfaces deben estan escritos utilizando la notacion Pascal case
+- Los nombres de los Funcional Guard, Variables, Metodos y Propiedades deben estar escritos en la notacion Camel case
+- Los componentes deben ser reutilizables, para que puedan ser utilizados en diferentes partes del proyecto.        fomentando la modularidad y facilitando el mantenimiento.
+- Cada componente o servicio debe tener una responsabilidad única y estar bien definido. Evita colocar demasiada lógica o estilos innecesarios en un solo componente.
+- Para mantener un codigo limpio y desacoplado se debe utilizar la inyeccion de dependencias, para proporcionar instancias de servicios a los componentes que los necesitan.
 
 #### 👉🏻 Construido con 🛠️
 
