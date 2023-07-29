@@ -114,7 +114,7 @@ Al unir fuerzas, creamos una comunidad donde cada voluntario puede contribuir co
 - Los nombres de los Funcional Guard, Variables, Metodos y Propiedades deben estar escritos en la notacion Camel case
 - Los componentes deben ser reutilizables, para que puedan ser utilizados en diferentes partes del proyecto.        fomentando la modularidad y facilitando el mantenimiento.
 - Cada componente o servicio debe tener una responsabilidad única y estar bien definido. Evita colocar demasiada lógica o estilos innecesarios en un solo componente.
-- Para mantener un codigo limpio y desacoplado se debe utilizar la inyeccion de dependencias para proporcionar instancias de servicios a los componentes que los necesitan.
+- Para mantener un codigo limpio y desacoplado se debe utilizar la inyeccion de dependencias, para proporcionar instancias de servicios a los componentes que los necesitan.
 
 #### 👉🏻 Construido con 🛠️
 
